@@ -186,10 +186,9 @@
     </div>
   </div>
 
-</div>
-
-
 Image Loading Progress
+
+</div>
 
 </body>
 
