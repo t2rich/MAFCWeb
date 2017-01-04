@@ -155,8 +155,8 @@ This is an example webpage to be utilized for 2AFC observer studies.
 <script src="./js/dicomParser.min.js"></script>
 
 <!-- Add support for JPEG2000 Compressed dicoms and JPEG-LS -->
-<script src="cornerstoneWADOImageLoader/examples/libopenjpeg.js"></script>
-<script src="cornerstoneWADOImageLoader/examples/libCharLS.js"></script>
+<script src="./js/libopenjpeg.js"></script>
+<script src="./js/libCharLS.js"></script>
 
 
 <!-- include the cornerstoneWADOImageLoader library -->
@@ -228,7 +228,7 @@ function loadAndDisplayImages() {
   var image_number = (2*study_index) - 1;
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/image' + image_number + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/image' + image_number + '/' + 'Instance_' + (i+1) + '.dcm';
   };
 
   // update stack info
@@ -297,7 +297,7 @@ function loadAndDisplayImages() {
   var image_number2 = (2*study_index);
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/image' + image_number2 + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/image' + image_number2 + '/' + 'Instance_' + (i+1) + '.dcm';
   };
 
   // update stack info
@@ -412,7 +412,7 @@ function write_to_db(){
   // post selection to server side database
   $.ajax({
     type: 'POST',
-    url: 'script.php',
+    url: './db/script.php',
   });
 
   //TODO add code to clear cache
@@ -427,7 +427,7 @@ function write_to_db2(){
   // post selection to server side database
   $.ajax({
     type: 'POST',
-    url: 'script2.php',
+    url: './db/script2.php',
   });
 
   //TODO add code to clear cache
