@@ -188,9 +188,8 @@
 
 </div>
 
-<br>
 
-Image Load Progress
+Image Loading Progress
 
 </body>
 
@@ -539,7 +538,7 @@ function resizeMain() {
   $('.btn_interp').css('font-size', fontSize);
   $('.btn2').css('font-size', fontSize);
   $('body').css('font-size', fontSize);
-  $('#label').css('font-size', fontSize/2);
+  $('#label').css('font-size', fontSize);
 
 }
 
