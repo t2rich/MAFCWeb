@@ -42,7 +42,7 @@
     #myProgress {
       position: relative;
       width: 20%;
-      height: 1%;
+      height: 2%;
       background-color: grey;
     }
 
@@ -55,7 +55,7 @@
 
     #label {
       text-align: center;
-      line-height: 80%;
+      line-height: 100%;
       color: white;
     }
 
@@ -179,7 +179,6 @@
 
   <br>
   <br>
-  <br>
 
   <div id="myProgress">
     <div id="myBar">
@@ -188,6 +187,8 @@
   </div>
 
 </div>
+
+<br>
 
 Image Load Progress
 
