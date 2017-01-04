@@ -480,6 +480,7 @@ function write_to_db(){
   });
 
   //TODO add code to clear cache
+  cornerstone.purgeCache()
 
   //start the next mafc user selection
   loadAndDisplayImages();
@@ -495,6 +496,7 @@ function write_to_db2(){
   });
 
   //TODO add code to clear cache
+  cornerstone.purgeCache()
 
   //start the next mafc user selection
   loadAndDisplayImages();
