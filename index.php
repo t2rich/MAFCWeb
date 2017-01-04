@@ -42,15 +42,21 @@
     #myProgress {
       position: relative;
       width: 100%;
-      height: 30px;
+      height: 1%;
       background-color: grey;
     }
 
     #myBar {
       position: absolute;
-      width: 1%;
+      width: 10%;
       height: 100%;
       background-color: green;
+    }
+
+    #label {
+      text-align: center;
+      line-height: 100%;
+      color: white;
     }
 
   </style>
@@ -171,10 +177,14 @@
   <input id="zp" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Zoom/Pan
   <input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
 
-</div>
+  <br>
 
-<div id="myProgress">
-  <div id="myBar"></div>
+  <div id="myProgress">
+    <div id="myBar">
+      <div id="label">10%</div>
+    </div>
+  </div>
+
 </div>
 
 </body>
@@ -510,6 +520,7 @@ function resizeMain() {
   $('.btn_interp').css('font-size', fontSize);
   $('.btn2').css('font-size', fontSize);
   $('body').css('font-size', fontSize);
+  $('#label').css('font-size', fontSize);
 
 }
 
