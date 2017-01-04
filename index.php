@@ -4,7 +4,7 @@
 <head>
 
   <title>
-    Taylor's 2AFC
+    RAILabs 2AFC
   </title>
 
   <style>
@@ -22,6 +22,37 @@
       color:#737CA1
     }
 
+    .btn {
+      width:9%;
+    }
+
+    .btn1 {
+      width: 9%;
+    }
+
+    .btn2 {
+      width:46.4%;
+      line-height: 200%;
+    }
+
+    .btn3 {
+      margin-right: .5%;
+    }
+
+    #myProgress {
+      position: relative;
+      width: 100%;
+      height: 30px;
+      background-color: grey;
+    }
+
+    #myBar {
+      position: absolute;
+      width: 1%;
+      height: 100%;
+      background-color: green;
+    }
+
   </style>
 
 </head>
@@ -32,7 +63,7 @@
   2AFC Duke RAILabs
 </h1>
 
-This is an example webpage to be utilized for 2AFC observer studies.
+<!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
 <br>
 <br>
@@ -41,8 +72,8 @@ This is an example webpage to be utilized for 2AFC observer studies.
 <div class="container">
 
   <!-- Set up javascript buttons for user selection of "correct" image -->
-  <button id="choose1" class="btn2" style="width:46.4%; margin-right: 1.9%; line-height: 200%;" onclick="write_to_db()">CHOOSE IMAGE 1</button>
-  <button id="choose2" class="btn2"style="width:46.4%; line-height: 200%;;" onclick="write_to_db2()">CHOOSE IMAGE 2</button>
+  <button id="choose1" class="btn2" style="margin-right: 1.9%;" onclick="write_to_db()">CHOOSE IMAGE 1</button>
+  <button id="choose2" class="btn2" onclick="write_to_db2()">CHOOSE IMAGE 2</button>
 
   <br>
   <br>
@@ -122,24 +153,28 @@ This is an example webpage to be utilized for 2AFC observer studies.
 
   <div class="cont" style="width:inherit;">
     <!-- Set up javascript buttons for window level presets -->
-    <button id="softTissue" class="btn" style="width:9%; ">Soft Tissue</button>
-    <button id="lung" class="btn" style="width:9%; ">Lung</button>
-    <button id="bone" class="btn" style="width:9%;">Bone</button>
+    <button id="softTissue" class="btn" >Soft Tissue</button>
+    <button id="lung" class="btn" >Lung</button>
+    <button id="bone" class="btn" >Bone</button>
     <!-- <button id="invert" class="btn_invert" style="width:9%;">Invert</button> -->
     <!-- <button id="interpolation" class="btn_interp selected" style="width:9%;">Interpolation</button> -->
-    <button id="softTissue2" class="btn1" style="width:9%; margin-left: 21.25%;">Soft Tissue</button>
-    <button id="lung2" class="btn1" style="width:9%;">Lung</button>
-    <button id="bone2" class="btn1" style="width:9%;">Bone</button>
+    <button id="softTissue2" class="btn1" style="margin-left: 21.25%;">Soft Tissue</button>
+    <button id="lung2" class="btn1" >Lung</button>
+    <button id="bone2" class="btn1" >Bone</button>
     <!-- <button id="invert2" class="btn_invert"  style="width:9%;">Invert</button> -->
     <!-- <button id="interpolation2" class="btn_interp selected" style="width:9%;">Interpolation</button> -->
   </div>
 
   <br>
 
-  <input id="ww" class="btn3" type="checkbox" checked="" style="margin-right: .5%;"> Synchronize WW/WC
-  <input id="zp" class="btn3" type="checkbox" checked="" style="margin-right: .5%; margin-left: 1%;"> Synchronize Zoom/Pan
-  <input id="pos" class="btn3" type="checkbox" checked="" style="margin-right: .5%; margin-left: 1%;"> Synchronize Slice
+  <input id="ww" class="btn3" type="checkbox" checked="" > Synchronize WW/WC
+  <input id="zp" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Zoom/Pan
+  <input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
 
+</div>
+
+<div id="myProgress">
+  <div id="myBar"></div>
 </div>
 
 </body>
@@ -158,7 +193,6 @@ This is an example webpage to be utilized for 2AFC observer studies.
 <script src="./js/libopenjpeg.js"></script>
 <script src="./js/libCharLS.js"></script>
 
-
 <!-- include the cornerstoneWADOImageLoader library -->
 <script src="./js/cornerstoneWADOImageLoader.js"></script>
 
@@ -171,13 +205,15 @@ This is an example webpage to be utilized for 2AFC observer studies.
 <script>
 
 var study_index = 1; // study progress index
-//check database to see where they left off, or are just beginning
+//check dynamic database to see where they left off, or are just beginning
 
 // number of stack slices (must be constant across all image datasets)
 var slices = 5;
+//read from pre-filled database
 
 // scale the zoom property to account for reconstructed field of view differences
 var size_ratio = 1;
+//Not implemented in this iteration
 
 // set-up some dummy variables to be used to load images later on
 var imageIds1 = [
@@ -226,6 +262,7 @@ function loadAndDisplayImages() {
 
   // check current study index
   var image_number = (2*study_index) - 1;
+
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
     imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/image' + image_number + '/' + 'Instance_' + (i+1) + '.dcm';
@@ -233,7 +270,7 @@ function loadAndDisplayImages() {
 
   // update stack info
   stack = {
-      currentImageIdIndex : Math.floor(slices/2),
+      currentImageIdIndex : Math.floor(slices/2), // Middle slice as default
       imageIds: imageIds1
   };
 
@@ -295,6 +332,7 @@ function loadAndDisplayImages() {
 
   // check current study index
   var image_number2 = (2*study_index);
+
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
     imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/image' + image_number2 + '/' + 'Instance_' + (i+1) + '.dcm';
@@ -302,7 +340,7 @@ function loadAndDisplayImages() {
 
   // update stack info
   stack2 = {
-      currentImageIdIndex : Math.floor(slices/2),
+      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
       imageIds: imageIds2
   };
 
@@ -614,7 +652,19 @@ $('.btn_interp').on('click', function(){
   $(this).toggleClass('selected');
 });
 
-
+function move() {
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            width++;
+            elem.style.width = width + '%';
+        }
+    }
+}
 
 </script>
 </html>
