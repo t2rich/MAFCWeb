@@ -178,6 +178,8 @@
   <input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
 
   <br>
+  <br>
+  <br>
 
   <div id="myProgress">
     <div id="myBar">
@@ -186,6 +188,8 @@
   </div>
 
 </div>
+
+Image Load Progress
 
 </body>
 
@@ -355,7 +359,7 @@ function loadAndDisplayImages() {
   };
 
   // function used to display images
-  loadAll(imageIds2).then(function(image2) {
+  loadAll2(imageIds2).then(function(image2) {
 
     // log full image data to browser log
     console.log(image2);
@@ -418,13 +422,24 @@ function loadAll(imageID) {
   for (i = 0; i < slices; i++) {
 
     cornerstone.loadAndCacheImage(imageID[i]);
-    move(i,slices);
+    move(i,slices*2 -1);
 
   }
 
   return cornerstone.loadImage(imageID[Math.floor(slices/2)]);
 }
 
+function loadAll2(imageID) {
+
+  for (i = 0; i < slices; i++) {
+
+    cornerstone.loadAndCacheImage(imageID[i]);
+    move(slices + i,slices*2 -1);
+
+  }
+
+  return cornerstone.loadImage(imageID[Math.floor(slices/2)]);
+}
 
 // define image update callback functions
 function onViewportUpdated(e, data) {
@@ -523,7 +538,7 @@ function resizeMain() {
   $('.btn_interp').css('font-size', fontSize);
   $('.btn2').css('font-size', fontSize);
   $('body').css('font-size', fontSize);
-  $('#label').css('font-size', fontSize);
+  $('#label').css('font-size', fontSize/2);
 
 }
 
