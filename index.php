@@ -41,7 +41,7 @@
 
     #myProgress {
       position: relative;
-      width: 100%;
+      width: 20%;
       height: 1%;
       background-color: grey;
     }
@@ -55,7 +55,7 @@
 
     #label {
       text-align: center;
-      line-height: 100%;
+      line-height: 80%;
       color: white;
     }
 
@@ -508,6 +508,8 @@ function resizeMain() {
 
   $('#image2').height(new_size);
   $('#image2').width(new_size);
+
+  $('#MyBar').width(new_size);
 
   cornerstone.resize(element, true);
   cornerstone.resize(element2, true);
