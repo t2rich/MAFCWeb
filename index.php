@@ -418,6 +418,7 @@ function loadAll(imageID) {
   for (i = 0; i < slices; i++) {
 
     cornerstone.loadAndCacheImage(imageID[i]);
+    move(i,slices);
 
   }
 
@@ -509,7 +510,7 @@ function resizeMain() {
   $('#image2').height(new_size);
   $('#image2').width(new_size);
 
-  $('#MyBar').width(new_size);
+  $('#myProgress').width(new_size);
 
   cornerstone.resize(element, true);
   cornerstone.resize(element2, true);
@@ -665,18 +666,11 @@ $('.btn_interp').on('click', function(){
   $(this).toggleClass('selected');
 });
 
-function move() {
+function move(current_index,total) {
     var elem = document.getElementById("myBar");
-    var width = 1;
-    var id = setInterval(frame, 10);
-    function frame() {
-        if (width >= 100) {
-            clearInterval(id);
-        } else {
-            width++;
-            elem.style.width = width + '%';
-        }
-    }
+    var width = Math.floor((current_index/total)*100);
+    elem.style.width = width + '%';
+    document.getElementById("label").innerHTML = width + '%';
 }
 
 </script>
