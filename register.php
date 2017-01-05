@@ -132,7 +132,7 @@
         $errMSG = "Something went wrong with database, try again later...";
       }else {
         $errTyp = "success";
-        $errMSG = echo $row['userId'];
+        $errMSG = "Successfully registered, you may login now";
       }
     }
    } else {
