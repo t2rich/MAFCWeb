@@ -98,7 +98,7 @@
       margin-left: 75%;
     }
 
-    input[type=checkbox] {
+    input[type=checkbox]:checked {
       background: #737CA1;
       background-color: #737CA1;
     }
