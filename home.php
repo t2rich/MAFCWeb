@@ -76,12 +76,12 @@
 
     #title_stuff {
       color:#737CA1;
-      font-size: 60%;
+      font-size: 200%;
     }
 
     #title_stuff a {
       color:#737CA1;
-      margin-left: 60%;
+      margin-left: 85%;
     }
   </style>
 
