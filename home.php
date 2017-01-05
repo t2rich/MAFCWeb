@@ -102,12 +102,10 @@
     }
 
     input[type=checkbox]{
+      -webkit-appearance: none;
       background: #737CA1;
       background-color: #737CA1;
       color: #737CA1;
-      background: url(http://webdesigntutsplus.s3.amazonaws.com/tuts/391_checkboxes/check_radio_sheet.png) left top no-repeat;
-
-
     }
   </style>
 
