@@ -41,7 +41,8 @@
     button:active {
       outline: none;
       border: none;
-      background-color:#0C090A;
+      background-color:#737CA1;
+      color: black;
     }
 
 
