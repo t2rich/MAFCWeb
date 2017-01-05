@@ -33,7 +33,7 @@
     }
 
     body {
-      margin:auto;
+      margin-left:auto;
       background-color:#0C090A;
       color:#737CA1;
     }
