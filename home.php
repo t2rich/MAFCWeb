@@ -102,7 +102,7 @@
       background: #737CA1;
       background-color: #737CA1;
       color: #737CA1;
-      content: "";
+      background-image: linear-gradient();
     }
   </style>
 
