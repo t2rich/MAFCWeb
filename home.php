@@ -82,13 +82,13 @@
     #title_stuff {
       color:#737CA1;
       font-size: 200%;
+      width: 100%;
     }
 
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
       margin-left: 60%;
-      width: 10%;
     }
   </style>
 
