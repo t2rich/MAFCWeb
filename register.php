@@ -125,7 +125,7 @@
     if ($res2){
       $row=mysql_fetch_array($res2);
       $idname = $row['userId'];
-      //$query2 = "CREATE TABLE `"$idname"` (study_index INT(3) AUTO_INCREMENT PRIMARY KEY, fnl VARCHAR(30) NOT NULL, fnr VARCHAR(30) NOT NULL, slices INT(3))";
+      $query2 = "CREATE TABLE '$idname' (study_index INT(3) AUTO_INCREMENT PRIMARY KEY, fnl VARCHAR(30) NOT NULL, fnr VARCHAR(30) NOT NULL, slices INT(3))";
       // $res3 = mysql_query($query2);
       // if (!$res3){
       //   $errTyp = "danger";
