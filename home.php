@@ -544,7 +544,7 @@ function resizeMain() {
   $('.container').height(new_size);
   $('.container').width(new_size);
 
-  $('.cornerstone-enabled-image').height(Math.floor(new_size * .8));
+  $('.cornerstone-enabled-image').height(Math.floor(new_size * .49));
   $('.cornerstone-enabled-image').width(Math.floor(new_size * .49));
 
   $('#image1').height($('.cornerstone-enabled-image').height());
