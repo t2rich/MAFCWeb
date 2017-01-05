@@ -74,13 +74,18 @@
       color: white;
     }
 
+    h1 a {
+      text-align:right;
+      color:#737CA1;
+      margin-right: 10%;
+    }
   </style>
 
 </head>
 
 <body>
 <div>
-<h1> 2AFC Duke RAILabs <a style="text-align:right; color:#737CA1;" href="logout.php?logout">Sign Out</a> </h1>
+<h1> 2AFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </h1>
 </div>
 <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
