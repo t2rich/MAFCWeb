@@ -39,7 +39,7 @@
     }
 
     .container {
-      margin:0 auto;
+
     }
 
     .btn {
