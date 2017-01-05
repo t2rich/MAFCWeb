@@ -102,7 +102,7 @@
     }
 
     input[type=checkbox]{
-      -webkit-appearance: none;
+      -webkit-appearance: checkbox-container;
       background: #737CA1;
       background-color: #737CA1;
       color: #737CA1;
