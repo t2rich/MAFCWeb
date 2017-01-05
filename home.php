@@ -39,7 +39,7 @@
     }
 
     .container {
-      margin:auto;
+      margin:0 auto;
     }
 
     .btn {
@@ -543,8 +543,8 @@ function resizeMain() {
     new_size = width;
   }
 
-  $('body').height(new_size * .45);
-  $('body').width(new_size * .9);
+  $('body').height(new_size * .49);
+  $('body').width(new_size * .98);
 
   $('.container').height($('body').height());
   $('.container').width(Math.floor($('body').width()*.8));
