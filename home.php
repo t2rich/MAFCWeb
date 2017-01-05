@@ -51,11 +51,13 @@
     .btn {
       width:9%;
       outline: none;
+      line-height: 100%;
     }
 
     .btn1 {
       width: 9%;
       outline: none;
+      line-height: 100%;
     }
 
     .btn2 {
@@ -84,7 +86,7 @@
       text-align: center;
       line-height: 100%;
       color: white;
-      margin-top: .1%;
+      margin-top: .3%;
     }
 
     #title_stuff {
@@ -99,7 +101,7 @@
     }
 
     input[type=checkbox] {
-      background-color: #737CA1;
+      background: #737CA1;
     }
   </style>
 
