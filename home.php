@@ -83,7 +83,7 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 74%;
+      margin-left: 75%;
     }
   </style>
 
@@ -92,7 +92,7 @@
 <body>
 
 <!-- setting up the html division to be container for cornstone enabled elements  -->
-<div class="container">
+<div class="container" style="margin:auto;">
 
   <br>
 
@@ -187,7 +187,7 @@
     <button id="bone" class="btn" >Bone</button>
     <!-- <button id="invert" class="btn_invert" style="width:9%;">Invert</button> -->
     <!-- <button id="interpolation" class="btn_interp selected" style="width:9%;">Interpolation</button> -->
-    <button id="softTissue2" class="btn1" style="margin-left: 23%;">Soft Tissue</button>
+    <button id="softTissue2" class="btn1" style="margin-left: 22.5%;">Soft Tissue</button>
     <button id="lung2" class="btn1" >Lung</button>
     <button id="bone2" class="btn1" >Bone</button>
     <!-- <button id="invert2" class="btn_invert"  style="width:9%;">Invert</button> -->
@@ -542,15 +542,15 @@ function resizeMain() {
   $('body').width(new_size * .9);
 
   $('.container').height($('body').height());
-  $('.container').width($('body').width());
+  $('.container').width(Math.floor($('body').width()*.8));
 
-  $('.cornerstone-enabled-image').height(Math.floor($('.container').height() * .98));
+  $('.cornerstone-enabled-image').height(Math.floor($('.container').width() * .49));
   $('.cornerstone-enabled-image').width(Math.floor($('.container').width() * .49));
 
-  $('#image1').height($('.cornerstone-enabled-image').height());
+  $('#image1').height($('.cornerstone-enabled-image').width());
   $('#image1').width($('.cornerstone-enabled-image').width());
 
-  $('#image2').height($('.cornerstone-enabled-image').height());
+  $('#image2').height($('.cornerstone-enabled-image').width());
   $('#image2').width($('.cornerstone-enabled-image').width());
 
   $('#myProgress').width($('.cornerstone-enabled-image').width());
