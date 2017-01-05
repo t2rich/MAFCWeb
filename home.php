@@ -93,7 +93,7 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 65%;
+      margin-left: 55%;
     }
   </style>
 
