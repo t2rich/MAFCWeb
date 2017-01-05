@@ -533,8 +533,8 @@ function resizeMain() {
   var new_size = 0;
 
   //find limiting dimension
-  if (height >= width*.5) {
-    new_size = height;
+  if (height >= width) {
+    new_size = width;
   } else {
       new_size = width;
   }
@@ -555,7 +555,7 @@ function resizeMain() {
   $('#image2').width($('.cornerstone-enabled-image').width());
 
   $('#myProgress').width($('.cornerstone-enabled-image').width());
-  $('#title_stuff').width(new_size);
+  $('#title_stuff').width(new_size * .9);
 
   cornerstone.resize(element, true);
   cornerstone.resize(element2, true);
