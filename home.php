@@ -29,7 +29,7 @@
     }
 
     .selected {
-      background-color:skyblue;
+      background-color:#737CA1;
     }
 
     body {
@@ -40,10 +40,12 @@
 
     .btn {
       width:9%;
+      outline: none;
     }
 
     .btn1 {
       width: 9%;
+      outline: none;
     }
 
     .btn2 {
@@ -72,6 +74,7 @@
       text-align: center;
       line-height: 100%;
       color: white;
+      margin-top: 10%;
     }
 
     #title_stuff {
