@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{
+	margin:0;
+	padding:0;
+}
+#login-form {
+	margin:5% auto;
+	max-width:500px;
+}
+/* home page */
+#wrapper{
+	padding-top:50px;
+}
+
+
+.sd-form{
+	margin:5% auto;
+	max-width: 500px;
+}
+
+.subscription-form {
+	display: none;
+}
+
+.col-lg-6 {
+	margin:10% auto;
+}
+
+.result{
+	//display: none;
+}
