@@ -33,9 +33,19 @@
     }
 
     body {
-      margin: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background-color:#0C090A;
       color:#737CA1;
+    }
+
+    .container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     .btn {
@@ -92,7 +102,7 @@
 <body>
 
 <!-- setting up the html division to be container for cornstone enabled elements  -->
-<div class="container" style="margin:auto;">
+<div class="container">
 
   <br>
 
