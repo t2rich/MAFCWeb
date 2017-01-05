@@ -124,7 +124,7 @@
     unset($inst);
     unset($years);
     unset($utype);
-    $res2=mysql_query("SELECT userName FROM users WHERE email='$email'");
+    $res2=mysql_query("SELECT userName FROM users WHERE userEmail='$email'");
     echo $res2;
     if ($res2){
       $row=mysql_fetch_array($res2);
