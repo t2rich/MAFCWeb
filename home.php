@@ -534,9 +534,9 @@ function resizeMain() {
 
   //find limiting dimension
   if (height >= width*.5) {
-    new_size = width;
+    new_size = height;
   } else {
-      new_size = height;
+      new_size = width;
   }
 
   $('body').height(new_size * .9);
