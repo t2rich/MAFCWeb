@@ -34,7 +34,7 @@
 
     body {
       width: 90%;
-      height: 90%;
+      height: 60%;
       margin: auto;
       background-color:#0C090A;
       color:#737CA1;
@@ -93,15 +93,15 @@
 
 <body>
 
-<br>
-
-<div id="title_stuff"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
-<!-- This is an example webpage to be utilized for 2AFC observer studies. -->
-
-<br>
-
 <!-- setting up the html division to be container for cornstone enabled elements  -->
 <div class="container">
+
+  <br>
+
+  <div id="title_stuff"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
+  <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
+
+  <br>
 
   <!-- Set up javascript buttons for user selection of "correct" image -->
   <button id="choose1" class="btn2" style="margin-right: 1.9%;" onclick="write_to_db()">CHOOSE IMAGE 1</button>
@@ -530,8 +530,8 @@ function write_to_db2(){
 
 // Resize elements according to current browser display window size
 function resizeMain() {
-  var height = Math.floor($(window).height()*.6); // .7 allows space for buttons below and above image container
-  var width = Math.floor(($(window).width()/2)*.95); // .99 allows space for 2% buffer between images
+  var height = $(window).height();
+  var width = $(window).width();
   var new_size = 0;
 
   //find limiting dimension
@@ -541,20 +541,20 @@ function resizeMain() {
       new_size = height;
   }
 
-  $('.container').height(Math.floor(new_size*1.2)); //1.2 allows space for buttons within image container
-  $('.container').width(Math.floor(2.1*new_size)); //2.15 allows space for buttons within image container
+  $('.container').height(new_size);
+  $('.container').width(new_size);
 
-  $('.cornerstone-enabled-image').height(new_size);
-  $('.cornerstone-enabled-image').width(new_size);
+  $('.cornerstone-enabled-image').height(Math.floor(new_size * .8));
+  $('.cornerstone-enabled-image').width(Math.floor(new_size * .49));
 
-  $('#image1').height(new_size);
-  $('#image1').width(new_size);
+  $('#image1').height($('.cornerstone-enabled-image').height());
+  $('#image1').width($('.cornerstone-enabled-image').width());
 
-  $('#image2').height(new_size);
-  $('#image2').width(new_size);
+  $('#image2').height($('.cornerstone-enabled-image').height());
+  $('#image2').width($('.cornerstone-enabled-image').width());
 
-  $('#myProgress').width(new_size);
-  $('#title_stuff').width(Math.floor(2.15*new_size));
+  $('#myProgress').width($('.cornerstone-enabled-image').width());
+  $('#title_stuff').width(new_size);
 
   cornerstone.resize(element, true);
   cornerstone.resize(element2, true);
