@@ -81,6 +81,7 @@
 
     #title_stuff a {
       color:#737CA1;
+      font-size: 100%;
       margin-left: 85%;
     }
   </style>
@@ -88,8 +89,9 @@
 </head>
 
 <body>
+<br>
 <div>
-<div id="title_stuff"> 2AFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
+<div id="title_stuff"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
 </div>
 <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
@@ -548,6 +550,7 @@ function resizeMain() {
   $('#image2').width(new_size);
 
   $('#myProgress').width(new_size);
+  $('#title_stuff').width(new_size);
 
   cornerstone.resize(element, true);
   cornerstone.resize(element2, true);
