@@ -65,6 +65,9 @@
 
     .btn3 {
       margin-right: .5%;
+      background: #737CA1;
+      background-color: #737CA1;
+      color: #737CA1;
     }
 
     #myProgress {
