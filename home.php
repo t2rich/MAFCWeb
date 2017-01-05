@@ -98,6 +98,8 @@
 <!-- setting up the html division to be container for cornstone enabled elements  -->
 <div class="container">
 
+  <br>
+
   <div id="title_stuff"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
   <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
@@ -540,8 +542,8 @@ function resizeMain() {
     new_size = width;
   }
 
-  $('body').height(new_size * .45);
-  $('body').width(new_size * .9);
+  $('body').height(new_size * .475);
+  $('body').width(new_size * .95);
 
   $('.container').height($('body').height());
   $('.container').width(Math.floor($('body').width()*.8));
