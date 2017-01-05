@@ -83,7 +83,7 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 78%;
+      margin-left: 74%;
     }
   </style>
 
@@ -187,7 +187,7 @@
     <button id="bone" class="btn" >Bone</button>
     <!-- <button id="invert" class="btn_invert" style="width:9%;">Invert</button> -->
     <!-- <button id="interpolation" class="btn_interp selected" style="width:9%;">Interpolation</button> -->
-    <button id="softTissue2" class="btn1" style="margin-left: 24.25%;">Soft Tissue</button>
+    <button id="softTissue2" class="btn1" style="margin-left: 23%;">Soft Tissue</button>
     <button id="lung2" class="btn1" >Lung</button>
     <button id="bone2" class="btn1" >Bone</button>
     <!-- <button id="invert2" class="btn_invert"  style="width:9%;">Invert</button> -->
