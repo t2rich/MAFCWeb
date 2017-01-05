@@ -533,10 +533,10 @@ function resizeMain() {
   var new_size = 0;
 
   //find limiting dimension
-  if (height >= width) {
+  if (height <= (width*.5)) {
+    new_size = height;
+  } else {
     new_size = width;
-  } else if (height <= (width*.5)){
-      new_size = height;
   }
 
   $('body').height(new_size * .9);
