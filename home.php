@@ -51,13 +51,11 @@
     .btn {
       width:9%;
       outline: none;
-      line-height: 100%;
     }
 
     .btn1 {
       width: 9%;
       outline: none;
-      line-height: 100%;
     }
 
     .btn2 {
@@ -102,6 +100,7 @@
 
     input[type=checkbox] {
       background: #737CA1;
+      background-color: #737CA1;
     }
   </style>
 
