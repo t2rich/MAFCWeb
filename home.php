@@ -65,7 +65,7 @@
       position: absolute;
       width: 10%;
       height: 100%;
-      background-color: green;
+      background-color: #737CA1;
     }
 
     #label {
@@ -526,7 +526,7 @@ function write_to_db2(){
 
 // Resize elements according to current browser display window size
 function resizeMain() {
-  var height = Math.floor($(window).height()*.7); // .7 allows space for buttons below and above image container
+  var height = Math.floor($(window).height()*.65); // .7 allows space for buttons below and above image container
   var width = Math.floor(($(window).width()/2)*.95); // .99 allows space for 2% buffer between images
   var new_size = 0;
 
