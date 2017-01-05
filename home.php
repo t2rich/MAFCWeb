@@ -75,9 +75,8 @@
     }
 
     #title_stuff a {
-      text-align:right;
       color:#737CA1;
-      margin-right: 10%;
+      margin-left: 20%;
     }
   </style>
 
