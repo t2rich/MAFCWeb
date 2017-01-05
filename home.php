@@ -33,8 +33,6 @@
     }
 
     body {
-      width: 90%;
-      height: 90%;
       margin: auto;
       background-color:#0C090A;
       color:#737CA1;
@@ -540,6 +538,9 @@ function resizeMain() {
   } else {
       new_size = height;
   }
+
+  $('body').height(new_size * .9);
+  $('body').width(new_size * .9);
 
   $('.container').height(new_size * .9);
   $('.container').width(new_size * .9);
