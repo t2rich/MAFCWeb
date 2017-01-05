@@ -61,19 +61,17 @@
     .btn2 {
       width:49%;
       line-height: 200%;
+      outline: none;
     }
 
     .btn3 {
       margin-right: .5%;
-      background: #737CA1;
-      background-color: #737CA1;
-      color: #737CA1;
     }
 
     #myProgress {
       position: relative;
       height: 2%;
-      background-color: grey;
+      background-color: #0C090A;
     }
 
     #myBar {
@@ -90,23 +88,17 @@
       margin-top: .3%;
     }
 
-    #title_stuff {
+    #top_line {
       color:#737CA1;
       font-size: 200%;
     }
 
-    #title_stuff a {
+    #top_line a {
       color:#737CA1;
       font-size: 100%;
       margin-left: 75%;
     }
 
-    input[type=checkbox]{
-      -webkit-appearance: checkbox-container;
-      background: #737CA1;
-      background-color: #737CA1;
-      color: #737CA1;
-    }
   </style>
 
 </head>
@@ -118,7 +110,7 @@
 
   <br>
 
-  <div id="title_stuff"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
+  <div id="top_line"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
   <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
   <br>
@@ -271,7 +263,7 @@ var slices = 5;
 //read from pre-filled database
 
 // scale the zoom property to account for reconstructed field of view differences
-var size_ratio = 1;
+// var size_ratio = 1;
 //Not implemented in this iteration
 
 // set-up some dummy variables to be used to load images later on
@@ -540,7 +532,7 @@ function write_to_db2(){
     url: './db/script2.php',
   });
 
-  //TODO add code to clear cache
+  //clear cache
   cornerstone.imageCache.purgeCache();
 
   //start the next mafc user selection
@@ -576,7 +568,7 @@ function resizeMain() {
   $('#image2').width($('.cornerstone-enabled-image').width());
 
   $('#myProgress').width($('.cornerstone-enabled-image').width());
-  $('#title_stuff').width($('body').width());
+  $('#top_line').width($('body').width());
 
   cornerstone.resize(element, true);
   cornerstone.resize(element2, true);
@@ -732,6 +724,7 @@ $('.btn_interp').on('click', function(){
   $(this).toggleClass('selected');
 });
 
+// progress bar update function
 function move(current_index,total) {
     var elem = document.getElementById("myBar");
     var width = Math.floor((current_index/total)*100);

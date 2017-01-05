@@ -121,6 +121,16 @@
     unset($inst);
     unset($years);
     unset($utype);
+    $res2=mysql_query("SELECT userId FROM users WHERE email=$email);
+    if ($res2){
+      $row=mysql_fetch_array($res2);
+      $query2 = "CREATE TABLE $row['userId'] (study_index INT(3) UNSIGNED PRIMARY KEY, fnl VARCHAR(30) NOT NULL, fnr VARCHAR(30) NOT NULL, slices INT(3) UNSIGNED)";
+      $res3 = mysql_query($query2);
+      if (!$res3){
+        $errTyp = "danger";
+        $errMSG = "Something went wrong with database, try again later...";
+      }
+    }
    } else {
     $errTyp = "danger";
     $errMSG = "Something went wrong, try again later...";
