@@ -82,7 +82,7 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 70%;
+      margin-left: 73%;
     }
   </style>
 
@@ -537,8 +537,8 @@ function resizeMain() {
     new_size = width;
   }
 
-  $('body').height(new_size * .48);
-  $('body').width(new_size * .85);
+  $('body').height(new_size * .49);
+  $('body').width(new_size * .8);
 
   $('.container').height($('body').height());
   $('.container').width($('body').width());
