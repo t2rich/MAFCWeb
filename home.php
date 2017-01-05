@@ -80,7 +80,7 @@
 
 <body>
 <div>
-<h1> 2AFC Duke RAILabs </h1>
+<h1> 2AFC Duke RAILabs <p style="text-align:right; color:#737CA1;"> <a href="logout.php?logout">Sign Out</a> </p> </h1>
 </div>
 <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
@@ -189,7 +189,8 @@
   <input id="zp" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Zoom/Pan
   <input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
 
-  <p style="text-align:right; color:#737CA1; margin-right:2%;"> <a href="logout.php?logout">Sign Out</a> </p>
+  <br>
+  <br>
 
   <div id="myProgress">
     <div id="myBar">
