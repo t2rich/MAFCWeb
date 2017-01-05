@@ -33,18 +33,13 @@
     }
 
     body {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      margin:auto;
       background-color:#0C090A;
       color:#737CA1;
     }
 
     .container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
+      margin:auto;
       transform: translate(-50%, -50%);
     }
 
@@ -93,7 +88,7 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 55%;
+      margin-left: 60%;
     }
   </style>
 
