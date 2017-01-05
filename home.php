@@ -33,8 +33,7 @@
     }
 
     body {
-      margin:0 auto;
-      padding: 0;
+      margin:auto;
       background-color:#0C090A;
       color:#737CA1;
     }
@@ -89,6 +88,7 @@
       color:#737CA1;
       font-size: 100%;
       margin-left: 60%;
+      width: 10%;
     }
   </style>
 
