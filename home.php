@@ -35,7 +35,6 @@
     body {
       background-color:#0C090A;
       color:#737CA1;
-      margin: auto;
     }
 
     .btn {
@@ -83,7 +82,7 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 65%;
+      margin-left: 72%;
     }
   </style>
 
