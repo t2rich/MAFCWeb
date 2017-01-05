@@ -30,6 +30,8 @@
 
     .selected {
       background-color:#737CA1;
+      outline: none;
+      border: none;
     }
 
     body {
