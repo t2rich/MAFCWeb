@@ -33,13 +33,9 @@
     }
 
     body {
-      margin:0;
+      margin:auto;
       background-color:#0C090A;
       color:#737CA1;
-    }
-
-    .container {
-
     }
 
     .btn {
@@ -61,7 +57,6 @@
 
     #myProgress {
       position: relative;
-      width: 20%;
       height: 2%;
       background-color: grey;
     }
@@ -82,13 +77,12 @@
     #title_stuff {
       color:#737CA1;
       font-size: 200%;
-      width: 100%;
     }
 
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 60%;
+      margin-left: 60.5%;
     }
   </style>
 
@@ -543,11 +537,11 @@ function resizeMain() {
     new_size = width;
   }
 
-  $('body').height(new_size * .49);
-  $('body').width(new_size * .98);
+  $('body').height(new_size * .45);
+  $('body').width(new_size * .7);
 
   $('.container').height($('body').height());
-  $('.container').width(Math.floor($('body').width()*.8));
+  $('.container').width($('body').width());
 
   $('.cornerstone-enabled-image').height(Math.floor($('.container').width() * .49));
   $('.cornerstone-enabled-image').width(Math.floor($('.container').width() * .49));
