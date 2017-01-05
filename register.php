@@ -88,7 +88,7 @@
   // years experience validation
   if (empty($years)) {
    $error = true;
-   $yearsError = "Please enter number of years experience.";
+   $yearsError = "Please enter number of years experience with medical imaging.";
  } else if (!preg_match("/^[1-9][0-9]{0,2}$/",$years)) {
    $error = true;
    $instError = "Enter integer number of years with minimum of 1.";
@@ -211,7 +211,7 @@ body {
             <div class="form-group">
              <div class="input-group">
                 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-             <input type="text" name="years" class="form-control" placeholder="Enter Years of Experience" maxlength="2" value="<?php echo $years ?>" />
+             <input type="text" name="years" class="form-control" placeholder="Enter Years of Experience with Medical Imaging" maxlength="2" value="<?php echo $years ?>" />
                 </div>
                 <span class="text-danger"><?php echo $yearsError; ?></span>
             </div>

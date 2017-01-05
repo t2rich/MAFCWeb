@@ -33,6 +33,9 @@
     }
 
     body {
+      width: 90%;
+      height: 90%;
+      margin: auto;
       background-color:#0C090A;
       color:#737CA1;
     }
@@ -209,7 +212,8 @@
     </div>
   </div>
 
-Image Loading Progress
+
+Image Load Progress
 
 </div>
 
@@ -526,7 +530,7 @@ function write_to_db2(){
 
 // Resize elements according to current browser display window size
 function resizeMain() {
-  var height = Math.floor($(window).height()*.65); // .7 allows space for buttons below and above image container
+  var height = Math.floor($(window).height()*.6); // .7 allows space for buttons below and above image container
   var width = Math.floor(($(window).width()/2)*.95); // .99 allows space for 2% buffer between images
   var new_size = 0;
 
@@ -538,7 +542,7 @@ function resizeMain() {
   }
 
   $('.container').height(Math.floor(new_size*1.2)); //1.2 allows space for buttons within image container
-  $('.container').width(Math.floor(2.15*new_size)); //2.15 allows space for buttons within image container
+  $('.container').width(Math.floor(2.1*new_size)); //2.15 allows space for buttons within image container
 
   $('.cornerstone-enabled-image').height(new_size);
   $('.cornerstone-enabled-image').width(new_size);
