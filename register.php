@@ -113,8 +113,8 @@
    $res = mysql_query($query);
 
    if ($res) {
-    $errTyp = "success";
-    $errMSG = "Successfully registered, you may login now";
+    //$errTyp = "success";
+    //$errMSG = "Successfully registered, you may login now";
     unset($name);
     unset($email);
     unset($pass);
@@ -129,6 +129,9 @@
       if (!$res3){
         $errTyp = "danger";
         $errMSG = "Something went wrong with database, try again later...";
+      }else {
+        $errTyp = "success";
+        $errMSG = echo $row['userId'];
       }
     }
    } else {
