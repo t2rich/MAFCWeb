@@ -40,7 +40,6 @@
 
     .container {
       margin:auto;
-      transform: translate(-50%, -50%);
     }
 
     .btn {
