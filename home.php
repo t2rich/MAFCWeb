@@ -542,8 +542,8 @@ function resizeMain() {
     new_size = width;
   }
 
-  $('body').height(new_size * .45);
-  $('body').width(new_size * .9);
+  $('body').height(new_size * .425);
+  $('body').width(new_size * .85);
 
   $('.container').height($('body').height());
   $('.container').width(Math.floor($('body').width()*.8));
