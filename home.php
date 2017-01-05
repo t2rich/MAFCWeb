@@ -82,17 +82,17 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 85%;
+      margin-left: 65%;
     }
   </style>
 
 </head>
 
 <body>
+
 <br>
-<div>
+
 <div id="title_stuff"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
-</div>
 <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
 <br>
@@ -527,7 +527,7 @@ function write_to_db2(){
 // Resize elements according to current browser display window size
 function resizeMain() {
   var height = Math.floor($(window).height()*.7); // .7 allows space for buttons below and above image container
-  var width = Math.floor(($(window).width()/2)*.99); // .99 allows space for 2% buffer between images
+  var width = Math.floor(($(window).width()/2)*.98); // .99 allows space for 2% buffer between images
   var new_size = 0;
 
   //find limiting dimension
