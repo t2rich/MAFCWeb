@@ -533,18 +533,18 @@ function resizeMain() {
 
   //find limiting dimension
   if (height <= (width*.5)) {
-    new_size = height;
+    new_size = height*2;
   } else {
     new_size = width;
   }
 
-  $('body').height(new_size * .9);
+  $('body').height(new_size * .45);
   $('body').width(new_size * .9);
 
   $('.container').height($('body').height());
   $('.container').width($('body').width());
 
-  $('.cornerstone-enabled-image').height(Math.floor($('.container').height() * .49));
+  $('.cornerstone-enabled-image').height(Math.floor($('.container').height() * .98));
   $('.cornerstone-enabled-image').width(Math.floor($('.container').width() * .49));
 
   $('#image1').height($('.cornerstone-enabled-image').height());
