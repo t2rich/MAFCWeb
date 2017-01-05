@@ -126,7 +126,7 @@
       $row=mysql_fetch_array($res2);
       $idname = settype($row['userId'], "string");
       $errTyp = "success";
-      $errMSG = $idname;
+      $errMSG = "$idname";
       // $query2 = "CREATE TABLE `".$idname."` (study_index INT(3) AUTO_INCREMENT PRIMARY KEY, fnl VARCHAR(30) NOT NULL, fnr VARCHAR(30) NOT NULL, slices INT(3))";
       // $res3 = mysql_query($query2);
       // if (!$res3){
