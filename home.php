@@ -527,7 +527,7 @@ function write_to_db2(){
 // Resize elements according to current browser display window size
 function resizeMain() {
   var height = Math.floor($(window).height()*.7); // .7 allows space for buttons below and above image container
-  var width = Math.floor(($(window).width()/2)*.98); // .99 allows space for 2% buffer between images
+  var width = Math.floor(($(window).width()/2)*.95); // .99 allows space for 2% buffer between images
   var new_size = 0;
 
   //find limiting dimension
@@ -550,7 +550,7 @@ function resizeMain() {
   $('#image2').width(new_size);
 
   $('#myProgress').width(new_size);
-  $('#title_stuff').width(new_size);
+  $('#title_stuff').width(Math.floor(2.15*new_size));
 
   cornerstone.resize(element, true);
   cornerstone.resize(element2, true);
