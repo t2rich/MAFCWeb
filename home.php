@@ -34,7 +34,7 @@
 
     body {
       width: 90%;
-      height: 60%;
+      height: 90%;
       margin: auto;
       background-color:#0C090A;
       color:#737CA1;
@@ -112,7 +112,7 @@
 
   <!-- We disable mouse selection on the top most div -->
   <div id="divright"
-    style="position:relative; display:inline-block; margin-right:2%;"
+    style="position:relative; display:inline-block; margin-right:1.9%;"
     class="cornerstone-enabled-image"
     oncontextmenu="return false"
     unselectable='on'
@@ -541,11 +541,11 @@ function resizeMain() {
       new_size = height;
   }
 
-  $('.container').height(new_size);
-  $('.container').width(new_size);
+  $('.container').height(new_size * .9);
+  $('.container').width(new_size * .9);
 
-  $('.cornerstone-enabled-image').height(Math.floor(new_size * .49));
-  $('.cornerstone-enabled-image').width(Math.floor(new_size * .49));
+  $('.cornerstone-enabled-image').height(Math.floor($('.container').height() * .49));
+  $('.cornerstone-enabled-image').width(Math.floor($('.container').width() * .49));
 
   $('#image1').height($('.cornerstone-enabled-image').height());
   $('#image1').width($('.cornerstone-enabled-image').width());
