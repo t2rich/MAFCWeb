@@ -38,6 +38,13 @@
       color:#737CA1;
     }
 
+    button:active {
+      outline: none;
+      border: none;
+    }
+
+    button:focus {outline:0;}
+    
     .btn {
       width:9%;
       outline: none;
