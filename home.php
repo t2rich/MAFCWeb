@@ -109,8 +109,7 @@
   <br>
 
   <!-- We disable mouse selection on the top most div -->
-  <div id="divright"
-    style="position:relative; display:inline-block; margin-right:1%;"
+  <div style="position:relative; display:inline-block; margin-right:1%;"
     class="cornerstone-enabled-image"
     oncontextmenu="return false"
     unselectable='on'
@@ -542,8 +541,8 @@ function resizeMain() {
   $('body').height(new_size * .9);
   $('body').width(new_size * .9);
 
-  $('.container').height(new_size * .9);
-  $('.container').width(new_size * .9);
+  $('.container').height($('body').height());
+  $('.container').width($('body').width());
 
   $('.cornerstone-enabled-image').height(Math.floor($('.container').height() * .49));
   $('.cornerstone-enabled-image').width(Math.floor($('.container').width() * .49));
@@ -555,7 +554,7 @@ function resizeMain() {
   $('#image2').width($('.cornerstone-enabled-image').width());
 
   $('#myProgress').width($('.cornerstone-enabled-image').width());
-  $('#title_stuff').width(new_size * .9);
+  $('#title_stuff').width($('body').width());
 
   cornerstone.resize(element, true);
   cornerstone.resize(element2, true);
