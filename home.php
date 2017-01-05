@@ -112,7 +112,7 @@
 
   <!-- We disable mouse selection on the top most div -->
   <div id="divright"
-    style="position:relative; display:inline-block; margin-right:1.9%;"
+    style="position:relative; display:inline-block; margin-right:1%;"
     class="cornerstone-enabled-image"
     oncontextmenu="return false"
     unselectable='on'
@@ -535,7 +535,7 @@ function resizeMain() {
   var new_size = 0;
 
   //find limiting dimension
-  if (height >= width) {
+  if (height >= width*.5) {
     new_size = width;
   } else {
       new_size = height;
