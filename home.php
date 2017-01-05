@@ -33,6 +33,7 @@
     }
 
     body {
+      margin:0;
       background-color:#0C090A;
       color:#737CA1;
     }
