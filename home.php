@@ -74,9 +74,14 @@
       color: white;
     }
 
+    #title_stuff {
+      color:#737CA1;
+      font-size: 60%;
+    }
+
     #title_stuff a {
       color:#737CA1;
-      margin-left: 20%;
+      margin-left: 60%;
     }
   </style>
 
