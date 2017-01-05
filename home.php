@@ -47,7 +47,7 @@
     }
 
     .btn2 {
-      width:46.4%;
+      width:49%;
       line-height: 200%;
     }
 
@@ -83,7 +83,7 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 72%;
+      margin-left: 78%;
     }
   </style>
 
@@ -102,7 +102,7 @@
   <br>
 
   <!-- Set up javascript buttons for user selection of "correct" image -->
-  <button id="choose1" class="btn2" style="margin-right: 1.9%;" onclick="write_to_db()">CHOOSE IMAGE 1</button>
+  <button id="choose1" class="btn2" style="margin-right: 1%;" onclick="write_to_db()">CHOOSE IMAGE 1</button>
   <button id="choose2" class="btn2" onclick="write_to_db2()">CHOOSE IMAGE 2</button>
 
   <br>
@@ -187,7 +187,7 @@
     <button id="bone" class="btn" >Bone</button>
     <!-- <button id="invert" class="btn_invert" style="width:9%;">Invert</button> -->
     <!-- <button id="interpolation" class="btn_interp selected" style="width:9%;">Interpolation</button> -->
-    <button id="softTissue2" class="btn1" style="margin-left: 21.25%;">Soft Tissue</button>
+    <button id="softTissue2" class="btn1" style="margin-left: 24.25%;">Soft Tissue</button>
     <button id="lung2" class="btn1" >Lung</button>
     <button id="bone2" class="btn1" >Bone</button>
     <!-- <button id="invert2" class="btn_invert"  style="width:9%;">Invert</button> -->
