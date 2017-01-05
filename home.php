@@ -41,10 +41,10 @@
     button:active {
       outline: none;
       border: none;
+      background-color:#0C090A;
     }
 
-    button:focus {outline:0;}
-    
+
     .btn {
       width:9%;
       outline: none;
