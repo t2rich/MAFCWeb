@@ -6,6 +6,9 @@
  }
  include_once 'dbconnect.php';
 
+ ini_set('display_errors', 'On');
+ error_reporting(E_ALL | E_STRICT);
+
  $error = false;
 
  if ( isset($_POST['btn-signup']) ) {
@@ -121,12 +124,13 @@
     unset($inst);
     unset($years);
     unset($utype);
-    $res2=mysql_query("SELECT userId FROM users WHERE email='$email'");
+    $res2=mysql_query("SELECT userName FROM users WHERE email='$email'");
+    echo $res2;
     if ($res2){
       $row=mysql_fetch_array($res2);
-      $idname = settype($row['userId'], "string");
+      //$idname = settype($row['userId'], "string");
       $errTyp = "success";
-      $errMSG = "$idname";
+      $errMSG = $idname;
       // $query2 = "CREATE TABLE `".$idname."` (study_index INT(3) AUTO_INCREMENT PRIMARY KEY, fnl VARCHAR(30) NOT NULL, fnr VARCHAR(30) NOT NULL, slices INT(3))";
       // $res3 = mysql_query($query2);
       // if (!$res3){
