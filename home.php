@@ -93,7 +93,7 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 75%;
+      margin-left: 65%;
     }
   </style>
 
@@ -103,8 +103,6 @@
 
 <!-- setting up the html division to be container for cornstone enabled elements  -->
 <div class="container">
-
-  <br>
 
   <div id="title_stuff"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
   <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
