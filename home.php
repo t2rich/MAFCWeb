@@ -85,10 +85,6 @@
       margin-left: 75%;
     }
 
-    input[type=checkbox] {
-      width: 1%;
-      height: 1%;
-    }
   </style>
 
 </head>
