@@ -79,9 +79,9 @@
 </head>
 
 <body>
-
-<h1> 2AFC Duke RAILabs </h1> <a href="logout.php?logout"><h4 style="text-align:right;">Sign Out</h4></a><
-
+<div>
+<h1> 2AFC Duke RAILabs </h1> <h4 style="text-align:right; color:#737CA1;"> <a href="logout.php?logout">Sign Out</a> </h4>
+</div>
 <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
 <br>
