@@ -84,7 +84,7 @@
       text-align: center;
       line-height: 100%;
       color: white;
-      margin-top: 10%;
+      margin-top: .1%;
     }
 
     #title_stuff {
@@ -98,6 +98,9 @@
       margin-left: 75%;
     }
 
+    input[type=checkbox] {
+      background-color: #737CA1;
+    }
   </style>
 
 </head>
