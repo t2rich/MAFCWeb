@@ -189,8 +189,7 @@
   <input id="zp" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Zoom/Pan
   <input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
 
-  <p style="text-align:right; color:#737CA1;"> <a href="logout.php?logout">Sign Out</a> </p>
-  <br>
+  <p style="text-align:right; color:#737CA1; margin-right:2%;"> <a href="logout.php?logout">Sign Out</a> </p>
 
   <div id="myProgress">
     <div id="myBar">
