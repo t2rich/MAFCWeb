@@ -82,12 +82,12 @@
     #title_stuff a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 76%;
+      margin-left: 75%;
     }
 
     input[type=checkbox] {
-      width: 2%;
-      height: 2%;
+      width: 1%;
+      height: 1%;
     }
   </style>
 
