@@ -34,7 +34,8 @@
 
     body {
       background-color:#0C090A;
-      color:#737CA1
+      color:#737CA1;
+      margin: auto;
     }
 
     .btn {
