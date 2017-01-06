@@ -742,7 +742,7 @@ function onImageLoaded(){
 
   loading_index = loading_index + 1;
   var elem = document.getElementById("myBar");
-  var width = Math.floor((loading_index/(slices*2)))*100);
+  var width = Math.floor((loading_index/(slices*2))*100);
   elem.style.width = width + '%';
   document.getElementById("label").innerHTML = width + '%';
 
