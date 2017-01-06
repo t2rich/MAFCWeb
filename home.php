@@ -289,6 +289,9 @@ var stack2 = {
 var element = cornerstone.enable(document.getElementById('image1'));
 var element2 = cornerstone.enable(document.getElementById('image2'));
 
+// Image loading events are bound to the cornerstone object, not the element
+$(cornerstone).on("CornerstoneImageLoaded", onImageLoaded);
+
 // create listeners for updated images
 $(element).on("CornerstoneImageRendered", onViewportUpdated);
 $(element2).on("CornerstoneImageRendered", onViewportUpdated2);
@@ -730,6 +733,12 @@ function move(current_index,total) {
     var width = Math.floor((current_index/total)*100);
     elem.style.width = width + '%';
     document.getElementById("label").innerHTML = width + '%';
+}
+
+function onImageLoaded(){
+
+  alert("image loaded");
+
 }
 
 </script>

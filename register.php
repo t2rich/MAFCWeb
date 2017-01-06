@@ -114,7 +114,8 @@
 
    if ($res) {
 
-    $res2=mysql_query("SELECT userId FROM users WHERE userEmail='$email'");
+    $errTyp = "success";
+    $errMSG = "Successfully registered, you may login now";
 
     unset($name);
     unset($email);
@@ -123,31 +124,12 @@
     unset($years);
     unset($utype);
 
-    echo $res2;
-
-    if ($res2){
-
-      $row=mysql_fetch_array($res2);
-      $idname = settype($row['userId'], "string");
-
-      $query2 = "CREATE TABLE `".$idname."` (study_index INT(3) AUTO_INCREMENT PRIMARY KEY, fnl VARCHAR(30) NOT NULL, fnr VARCHAR(30) NOT NULL, slices INT(3))";
-      $res3 = mysql_query($query2);
-      
-      if (!$res3){
-        $errTyp = "danger";
-        $errMSG = "Something went wrong with database, try again later...";
-      }else {
-        $errTyp = "success";
-        $errMSG = "Successfully registered, you may login now";
-      }
-    }
    } else {
     $errTyp = "danger";
     $errMSG = "Something went wrong, try again later...";
    }
 
   }
-
 
  }
 ?>
