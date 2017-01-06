@@ -259,7 +259,7 @@ var study_index = 1; // study progress index
 //check dynamic database to see where they left off, or are just beginning
 
 // number of stack slices (must be constant across all image datasets)
-var slices = 49;
+var slices = 50;
 var loading_index = 0;
 //read from pre-filled database
 
@@ -320,7 +320,7 @@ function loadAndDisplayImages() {
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/image' + image_number + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/new_images/images' + image_number + '/' + 'Instance_' + (i+1) + '.dcm';
   };
 
   // update stack info
