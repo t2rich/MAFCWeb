@@ -260,6 +260,7 @@ var study_index = 1; // study progress index
 
 // number of stack slices (must be constant across all image datasets)
 var slices = 49;
+var loading_index = 0;
 //read from pre-filled database
 
 // scale the zoom property to account for reconstructed field of view differences
@@ -461,7 +462,7 @@ function loadAll(imageID) {
 
   for (i = 0; i < slices; i++) {
 
-    cornerstone.loadAndCacheImage(imageID[i]).then(move(i,slices*2 -1));
+    cornerstone.loadAndCacheImage(imageID[i]);
 
 
   }
@@ -473,7 +474,7 @@ function loadAll2(imageID) {
 
   for (i = 0; i < slices; i++) {
 
-    cornerstone.loadAndCacheImage(imageID[i]).then(move(slices + i,slices*2 -1));
+    cornerstone.loadAndCacheImage(imageID[i]);
 
 
   }
@@ -521,6 +522,7 @@ function write_to_db(){
 
   //TODO add code to clear cache
   cornerstone.imageCache.purgeCache();
+  loading_index = 0;
 
   //start the next mafc user selection
   loadAndDisplayImages();
@@ -537,6 +539,7 @@ function write_to_db2(){
 
   //clear cache
   cornerstone.imageCache.purgeCache();
+  loading_index = 0;
 
   //start the next mafc user selection
   loadAndDisplayImages();
@@ -727,17 +730,21 @@ $('.btn_interp').on('click', function(){
   $(this).toggleClass('selected');
 });
 
-// progress bar update function
-function move(current_index,total) {
-    var elem = document.getElementById("myBar");
-    var width = Math.floor((current_index/total)*100);
-    elem.style.width = width + '%';
-    document.getElementById("label").innerHTML = width + '%';
-}
+// // progress bar update function
+// function move(loading_index,total) {
+//     var elem = document.getElementById("myBar");
+//     var width = Math.floor((loading_index/total)*100);
+//     elem.style.width = width + '%';
+//     document.getElementById("label").innerHTML = width + '%';
+// }
 
 function onImageLoaded(){
 
-  alert("image loaded");
+  loading_index = loading_index + 1;
+  var elem = document.getElementById("myBar");
+  var width = Math.floor((loading_index/(slices*2)))*100);
+  elem.style.width = width + '%';
+  document.getElementById("label").innerHTML = width + '%';
 
 }
 
