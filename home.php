@@ -76,7 +76,7 @@
 
     #myBar {
       position: absolute;
-      width: 10%;
+      width: 1%;
       height: 100%;
       background-color: #737CA1;
     }
