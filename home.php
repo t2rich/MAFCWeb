@@ -259,7 +259,7 @@ var study_index = 1; // study progress index
 //check dynamic database to see where they left off, or are just beginning
 
 // number of stack slices (must be constant across all image datasets)
-var slices = 50;
+var slices = 49;
 //read from pre-filled database
 
 // scale the zoom property to account for reconstructed field of view differences
@@ -458,8 +458,8 @@ function loadAll(imageID) {
 
   for (i = 0; i < slices; i++) {
 
-    cornerstone.loadAndCacheImage(imageID[i]);
-    move(i,slices*2 -1);
+    cornerstone.loadAndCacheImage(imageID[i]).then(move(i,slices*2 -1));
+
 
   }
 
@@ -470,8 +470,8 @@ function loadAll2(imageID) {
 
   for (i = 0; i < slices; i++) {
 
-    cornerstone.loadAndCacheImage(imageID[i]);
-    move(slices + i,slices*2 -1);
+    cornerstone.loadAndCacheImage(imageID[i]).then(move(slices + i,slices*2 -1));
+
 
   }
 
