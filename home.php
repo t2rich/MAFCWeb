@@ -259,7 +259,7 @@ var study_index = 1; // study progress index
 //check dynamic database to see where they left off, or are just beginning
 
 // number of stack slices (must be constant across all image datasets)
-var slices = 5;
+var slices = 50;
 //read from pre-filled database
 
 // scale the zoom property to account for reconstructed field of view differences
