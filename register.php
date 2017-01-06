@@ -109,13 +109,11 @@
   // if there's no error, continue to signup
   if( !$error ) {
 
-   $query = "INSERT INTO users(userName,userEmail,userPass,userInst,years,utype) VALUES('$name','$email','$password','$inst','$years','$utype')";
+   $query = "INSERT INTO users(userName,userEmail,userPass,userInst,years,utype,study_index) VALUES('$name','$email','$password','$inst','$years','$utype',1)";
    $res = mysql_query($query);
 
    if ($res) {
-
     $res2=mysql_query("SELECT userId FROM users WHERE userEmail='$email'");
-
     unset($name);
     unset($email);
     unset($pass);
@@ -123,16 +121,11 @@
     unset($years);
     unset($utype);
 
-    echo $res2;
-
     if ($res2){
-
       $row=mysql_fetch_array($res2);
       $idname = settype($row['userId'], "string");
-
-      $query2 = "CREATE TABLE `".$idname."` (study_index INT(3) AUTO_INCREMENT PRIMARY KEY, fnl VARCHAR(30) NOT NULL, fnr VARCHAR(30) NOT NULL, slices INT(3))";
+      $query2 = "CREATE TABLE `".$idname."` (study_index INT(3) AUTO_INCREMENT PRIMARY KEY, fnl VARCHAR(30) NOT NULL, fnr VARCHAR(30) NOT NULL, choice INT(1) NOT NULL, slices INT(3) NOT NULL)";
       $res3 = mysql_query($query2);
-      
       if (!$res3){
         $errTyp = "danger";
         $errMSG = "Something went wrong with database, try again later...";

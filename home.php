@@ -11,6 +11,19 @@
  // select loggedin users detail
  $res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
  $userRow=mysql_fetch_array($res);
+ $idname = settype($useRow['userId'], "string");
+
+// get last known study index
+ $init_study_index = $userRow['study_index'];
+
+ $res2=mysql_query("SELECT * FROM study_info WHERE study_case=".$init_study_index);
+ $userRow2=mysql_fetch_array($res2);
+ // get folder names, number of slices
+ $fnl = $userRow['fnl'];
+ $fnr = $userRow['fnr'];
+ $slices = $userRow['slices'];
+ $study_index = $userRow['study_case'];
+
 ?>
 
 <!DOCTYPE HTML>
@@ -255,11 +268,11 @@ Image Load Progress
 
 <script>
 
-var study_index = 1; // study progress index
+var study_index = "<?php echo $study_index; ?>";; // study progress index
 //check dynamic database to see where they left off, or are just beginning
 
 // number of stack slices (must be constant across all image datasets)
-var slices = 5;
+var slices = "<?php echo $slices; ?>";;
 //read from pre-filled database
 
 // scale the zoom property to account for reconstructed field of view differences
@@ -312,11 +325,11 @@ resizeMain();
 function loadAndDisplayImages() {
 
   // check current study index
-  var image_number = (2*study_index) - 1;
+  var image_name = "<?php echo $fnl; ?>";
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/image' + image_number + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name + '/' + 'Instance_' + (i+1) + '.dcm';
   };
 
   // update stack info
@@ -382,11 +395,11 @@ function loadAndDisplayImages() {
   });
 
   // check current study index
-  var image_number2 = (2*study_index);
+  var image_name2 = "<?php echo $fnl; ?>";
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/image' + image_number2 + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name2 + '/' + 'Instance_' + (i+1) + '.dcm';
   };
 
   // update stack info
@@ -510,12 +523,15 @@ function onNewImage2(e, data) {
 function write_to_db(){
   // step to the next image datasets
   study_index = study_index + 1;
+  <?php
   // post selection to server side database
-  $.ajax({
-    type: 'POST',
-    url: './db/script.php',
-  });
+  $query = "INSERT INTO `".$idname."`(fnl,fnr,choice,slices) VALUES('$fnl','$fnr',0,'$slices')";
+  $res = mysql_query($query);
 
+  //update user database study index
+  $query = "INSERT INTO users(study_index) VALUES($study_index)";
+  $res = mysql_query($query);
+  ?>
   //TODO add code to clear cache
   cornerstone.imageCache.purgeCache();
 
@@ -527,11 +543,15 @@ function write_to_db2(){
   // step to the next image datasets
   study_index = study_index + 1;
   // post selection to server side database
-  $.ajax({
-    type: 'POST',
-    url: './db/script2.php',
-  });
+  <?php
+  $query = "INSERT INTO `".$idname."`(fnl,fnr,choice,slices) VALUES('$fnl','$fnr',1,'$slices')";
+  $res = mysql_query($query);
 
+  //update user database study index
+  $study_index = $study_index + 1;
+  $query = "INSERT INTO users(study_index) VALUES('$study_index')";
+  $res = mysql_query($query);
+  ?>
   //clear cache
   cornerstone.imageCache.purgeCache();
 
