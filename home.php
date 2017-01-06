@@ -320,7 +320,7 @@ function loadAndDisplayImages() {
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/new_images/images' + image_number + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/new_images/images' + image_number + '/' + '00000' + (i) + '.dcm';
   };
 
   // update stack info
@@ -390,7 +390,7 @@ function loadAndDisplayImages() {
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/new_images/images' + image_number2 + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/new_images/images' + image_number2 + '/' + '00000' + (i) + '.dcm';
   };
 
   // update stack info
