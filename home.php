@@ -128,7 +128,7 @@ if($res){
   }
 
   #study_label {
-    margin-left: 170%;
+    margin-left: 70%;
     color:#737CA1;
   }
 
