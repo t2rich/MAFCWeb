@@ -116,7 +116,7 @@ if ( isset($_POST['btn-signup']) ) {
     $query = "INSERT INTO users(userName,userEmail,userPass,userInst,userYears,userType,studyIndex)
     VALUES('$name','$email','$password','$inst','$years','$utype',1)";
     $res = mysql_query($query);
-
+    echo $res;
     if ($res) {
       $res2=mysql_query("SELECT * FROM users WHERE userEmail='$email'");
       unset($name);
