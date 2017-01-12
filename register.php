@@ -141,13 +141,14 @@ if ( isset($_POST['btn-signup']) ) {
 
           $full_query = "";
           foreach ($shuffled_array as $value){
+            echo $value;
             if(empty($full_query)){
               $full_query = "INSERT INTO `".$idname."`(case_num) VALUES($value)";
             } else {
               $full_query.=",($value)";
             }
           }
-          echo $full_query;
+          //echo $full_query;
           $res5 = mysql_query($full_query);
           if ($res5){
             $errTyp = "success";
