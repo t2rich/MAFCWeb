@@ -392,8 +392,7 @@ function loadAndDisplayImages() {
     // set image overlay properites and values
     var viewport = cornerstone.getViewport(element);
     $('#bottomright').text("Zoom: " + viewport.scale.toFixed(2) + "x");
-    $('#bottomleft').text("WW/WC:" + Math.round(viewport.voi.windowWidth) + ...
-    "/" + Math.round(viewport.voi.windowCenter));
+    $('#bottomleft').text("WW/WC:" + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
 
     // enable and bind user input to mouse buttons and movement
     cornerstoneTools.mouseInput.enable(element);
