@@ -128,7 +128,7 @@ if($res){
   }
 
   #study_label {
-    margin-left: 150%;
+    margin-left: 170%;
     color:#737CA1;
   }
 
@@ -268,7 +268,7 @@ style="top:0px;left:0px; position:absolute">
 
 <div id="myProgress">
   <div id="myBar">
-    <div id="label">10%</div> <div id="study_label">Study Progress 0/100</div>
+    <div id="label">10%</div> <div id="study_label">Study Progress: 0/100</div>
   </div>
 </div>
 
@@ -848,7 +848,7 @@ function onImageLoaded(){
 
 // study progress update function
 function study_progress() {
-  document.getElementById("study_label").innerHTML = study_index + '/' + total_cases;
+  document.getElementById("study_label").innerHTML = "Study Progress: "study_index + '/' + total_cases;
 }
 
 </script>
