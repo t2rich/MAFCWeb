@@ -125,9 +125,8 @@ if($res){
     margin-top: .3%;
   }
 
-  .container a {
+  .container c {
     text-align:right;
-    margin-right: 1%;
     color:#737CA1;
   }
 
@@ -262,7 +261,7 @@ style="top:0px;left:0px; position:absolute">
 <input id="zp" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Zoom/Pan
 <input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
 
-<a id="study_label">Study Progress: 0/100 </a>
+<c id="study_label">Study Progress: 0/100 </c>
 
 <br>
 <br>
