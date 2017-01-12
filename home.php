@@ -23,7 +23,7 @@ error_reporting(E_ALL | E_STRICT);
  $userRow2=mysql_fetch_array($res2);
  $init_case_num = $userRow2['case_num'];
 
-//'$email'"
+echo $init_case_num;
 
  // load study info database
  $res3=mysql_query("SELECT * FROM study_info WHERE case_num='$init_case_num'");
