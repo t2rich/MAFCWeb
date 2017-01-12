@@ -128,7 +128,7 @@ if($res){
   }
 
   #study_label {
-    margin-left: 175%;
+    margin-left: 150%;
     color:#737CA1;
   }
 
@@ -146,7 +146,7 @@ if($res){
   #top_line b {
     color:#737CA1;
     font-size: 100%;
-    margin-left: 23%;
+    margin-left: 20%;
   }
   </style>
 
