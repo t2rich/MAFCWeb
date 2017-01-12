@@ -125,7 +125,7 @@ if($res){
     margin-top: .3%;
   }
 
-  .container c {
+  #container a {
     text-align:right;
     color:#737CA1;
   }
@@ -153,7 +153,7 @@ if($res){
 <body>
 
   <!-- setting up the html division to be container for cornstone enabled elements  -->
-  <div class="container">
+  <div id="container">
 
     <br>
 
@@ -261,7 +261,7 @@ style="top:0px;left:0px; position:absolute">
 <input id="zp" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Zoom/Pan
 <input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
 
-<c id="study_label">Study Progress: 0/100 </c>
+<a id="study_label">Study Progress: 0/100 </a>
 
 <br>
 <br>
@@ -669,11 +669,11 @@ function resizeMain() {
   $('body').height(new_size * .5);
   $('body').width(new_size * .75);
 
-  $('.container').height($('body').height());
-  $('.container').width($('body').width());
+  $('#container').height($('body').height());
+  $('#container').width($('body').width());
 
-  $('.cornerstone-enabled-image').height(Math.floor($('.container').width() * .49));
-  $('.cornerstone-enabled-image').width(Math.floor($('.container').width() * .49));
+  $('.cornerstone-enabled-image').height(Math.floor($('#container').width() * .49));
+  $('.cornerstone-enabled-image').width(Math.floor($('#container').width() * .49));
 
   $('#image1').height($('.cornerstone-enabled-image').width());
   $('#image1').width($('.cornerstone-enabled-image').width());
@@ -688,7 +688,7 @@ function resizeMain() {
   cornerstone.resize(element2, true);
 
   // update size of buttons to match current browser display size
-  var fontSize = $('.container').width() * 0.009; // 9% of container width
+  var fontSize = $('#container').width() * 0.009; // 9% of container width
   $('.btn').css('font-size', fontSize);
   $('.btn1').css('font-size', fontSize);
   $('.btn_invert').css('font-size', fontSize);
