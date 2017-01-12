@@ -136,8 +136,8 @@ if ( isset($_POST['btn-signup']) ) {
           $res4=mysql_query("SELECT * FROM study_info WHERE case_num=1");
           $userRow=mysql_fetch_array($res4);
           $study_size = $userRow['studySize'];
-          echo $study_size;
-          // $temp_array = range(1,$studySize);
+          $temp_array = range(1,$studySize);
+          echo $temp_array;
           // $shuffled_array = shuffle($temp_array);
           // echo $shuffled_array;
           // $full_query = "";
