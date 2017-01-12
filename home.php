@@ -848,7 +848,7 @@ function onImageLoaded(){
 
 // study progress update function
 function study_progress() {
-  document.getElementById("study_label").innerHTML = "Study Progress: "study_index + '/' + total_cases;
+  document.getElementById("study_label").innerHTML = "Study Progress: " + study_index + '/' + total_cases;
 }
 
 </script>
