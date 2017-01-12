@@ -25,8 +25,6 @@ if($res){
     $userRow2=mysql_fetch_array($res2);
     $init_case_num = $userRow2['case_num'];
 
-    echo $init_case_num;
-
     // load study info database
     $res3=mysql_query("SELECT * FROM study_info WHERE case_num='$init_case_num'");
     if($res3){
@@ -268,7 +266,7 @@ style="top:0px;left:0px; position:absolute">
 
 <div id="myProgress">
   <div id="myBar">
-    <div id="label">10%</div> <div id="study_label">Study Progress: 0/100</div>
+    <div id="label">10%</div> <div id="study_label">Study-Progress:(0/100)</div>
   </div>
 </div>
 
@@ -848,7 +846,7 @@ function onImageLoaded(){
 
 // study progress update function
 function study_progress() {
-  document.getElementById("study_label").innerHTML = "Study Progress: " + study_index + '/' + total_cases;
+  document.getElementById("study_label").innerHTML = "Study-Progress:(" + study_index + '/' + total_cases + ')';
 }
 
 </script>
