@@ -12,17 +12,27 @@
  $res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
  $userRow=mysql_fetch_array($res);
  $idname = settype($useRow['userId'], "string");
+ $init_study_index = $userRow['study_index']; // get last known study index
+ $cases_completed = $userRow['cases_completed']; // num of cases already completed
 
-// get last known study index
- $init_study_index = $userRow['study_index'];
-
- $res2=mysql_query("SELECT * FROM study_info WHERE study_case=".$init_study_index);
+ // load study info database
+ $res2=mysql_query("SELECT * FROM study_info WHERE case_num=".$init_study_index);
  $userRow2=mysql_fetch_array($res2);
  // get folder names, number of slices
- $fnl = $userRow['fnl'];
- $fnr = $userRow['fnr'];
- $slices = $userRow['slices'];
- $study_index = $userRow['study_case'];
+ $small_dir = $userRow2['small_dir'];
+ $large_dir = $userRow2['large_dir'];
+ $slices = $userRow2['slices'];
+ $study_index = $userRow2['case_num'];
+
+ $left_small = rand(0,1);
+
+ if ($left_small) {
+   $left_side = $small_dir;
+   $right_side = $large_dir;
+ } else {
+   $left_side = $large_dir;
+   $right_side = $large_dir;
+ }
 
 ?>
 
@@ -109,9 +119,14 @@
     #top_line a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 75%;
+      margin-left: 25%;
     }
 
+    #top_line b {
+      color:#737CA1;
+      font-size: 100%;
+      margin-left: 25%;
+    }
   </style>
 
 </head>
@@ -123,7 +138,7 @@
 
   <br>
 
-  <div id="top_line"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
+  <div id="top_line"> MAFC Duke RAILabs <b>Select image stack with larger nodule</b> <a href="logout.php?logout">Sign Out</a> </div>
   <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
   <br>
@@ -236,7 +251,7 @@
     </div>
   </div>
 
-
+<div id="study_label">0/100</div>
 Image Load Progress
 
 </div>
@@ -268,12 +283,20 @@ Image Load Progress
 
 <script>
 
-var study_index = "<?php echo $study_index; ?>";; // study progress index
+var total_cases = 100;
+
+var study_index = "<?php echo $study_index; ?>"; // init case number upon login
 //check dynamic database to see where they left off, or are just beginning
 
-// number of stack slices (must be constant across all image datasets)
-var slices = "<?php echo $slices; ?>";;
+var cases_completed = "<?php echo $cases_completed; ?>"; // study progress indicator
+
+// number of stack slices
+var slices = "<?php echo $slices; ?>";
 //read from pre-filled database
+
+var left_side = "<?php echo $left_side; ?>";
+var right_side = "<?php echo $right_side; ?>";
+var left_small = "<?php echo $left_small; ?>";
 
 // scale the zoom property to account for reconstructed field of view differences
 // var size_ratio = 1;
@@ -325,7 +348,7 @@ resizeMain();
 function loadAndDisplayImages() {
 
   // check current study index
-  var image_name = "<?php echo $fnl; ?>";
+  var image_name = left_side;
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
@@ -395,7 +418,7 @@ function loadAndDisplayImages() {
   });
 
   // check current study index
-  var image_name2 = "<?php echo $fnl; ?>";
+  var image_name2 = right_side;
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
@@ -750,6 +773,11 @@ function move(current_index,total) {
     var width = Math.floor((current_index/total)*100);
     elem.style.width = width + '%';
     document.getElementById("label").innerHTML = width + '%';
+}
+
+// study progress update function
+function study_progress(cases_completed,total_cases) {
+    document.getElementById("study_label").innerHTML = cases_completed + '/' + total_cases;
 }
 
 </script>
