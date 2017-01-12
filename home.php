@@ -126,7 +126,8 @@ if($res){
   }
 
   #study_label {
-    margin-left: 130%;
+    align:right;
+    margin-right: 1%;
     color:#737CA1;
   }
 
@@ -261,12 +262,14 @@ style="top:0px;left:0px; position:absolute">
 <input id="zp" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Zoom/Pan
 <input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
 
+<div id="study_label">Study Progress: 0/100 </div>
+
 <br>
 <br>
 
 <div id="myProgress">
   <div id="myBar">
-    <div id="label">10%</div> <div id="study_label">Study-Progress:(0/100)</div>
+    <div id="label">10%</div>
   </div>
 </div>
 
@@ -846,7 +849,7 @@ function onImageLoaded(){
 
 // study progress update function
 function study_progress() {
-  document.getElementById("study_label").innerHTML = "Study-Progress:(" + study_index + '/' + total_cases + ')';
+  document.getElementById("study_label").innerHTML = "Study Progress: " + study_index + '/' + total_cases;
 }
 
 </script>
