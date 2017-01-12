@@ -17,7 +17,7 @@ if( !isset($_SESSION['user']) ) {
 $res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
 if($res){
   $userRow=mysql_fetch_array($res);
-  $idname = settype($userRow['userId'], "string");
+  $idname = $userRow['userId'];
   $init_study_index = $userRow['studyIndex']; // get last known study index
 
   $res2=mysql_query("SELECT * FROM `".$idname."` WHERE studyIndex='$init_study_index'");
