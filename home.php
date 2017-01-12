@@ -4,47 +4,52 @@
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
 
- ob_start();
- session_start();
- require_once 'dbconnect.php';
+ob_start();
+session_start();
+require_once 'dbconnect.php';
 
- // if session is not set this will redirect to login page
- if( !isset($_SESSION['user']) ) {
+// if session is not set this will redirect to login page
+if( !isset($_SESSION['user']) ) {
   header("Location: index.php");
   exit;
- }
- // select loggedin users detail
- $res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
- $userRow=mysql_fetch_array($res);
- $idname = settype($userRow['userId'], "string");
- $init_study_index = $userRow['studyIndex'] + 1; // get last known study index + 1
+}
+// select loggedin users detail
+$res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
+if($res){
+  $userRow=mysql_fetch_array($res);
+  $idname = settype($userRow['userId'], "string");
+  $init_study_index = $userRow['studyIndex']; // get last known study index
 
- $res2=mysql_query("SELECT * FROM `".$idname."` WHERE studyIndex='$init_study_index'");
- $userRow2=mysql_fetch_array($res2);
- $init_case_num = $userRow2['case_num'];
+  $res2=mysql_query("SELECT * FROM `".$idname."` WHERE studyIndex='$init_study_index'");
+  if($res2){
+    $userRow2=mysql_fetch_array($res2);
+    $init_case_num = $userRow2['case_num'];
 
-echo $init_case_num;
+    echo $init_case_num;
 
- // load study info database
- $res3=mysql_query("SELECT * FROM study_info WHERE case_num='$init_case_num'");
- $userRow3=mysql_fetch_array($res3);
- $total_cases = $userRow3['studySize'];
- // get folder names, number of slices
- $small_dir = $userRow3['small_dir'];
- $large_dir = $userRow3['large_dir'];
- $slices = $userRow3['slices'];
- $study_size = $userRow3['case_num'];
+    // load study info database
+    $res3=mysql_query("SELECT * FROM study_info WHERE case_num='$init_case_num'");
+    if($res3){
+      $userRow3=mysql_fetch_array($res3);
+      $total_cases = $userRow3['studySize'];
+      // get folder names, number of slices
+      $small_dir = $userRow3['small_dir'];
+      $large_dir = $userRow3['large_dir'];
+      $slices = $userRow3['slices'];
+      $study_size = $userRow3['case_num'];
 
- $left_small = rand(0,1);
+      $left_small = rand(0,1);
 
- if ($left_small) {
-   $left_side = $small_dir;
-   $right_side = $large_dir;
- } else {
-   $left_side = $large_dir;
-   $right_side = $large_dir;
- }
-
+      if ($left_small) {
+        $left_side = $small_dir;
+        $right_side = $large_dir;
+      } else {
+        $left_side = $large_dir;
+        $right_side = $large_dir;
+      }
+    } else {echo "error3";}
+  } else {echo "error2";}
+} else {echo "error1";}
 ?>
 
 <!DOCTYPE HTML>
@@ -58,111 +63,111 @@ echo $init_case_num;
 
   <style>
 
-    .overlays {
-      color: gold;
-    }
+  .overlays {
+    color: gold;
+  }
 
-    .selected {
-      background-color:#737CA1;
-      outline: none;
-      border: none;
-    }
+  .selected {
+    background-color:#737CA1;
+    outline: none;
+    border: none;
+  }
 
-    body {
-      margin:auto;
-      background-color:#0C090A;
-      color:#737CA1;
-    }
+  body {
+    margin:auto;
+    background-color:#0C090A;
+    color:#737CA1;
+  }
 
-    button:active {
-      outline: none;
-      border: none;
-      background-color:#737CA1;
-      color: black;
-    }
+  button:active {
+    outline: none;
+    border: none;
+    background-color:#737CA1;
+    color: black;
+  }
 
 
-    .btn {
-      width:9%;
-      outline: none;
-    }
+  .btn {
+    width:9%;
+    outline: none;
+  }
 
-    .btn1 {
-      width: 9%;
-      outline: none;
-    }
+  .btn1 {
+    width: 9%;
+    outline: none;
+  }
 
-    .btn2 {
-      width:49%;
-      line-height: 200%;
-      outline: none;
-    }
+  .btn2 {
+    width:49%;
+    line-height: 200%;
+    outline: none;
+  }
 
-    .btn3 {
-      margin-right: .5%;
-    }
+  .btn3 {
+    margin-right: .5%;
+  }
 
-    #myProgress {
-      position: relative;
-      height: 2%;
-      background-color: #0C090A;
-    }
+  #myProgress {
+    position: relative;
+    height: 2%;
+    background-color: #0C090A;
+  }
 
-    #myBar {
-      position: absolute;
-      width: 1%;
-      height: 100%;
-      background-color: #737CA1;
-    }
+  #myBar {
+    position: absolute;
+    width: 1%;
+    height: 100%;
+    background-color: #737CA1;
+  }
 
-    #label {
-      text-align: center;
-      line-height: 100%;
-      color: white;
-      margin-top: .3%;
-    }
+  #label {
+    text-align: center;
+    line-height: 100%;
+    color: white;
+    margin-top: .3%;
+  }
 
-    #top_line {
-      color:#737CA1;
-      font-size: 200%;
-    }
+  #top_line {
+    color:#737CA1;
+    font-size: 200%;
+  }
 
-    #top_line a {
-      color:#737CA1;
-      font-size: 100%;
-      margin-left: 25%;
-    }
+  #top_line a {
+    color:#737CA1;
+    font-size: 100%;
+    margin-left: 25%;
+  }
 
-    #top_line b {
-      color:#737CA1;
-      font-size: 100%;
-      margin-left: 25%;
-    }
+  #top_line b {
+    color:#737CA1;
+    font-size: 100%;
+    margin-left: 25%;
+  }
   </style>
 
 </head>
 
 <body>
 
-<!-- setting up the html division to be container for cornstone enabled elements  -->
-<div class="container">
+  <!-- setting up the html division to be container for cornstone enabled elements  -->
+  <div class="container">
 
-  <br>
+    <br>
 
-  <div id="top_line"> MAFC Duke RAILabs <b>Select image stack with larger nodule</b> <a href="logout.php?logout">Sign Out</a> </div>
-  <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
+    <div id="top_line"> MAFC Duke RAILabs <b>Select image stack with larger nodule</b> <a href="logout.php?logout">Sign Out</a> </div>
+    <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
-  <br>
+    <br>
 
-  <!-- Set up javascript buttons for user selection of "correct" image -->
-  <button id="choose1" class="btn2" style="margin-right: 1%;" onclick="write_to_db(1)">CHOOSE IMAGE 1</button>
-  <button id="choose2" class="btn2" onclick="write_to_db(0)">CHOOSE IMAGE 2</button>
+    <!-- Set up javascript buttons for user selection of "correct" image -->
+    <button id="choose1" class="btn2" style="margin-right: 1%;" onclick="write_to_db(1)">CHOOSE IMAGE 1</button>
+    <button id="choose2" class="btn2" onclick="write_to_db(0)">CHOOSE IMAGE 2</button>
 
-  <br>
-  <br>
+    <br>
+    <br>
 
-  <!-- We disable mouse selection on the top most div -->
-  <div style="position:relative; display:inline-block; margin-right:1%;"
+    <!-- We disable mouse selection on the top most div -->
+    <div style="position:relative; display:inline-block; margin-right:1%;"
     class="cornerstone-enabled-image"
     oncontextmenu="return false"
     unselectable='on'
@@ -171,96 +176,96 @@ echo $init_case_num;
 
     <!-- dicom image (left)-->
     <div id="image1"
-      style="top:0px;left:0px; position:absolute">
-    </div>
-
-    <!-- image overlay -->
-    <div id="topleft" class="overlays" style="position: absolute;top:0px; left:0px">
-      Patient Name
-    </div>
-
-    <!-- image overlay -->
-    <div id="topright" class="overlays" style="position: absolute;top:0px; right:0px">
-      Image
-    </div>
-
-    <!-- image overlay -->
-    <div id="bottomright" class="overlays" style="position: absolute;bottom:0px; right:0px">
-      Zoom:
-    </div>
-
-    <!-- image overlay -->
-    <div id="bottomleft" class="overlays" style="position: absolute;bottom:0px; left:0px">
-      WW/WC:
-    </div>
-
+    style="top:0px;left:0px; position:absolute">
   </div>
 
-  <!-- We disable mouse selection on the top most div -->
-  <div style="position:relative; display:inline-block;"
-    class="cornerstone-enabled-image"
-    oncontextmenu="return false"
-    unselectable='on'
-    onselectstart='return false;'
-    onmousedown='return false;'>
-
-    <!-- dicom image (right)-->
-    <div id="image2"
-      style="top:0px;left:0px; position:absolute">
-    </div>
-
-    <!-- image overlay -->
-    <div id="topleft2" class="overlays" style="position: absolute;top:0px; left:0px">
-      Patient Name
-    </div>
-
-    <!-- image overlay -->
-    <div id="topright2" class="overlays" style="position: absolute;top:0px; right:0px">
-      Image
-    </div>
-
-    <!-- image overlay -->
-    <div id="bottomright2" class="overlays" style="position: absolute;bottom:0px; right:0px">
-      Zoom:
-    </div>
-
-    <!-- image overlay -->
-    <div id="bottomleft2" class="overlays" style="position: absolute;bottom:0px; left:0px">
-      WW/WC:
-    </div>
-
+  <!-- image overlay -->
+  <div id="topleft" class="overlays" style="position: absolute;top:0px; left:0px">
+    Patient Name
   </div>
 
-  <br>
-
-  <div class="cont" style="width:inherit;">
-    <!-- Set up javascript buttons for window level presets -->
-    <button id="softTissue" class="btn" >Soft Tissue</button>
-    <button id="lung" class="btn" >Lung</button>
-    <button id="bone" class="btn" >Bone</button>
-    <!-- <button id="invert" class="btn_invert" style="width:9%;">Invert</button> -->
-    <!-- <button id="interpolation" class="btn_interp selected" style="width:9%;">Interpolation</button> -->
-    <button id="softTissue2" class="btn1" style="margin-left: 22.5%;">Soft Tissue</button>
-    <button id="lung2" class="btn1" >Lung</button>
-    <button id="bone2" class="btn1" >Bone</button>
-    <!-- <button id="invert2" class="btn_invert"  style="width:9%;">Invert</button> -->
-    <!-- <button id="interpolation2" class="btn_interp selected" style="width:9%;">Interpolation</button> -->
+  <!-- image overlay -->
+  <div id="topright" class="overlays" style="position: absolute;top:0px; right:0px">
+    Image
   </div>
 
-  <br>
-
-  <input id="ww" class="btn3" type="checkbox" checked="" > Synchronize WW/WC
-  <input id="zp" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Zoom/Pan
-  <input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
-
-  <br>
-  <br>
-
-  <div id="myProgress">
-    <div id="myBar">
-      <div id="label">10%</div>
-    </div>
+  <!-- image overlay -->
+  <div id="bottomright" class="overlays" style="position: absolute;bottom:0px; right:0px">
+    Zoom:
   </div>
+
+  <!-- image overlay -->
+  <div id="bottomleft" class="overlays" style="position: absolute;bottom:0px; left:0px">
+    WW/WC:
+  </div>
+
+</div>
+
+<!-- We disable mouse selection on the top most div -->
+<div style="position:relative; display:inline-block;"
+class="cornerstone-enabled-image"
+oncontextmenu="return false"
+unselectable='on'
+onselectstart='return false;'
+onmousedown='return false;'>
+
+<!-- dicom image (right)-->
+<div id="image2"
+style="top:0px;left:0px; position:absolute">
+</div>
+
+<!-- image overlay -->
+<div id="topleft2" class="overlays" style="position: absolute;top:0px; left:0px">
+  Patient Name
+</div>
+
+<!-- image overlay -->
+<div id="topright2" class="overlays" style="position: absolute;top:0px; right:0px">
+  Image
+</div>
+
+<!-- image overlay -->
+<div id="bottomright2" class="overlays" style="position: absolute;bottom:0px; right:0px">
+  Zoom:
+</div>
+
+<!-- image overlay -->
+<div id="bottomleft2" class="overlays" style="position: absolute;bottom:0px; left:0px">
+  WW/WC:
+</div>
+
+</div>
+
+<br>
+
+<div class="cont" style="width:inherit;">
+  <!-- Set up javascript buttons for window level presets -->
+  <button id="softTissue" class="btn" >Soft Tissue</button>
+  <button id="lung" class="btn" >Lung</button>
+  <button id="bone" class="btn" >Bone</button>
+  <!-- <button id="invert" class="btn_invert" style="width:9%;">Invert</button> -->
+  <!-- <button id="interpolation" class="btn_interp selected" style="width:9%;">Interpolation</button> -->
+  <button id="softTissue2" class="btn1" style="margin-left: 22.5%;">Soft Tissue</button>
+  <button id="lung2" class="btn1" >Lung</button>
+  <button id="bone2" class="btn1" >Bone</button>
+  <!-- <button id="invert2" class="btn_invert"  style="width:9%;">Invert</button> -->
+  <!-- <button id="interpolation2" class="btn_interp selected" style="width:9%;">Interpolation</button> -->
+</div>
+
+<br>
+
+<input id="ww" class="btn3" type="checkbox" checked="" > Synchronize WW/WC
+<input id="zp" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Zoom/Pan
+<input id="pos" class="btn3" type="checkbox" checked="" style="margin-left: 1%;"> Synchronize Slice
+
+<br>
+<br>
+
+<div id="myProgress">
+  <div id="myBar">
+    <div id="label">10%</div>
+  </div>
+</div>
 
 <div id="study_label">0/100</div>
 Image Load Progress
@@ -316,21 +321,21 @@ var left_small = "<?php echo $left_small; ?>";
 
 // set-up some dummy variables to be used to load images later on
 var imageIds1 = [
-    'example://1',
+  'example://1',
 ];
 
 var imageIds2 = [
-    'example://1',
+  'example://1',
 ];
 
 var stack = {
-    currentImageIdIndex : 0,
-    imageIds: imageIds1
+  currentImageIdIndex : 0,
+  imageIds: imageIds1
 };
 
 var stack2 = {
-    currentImageIdIndex : 0,
-    imageIds: imageIds2
+  currentImageIdIndex : 0,
+  imageIds: imageIds2
 };
 
 // enablee the html divs to hold cornerstone dicom images
@@ -372,8 +377,8 @@ function loadAndDisplayImages() {
 
   // update stack info
   stack = {
-      currentImageIdIndex : Math.floor(slices/2), // Middle slice as default
-      imageIds: imageIds1
+    currentImageIdIndex : Math.floor(slices/2), // Middle slice as default
+    imageIds: imageIds1
   };
 
   // function used to display images
@@ -442,8 +447,8 @@ function loadAndDisplayImages() {
 
   // update stack info
   stack2 = {
-      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
-      imageIds: imageIds2
+    currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
+    imageIds: imageIds2
   };
 
   // function used to display images
@@ -529,15 +534,15 @@ function loadAll2(imageID) {
 
 // define image update callback functions
 function onViewportUpdated(e, data) {
-    var viewport = data.viewport;
-    $('#bottomleft').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
-    $('#bottomright').text("Zoom: " + viewport.scale.toFixed(2) + "x");
+  var viewport = data.viewport;
+  $('#bottomleft').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
+  $('#bottomright').text("Zoom: " + viewport.scale.toFixed(2) + "x");
 };
 
 function onViewportUpdated2(e, data) {
-    var viewport = data.viewport;
-    $('#bottomleft2').text("WW/WC: " + Math.round(viewport.voi.windowWidth) +"/" + Math.round(viewport.voi.windowCenter));
-    $('#bottomright2').text("Zoom: " + viewport.scale.toFixed(2) + "x");
+  var viewport = data.viewport;
+  $('#bottomleft2').text("WW/WC: " + Math.round(viewport.voi.windowWidth) +"/" + Math.round(viewport.voi.windowCenter));
+  $('#bottomright2').text("Zoom: " + viewport.scale.toFixed(2) + "x");
 };
 
 // define new image callback functions (i.e. slice scrolling)
@@ -568,12 +573,12 @@ function write_to_db(choice){
 
       alert('It worked!');
 
-        // //clear cache
-        // cornerstone.imageCache.purgeCache();
-        // loading_index = 0;
-        //
-        // //start the next mafc user selection
-        // loadAndDisplayImages();
+      // //clear cache
+      // cornerstone.imageCache.purgeCache();
+      // loading_index = 0;
+      //
+      // //start the next mafc user selection
+      // loadAndDisplayImages();
 
     }
   }
@@ -690,137 +695,137 @@ function resizeMain() {
 
 // Call resize main on window resize
 $(window).resize(function() {
-    resizeMain();
+  resizeMain();
 });
 
 // define other useful image display parameter functions (button activated)
 $('#invert').click(function (e) {
-    var viewport = cornerstone.getViewport(element);
-    if (viewport.invert === true) {
-        viewport.invert = false;
-    } else {
-        viewport.invert = true;
-    }
-    cornerstone.setViewport(element, viewport);
+  var viewport = cornerstone.getViewport(element);
+  if (viewport.invert === true) {
+    viewport.invert = false;
+  } else {
+    viewport.invert = true;
+  }
+  cornerstone.setViewport(element, viewport);
 });
 
 $('#interpolation').click(function (e) {
-    var viewport = cornerstone.getViewport(element);
-    if (viewport.pixelReplication === true) {
-        viewport.pixelReplication = false;
-    } else {
-        viewport.pixelReplication = true;
-    }
-    cornerstone.setViewport(element, viewport);
+  var viewport = cornerstone.getViewport(element);
+  if (viewport.pixelReplication === true) {
+    viewport.pixelReplication = false;
+  } else {
+    viewport.pixelReplication = true;
+  }
+  cornerstone.setViewport(element, viewport);
 });
 
 $('#invert2').click(function (e) {
-    var viewport = cornerstone.getViewport(element2);
-    if (viewport.invert === true) {
-        viewport.invert = false;
-    } else {
-        viewport.invert = true;
-    }
-    cornerstone.setViewport(element2, viewport);
+  var viewport = cornerstone.getViewport(element2);
+  if (viewport.invert === true) {
+    viewport.invert = false;
+  } else {
+    viewport.invert = true;
+  }
+  cornerstone.setViewport(element2, viewport);
 });
 
 $('#interpolation2').click(function (e) {
-    var viewport = cornerstone.getViewport(element2);
-    if (viewport.pixelReplication === true) {
-        viewport.pixelReplication = false;
-    } else {
-        viewport.pixelReplication = true;
-    }
-    cornerstone.setViewport(element2, viewport);
+  var viewport = cornerstone.getViewport(element2);
+  if (viewport.pixelReplication === true) {
+    viewport.pixelReplication = false;
+  } else {
+    viewport.pixelReplication = true;
+  }
+  cornerstone.setViewport(element2, viewport);
 });
 
 $('#ww').click(function() {
-    if (ww.checked){
-      synchronizer2.add(element2);
-      ww.checked = true;
-      cornerstone.updateImage(element2);
-      $('.btn').removeClass('selected');
-      id_name = $('.btn1.selected').attr('id');
-      split = id_name.match(/[a-zA-Z]+|[0-9]+/g);
-      only_letters = "#" + split[0];
-      $(only_letters).addClass('selected');
-      if ($('#invert2').hasClass('selected')){
-        $('#invert').addClass('selected');
-      }
-    } else {
-      synchronizer2.remove(element2);
-      ww.checked = false;
+  if (ww.checked){
+    synchronizer2.add(element2);
+    ww.checked = true;
+    cornerstone.updateImage(element2);
+    $('.btn').removeClass('selected');
+    id_name = $('.btn1.selected').attr('id');
+    split = id_name.match(/[a-zA-Z]+|[0-9]+/g);
+    only_letters = "#" + split[0];
+    $(only_letters).addClass('selected');
+    if ($('#invert2').hasClass('selected')){
+      $('#invert').addClass('selected');
     }
+  } else {
+    synchronizer2.remove(element2);
+    ww.checked = false;
+  }
 });
 
 $('#zp').click(function() {
-    if (zp.checked){
-      synchronizer.add(element2);
-      zp.checked = true;
-      cornerstone.updateImage(element2);
-    } else {
-      synchronizer.remove(element2);
-      zp.checked = false;
-    }
+  if (zp.checked){
+    synchronizer.add(element2);
+    zp.checked = true;
+    cornerstone.updateImage(element2);
+  } else {
+    synchronizer.remove(element2);
+    zp.checked = false;
+  }
 });
 
 $('#pos').click(function() {
-    if (pos.checked){
-      synchronizer3.add(element2);
-      pos.checked = true;
-      diff = stack2.currentImageIdIndex - stack.currentImageIdIndex;
-      cornerstoneTools.scroll(element, diff);
-    } else {
-      synchronizer3.remove(element2);
-      pos.checked = false;
-    }
+  if (pos.checked){
+    synchronizer3.add(element2);
+    pos.checked = true;
+    diff = stack2.currentImageIdIndex - stack.currentImageIdIndex;
+    cornerstoneTools.scroll(element, diff);
+  } else {
+    synchronizer3.remove(element2);
+    pos.checked = false;
+  }
 });
 
 $('.btn').on('click', function(){
-    if (ww.checked) {
-      $('.btn').removeClass('selected');
-      $('.btn1').removeClass('selected');
-      this_id = this.id;
-      split = this.id.match(/[a-zA-Z]+|[0-9]+/g);
-      only_letters = "#" + split[0];
-      sync_id = only_letters + 2;
-      $(only_letters).addClass('selected');
-      $(sync_id).addClass('selected');
-      if ($('#invert').hasClass('selected')){
-        $('#invert2').addClass('selected');
-      }
-    } else {
-      $('.btn').removeClass('selected');
-      $(this).addClass('selected');
+  if (ww.checked) {
+    $('.btn').removeClass('selected');
+    $('.btn1').removeClass('selected');
+    this_id = this.id;
+    split = this.id.match(/[a-zA-Z]+|[0-9]+/g);
+    only_letters = "#" + split[0];
+    sync_id = only_letters + 2;
+    $(only_letters).addClass('selected');
+    $(sync_id).addClass('selected');
+    if ($('#invert').hasClass('selected')){
+      $('#invert2').addClass('selected');
     }
+  } else {
+    $('.btn').removeClass('selected');
+    $(this).addClass('selected');
+  }
 });
 
 $('.btn1').on('click', function(){
-    if (ww.checked) {
-      $('.btn').removeClass('selected');
-      $('.btn1').removeClass('selected');
-      this_id = this.id;
-      split = this.id.match(/[a-zA-Z]+|[0-9]+/g);
-      only_letters = "#" + split[0];
-      sync_id = only_letters + 2;
-      $(only_letters).addClass('selected');
-      $(sync_id).addClass('selected');
-      if ($('#invert2').hasClass('selected')){
-        $('#invert').addClass('selected');
-      }
-    } else {
-      $('.btn1').removeClass('selected');
-      $(this).addClass('selected');
+  if (ww.checked) {
+    $('.btn').removeClass('selected');
+    $('.btn1').removeClass('selected');
+    this_id = this.id;
+    split = this.id.match(/[a-zA-Z]+|[0-9]+/g);
+    only_letters = "#" + split[0];
+    sync_id = only_letters + 2;
+    $(only_letters).addClass('selected');
+    $(sync_id).addClass('selected');
+    if ($('#invert2').hasClass('selected')){
+      $('#invert').addClass('selected');
     }
+  } else {
+    $('.btn1').removeClass('selected');
+    $(this).addClass('selected');
+  }
 });
 
 $('.btn_invert').on('click', function(){
-    if (ww.checked) {
-      $('#invert').toggleClass('selected');
-      $('#invert2').toggleClass('selected');
-    } else {
-      $(this).toggleClass('selected');
-    }
+  if (ww.checked) {
+    $('#invert').toggleClass('selected');
+    $('#invert2').toggleClass('selected');
+  } else {
+    $(this).toggleClass('selected');
+  }
 });
 
 $('.btn_interp').on('click', function(){
@@ -837,7 +842,7 @@ function onImageLoaded(){
 
 // study progress update function
 function study_progress() {
-    document.getElementById("study_label").innerHTML = study_index + '/' + total_cases;
+  document.getElementById("study_label").innerHTML = study_index + '/' + total_cases;
 }
 
 </script>
