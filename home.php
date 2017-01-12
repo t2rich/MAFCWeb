@@ -127,6 +127,11 @@ if($res){
     margin-top: .3%;
   }
 
+  #label {
+    text-align: right;
+    color:#737CA1;
+  }
+
   #top_line {
     color:#737CA1;
     font-size: 200%;
@@ -261,13 +266,13 @@ style="top:0px;left:0px; position:absolute">
 <br>
 <br>
 
-<div id="myProgress">
+<div id="myProgress"> <div id="study_label">0/100</div>
   <div id="myBar">
     <div id="label">10%</div>
   </div>
 </div>
 
-<div id="study_label">0/100</div>
+
 Image Load Progress
 
 </div>
@@ -363,6 +368,7 @@ $(document).ready(loadAndDisplayImages())
 
 // ajust all displayed elements to fit current screen size
 resizeMain();
+study_progress();
 
 // define all inline functions
 function loadAndDisplayImages() {
