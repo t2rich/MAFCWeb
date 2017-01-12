@@ -1,14 +1,18 @@
 <?php
- ob_start();
- session_start();
- if( isset($_SESSION['user'])!="" ){
+
+ini_set('display_errors', 'On');
+error_reporting(E_ALL | E_STRICT);
+
+ob_start();
+session_start();
+if( isset($_SESSION['user'])!="" ){
   header("Location: home.php");
- }
- include_once 'dbconnect.php';
+}
+include_once 'dbconnect.php';
 
- $error = false;
+$error = false;
 
- if ( isset($_POST['btn-signup']) ) {
+if ( isset($_POST['btn-signup']) ) {
 
   // clean user inputs to prevent sql injections
   $name = trim($_POST['name']);
@@ -37,37 +41,37 @@
 
   // basic name validation
   if (empty($name)) {
-   $error = true;
-   $nameError = "Please enter your full name.";
+    $error = true;
+    $nameError = "Please enter your full name.";
   } else if (strlen($name) < 3) {
-   $error = true;
-   $nameError = "Name must have atleat 3 characters.";
+    $error = true;
+    $nameError = "Name must have atleat 3 characters.";
   } else if (!preg_match("/^[a-zA-Z ]+$/",$name)) {
-   $error = true;
-   $nameError = "Name must contain alphabets and space.";
+    $error = true;
+    $nameError = "Name must contain alphabets and space.";
   }
 
   //basic email validation
   if ( !filter_var($email,FILTER_VALIDATE_EMAIL) ) {
-   $error = true;
-   $emailError = "Please enter valid email address.";
-  } else {
-   // check email exist or not
-   $query = "SELECT userEmail FROM users WHERE userEmail='$email'";
-   $result = mysql_query($query);
-   $count = mysql_num_rows($result);
-   if($count!=0){
     $error = true;
-    $emailError = "Provided Email is already in use.";
-   }
+    $emailError = "Please enter valid email address.";
+  } else {
+    // check email exist or not
+    $query = "SELECT userEmail FROM users WHERE userEmail='$email'";
+    $result = mysql_query($query);
+    $count = mysql_num_rows($result);
+    if($count!=0){
+      $error = true;
+      $emailError = "Provided Email is already in use.";
+    }
   }
   // password validation
   if (empty($pass)){
-   $error = true;
-   $passError = "Please enter password.";
+    $error = true;
+    $passError = "Please enter password.";
   } else if(strlen($pass) < 6) {
-   $error = true;
-   $passError = "Password must have atleast 6 characters.";
+    $error = true;
+    $passError = "Password must have atleast 6 characters.";
   }
 
   // password encrypt using SHA256();
@@ -75,190 +79,217 @@
 
   // basic institution name validation
   if (empty($inst)) {
-   $error = true;
-   $instError = "Please enter your Institution's full name.";
- } else if (strlen($inst) < 1) {
-   $error = true;
-   $instError = "Name must have at least 2 characters.";
- } else if (!preg_match("/^[a-zA-Z ]+$/",$inst)) {
-   $error = true;
-   $instError = "Name must contain alphabets and space.";
+    $error = true;
+    $instError = "Please enter your Institution's full name.";
+  } else if (strlen($inst) < 1) {
+    $error = true;
+    $instError = "Name must have at least 2 characters.";
+  } else if (!preg_match("/^[a-zA-Z ]+$/",$inst)) {
+    $error = true;
+    $instError = "Name must contain alphabets and space.";
   }
 
   // years experience validation
   if (empty($years)) {
-   $error = true;
-   $yearsError = "Please enter number of years experience with medical imaging.";
- } else if (!preg_match("/^[1-9][0-9]{0,2}$/",$years)) {
-   $error = true;
-   $instError = "Enter integer number of years with minimum of 1.";
+    $error = true;
+    $yearsError = "Please enter number of years experience with medical imaging.";
+  } else if (!preg_match("/^[1-9][0-9]{0,2}$/",$years)) {
+    $error = true;
+    $instError = "Enter integer number of years with minimum of 1.";
   }
 
   // basic user type validation
   if (empty($utype)) {
-   $error = true;
-   $utypeError = "Please enter user type (MD, Physicist, etc.).";
- } else if (strlen($inst) < 1) {
-   $error = true;
-   $utypeError = "User type musee be at least 2 characters.";
- } else if (!preg_match("/^[a-zA-Z ]+$/",$utype)) {
-   $error = true;
-   $utypeError = "Name must contain only alphabets and space.";
+    $error = true;
+    $utypeError = "Please enter user type (MD, Physicist, etc.).";
+  } else if (strlen($inst) < 1) {
+    $error = true;
+    $utypeError = "User type musee be at least 2 characters.";
+  } else if (!preg_match("/^[a-zA-Z ]+$/",$utype)) {
+    $error = true;
+    $utypeError = "Name must contain only alphabets and space.";
   }
 
   // if there's no error, continue to signup
   if( !$error ) {
 
-   $query = "INSERT INTO users(userName,userEmail,userPass,userInst,years,utype,study_index) VALUES('$name','$email','$password','$inst','$years','$utype',1)";
-   $res = mysql_query($query);
+    $query = "INSERT INTO users(userName,userEmail,userPass,userInst,userYears,userType,studyIndex)
+    VALUES('$name','$email','$password','$inst','$years','$utype',1)";
+    $res = mysql_query($query);
 
-   if ($res) {
-    $res2=mysql_query("SELECT userId FROM users WHERE userEmail='$email'");
-    unset($name);
-    unset($email);
-    unset($pass);
-    unset($inst);
-    unset($years);
-    unset($utype);
+    if ($res) {
+      $res2=mysql_query("SELECT userId FROM users WHERE userEmail='$email'");
+      unset($name);
+      unset($email);
+      unset($pass);
+      unset($inst);
+      unset($years);
+      unset($utype);
 
-    if ($res2){
-      $row=mysql_fetch_array($res2);
-      $idname = settype($row['userId'], "string");
-      $query2 = "CREATE TABLE `".$idname."` (study_index INT(3) AUTO_INCREMENT PRIMARY KEY, fnl VARCHAR(30) NOT NULL, fnr VARCHAR(30) NOT NULL, choice INT(1) NOT NULL, slices INT(3) NOT NULL)";
-      $res3 = mysql_query($query2);
-      if (!$res3){
+      if ($res2){
+        $row=mysql_fetch_array($res2);
+        $idname = settype($row['userId'], "string");
+        $query2 = "CREATE TABLE `".$idname."` (studyIndex INT(3) AUTO_INCREMENT PRIMARY KEY, case_num INT(3), left_small INT(1), choice INT(1), small_dir VARCHAR(30), large_dir VARCHAR(30), slices INT(2), time INT(4))";
+        $res3 = mysql_query($query2);
+
+        if ($res3){
+          $res4=mysql_query("SELECT * FROM study_info WHERE case_number=1");
+          $userRow=mysql_fetch_array($res4);
+          $study_size = $userRow['studySize'];
+
+          $temp_array = range(1,$studySize);
+          $shuffled_array = shuffle($temp_array);
+
+          $full_query = "";
+          foreach ($shuffled_array as $value){
+            if(empty($full_query)){
+              $full_query = "INSERT INTO `".$idname."`(case_num) VALUES($value)";
+            } else {
+              $full_query.=",($value)";
+            }
+          }
+
+          $res5 = mysql_query($full_query);
+          if ($res5){
+            $errTyp = "success";
+            $errMSG = "Successfully registered, you may login now";
+          } else {
+            $errTyp = "danger";
+            $errMSG = "Something went wrong, try again later...";
+          }
+        } else {
+          $errTyp = "danger";
+          $errMSG = "Something went wrong, try again later...";
+        }
+      } else {
         $errTyp = "danger";
-        $errMSG = "Something went wrong with database, try again later...";
-      }else {
-        $errTyp = "success";
-        $errMSG = "Successfully registered, you may login now";
+        $errMSG = "Something went wrong, try again later...";
       }
+    } else {
+      $errTyp = "danger";
+      $errMSG = "Something went wrong, try again later...";
     }
-   } else {
+  } else {
     $errTyp = "danger";
-    $errMSG = "Something went wrong, try again later...";
-   }
-
+    $errMSG = "Something went wrong with user input, try again...";
   }
-
-
- }
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Duke RAILabs MAFC - Login & Registration System</title>
-<link rel="stylesheet" href="bootstrap.min.css" type="text/css"  />
-<link rel="stylesheet" href="style.css" type="text/css" />
-<style>
-body {
-  background-color:#0C090A;
-  color:#737CA1
-}
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Duke RAILabs MAFC - Login & Registration System</title>
+  <link rel="stylesheet" href="bootstrap.min.css" type="text/css"  />
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <style>
+  body {
+    background-color:#0C090A;
+    color:#737CA1
+  }
 
-</style>
+  </style>
 </head>
 <body>
 
-<div class="container">
+  <div class="container">
 
- <div id="login-form">
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+    <div id="login-form">
+      <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
 
-     <div class="col-md-12">
+        <div class="col-md-12">
 
-         <div class="form-group">
-             <h2 class="">Duke RAILabs MAFC Sign Up</h2>
+          <div class="form-group">
+            <h2 class="">Duke RAILabs MAFC Sign Up</h2>
+          </div>
+
+          <div class="form-group">
+            <hr />
+          </div>
+
+          <?php
+          if ( isset($errMSG) ) {
+
+            ?>
+            <div class="form-group">
+              <div class="alert alert-<?php echo ($errTyp=="success") ? "success" : $errTyp; ?>">
+                <span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
+              </div>
             </div>
-
-         <div class="form-group">
-             <hr />
-            </div>
-
             <?php
-   if ( isset($errMSG) ) {
+          }
+          ?>
 
-    ?>
-    <div class="form-group">
-             <div class="alert alert-<?php echo ($errTyp=="success") ? "success" : $errTyp; ?>">
-    <span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
-                </div>
-             </div>
-                <?php
-   }
-   ?>
-
-            <div class="form-group">
-             <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-             <input type="text" name="name" class="form-control" placeholder="Enter Name" maxlength="50" value="<?php echo $name ?>" />
-                </div>
-                <span class="text-danger"><?php echo $nameError; ?></span>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+              <input type="text" name="name" class="form-control" placeholder="Enter Name" maxlength="50" value="<?php echo $name ?>" />
             </div>
+            <span class="text-danger"><?php echo $nameError; ?></span>
+          </div>
 
-            <div class="form-group">
-             <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-             <input type="email" name="email" class="form-control" placeholder="Enter Your Email" maxlength="40" value="<?php echo $email ?>" />
-                </div>
-                <span class="text-danger"><?php echo $emailError; ?></span>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+              <input type="email" name="email" class="form-control" placeholder="Enter Your Email" maxlength="40" value="<?php echo $email ?>" />
             </div>
+            <span class="text-danger"><?php echo $emailError; ?></span>
+          </div>
 
-            <div class="form-group">
-             <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-             <input type="password" name="pass" class="form-control" placeholder="Enter Password" maxlength="15" />
-                </div>
-                <span class="text-danger"><?php echo $passError; ?></span>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+              <input type="password" name="pass" class="form-control" placeholder="Enter Password" maxlength="15" />
             </div>
+            <span class="text-danger"><?php echo $passError; ?></span>
+          </div>
 
-            <div class="form-group">
-             <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-             <input type="text" name="inst" class="form-control" placeholder="Enter Institution Name" maxlength="50" value="<?php echo $inst ?>" />
-                </div>
-                <span class="text-danger"><?php echo $instError; ?></span>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+              <input type="text" name="inst" class="form-control" placeholder="Enter Institution Name" maxlength="50" value="<?php echo $inst ?>" />
             </div>
+            <span class="text-danger"><?php echo $instError; ?></span>
+          </div>
 
-            <div class="form-group">
-             <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-             <input type="text" name="years" class="form-control" placeholder="Enter Years of Experience with Medical Imaging" maxlength="2" value="<?php echo $years ?>" />
-                </div>
-                <span class="text-danger"><?php echo $yearsError; ?></span>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+              <input type="text" name="years" class="form-control" placeholder="Enter Years of Experience with Medical Imaging" maxlength="2" value="<?php echo $years ?>" />
             </div>
+            <span class="text-danger"><?php echo $yearsError; ?></span>
+          </div>
 
-            <div class="form-group">
-             <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-             <input type="text" name="utype" class="form-control" placeholder="Enter User Type (MD, Physicist, etc.)" maxlength="20" value="<?php echo $utype ?>" />
-                </div>
-                <span class="text-danger"><?php echo $utypeError; ?></span>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+              <input type="text" name="utype" class="form-control" placeholder="Enter User Type (MD, Physicist, etc.)" maxlength="20" value="<?php echo $utype ?>" />
             </div>
+            <span class="text-danger"><?php echo $utypeError; ?></span>
+          </div>
 
-            <div class="form-group">
-             <hr />
-            </div>
+          <div class="form-group">
+            <hr />
+          </div>
 
-            <div class="form-group">
-             <button type="submit" class="btn btn-block btn-primary" name="btn-signup" style="background-color:#737CA1;">Sign Up</button>
-            </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-block btn-primary" name="btn-signup" style="background-color:#737CA1;">Sign Up</button>
+          </div>
 
-            <div class="form-group">
-             <hr />
-            </div>
+          <div class="form-group">
+            <hr />
+          </div>
 
-            <div class="form-group">
-             <a href="index.php"> <h4 style="color:#737CA1;">Sign in Here...</h4></a>
-            </div>
+          <div class="form-group">
+            <a href="index.php"> <h4 style="color:#737CA1;">Sign in Here...</h4></a>
+          </div>
 
         </div>
 
-    </form>
+      </form>
     </div>
 
-</div>
+  </div>
 
 </body>
 </html>

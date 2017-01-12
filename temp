@@ -1,9 +1,4 @@
 <?php
-
-
-ini_set('display_errors', 'On');
-error_reporting(E_ALL | E_STRICT);
-
  ob_start();
  session_start();
  require_once 'dbconnect.php';
@@ -16,33 +11,6 @@ error_reporting(E_ALL | E_STRICT);
  // select loggedin users detail
  $res=mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
  $userRow=mysql_fetch_array($res);
- $idname = settype($userRow['userId'], "string");
- $init_study_index = $userRow['studyIndex'] + 1; // get last known study index + 1
-
- $res2=mysql_query("SELECT * FROM `".$idname."` WHERE studyIndex=".$init_study_index);
- $userRow2=mysql_fetch_array($res2);
- $init_case_num = $userRow2['case_num'];
-
- // load study info database
- $res3=mysql_query("SELECT * FROM study_info WHERE case_num=".$init_case_num);
- $userRow3=mysql_fetch_array($res3);
- $total_cases = $userRow3['studySize'];
- // get folder names, number of slices
- $small_dir = $userRow3['small_dir'];
- $large_dir = $userRow3['large_dir'];
- $slices = $userRow3['slices'];
- $study_size = $userRow3['case_num'];
-
- $left_small = rand(0,1);
-
- if ($left_small) {
-   $left_side = $small_dir;
-   $right_side = $large_dir;
- } else {
-   $left_side = $large_dir;
-   $right_side = $large_dir;
- }
-
 ?>
 
 <!DOCTYPE HTML>
@@ -128,14 +96,9 @@ error_reporting(E_ALL | E_STRICT);
     #top_line a {
       color:#737CA1;
       font-size: 100%;
-      margin-left: 25%;
+      margin-left: 75%;
     }
 
-    #top_line b {
-      color:#737CA1;
-      font-size: 100%;
-      margin-left: 25%;
-    }
   </style>
 
 </head>
@@ -147,14 +110,14 @@ error_reporting(E_ALL | E_STRICT);
 
   <br>
 
-  <div id="top_line"> MAFC Duke RAILabs <b>Select image stack with larger nodule</b> <a href="logout.php?logout">Sign Out</a> </div>
+  <div id="top_line"> MAFC Duke RAILabs <a href="logout.php?logout">Sign Out</a> </div>
   <!-- This is an example webpage to be utilized for 2AFC observer studies. -->
 
   <br>
 
   <!-- Set up javascript buttons for user selection of "correct" image -->
-  <button id="choose1" class="btn2" style="margin-right: 1%;" onclick="write_to_db(1)">CHOOSE IMAGE 1</button>
-  <button id="choose2" class="btn2" onclick="write_to_db(0)">CHOOSE IMAGE 2</button>
+  <button id="choose1" class="btn2" style="margin-right: 1%;" onclick="write_to_db()">CHOOSE IMAGE 1</button>
+  <button id="choose2" class="btn2" onclick="write_to_db2()">CHOOSE IMAGE 2</button>
 
   <br>
   <br>
@@ -260,7 +223,7 @@ error_reporting(E_ALL | E_STRICT);
     </div>
   </div>
 
-<div id="study_label">0/100</div>
+
 Image Load Progress
 
 </div>
@@ -292,21 +255,13 @@ Image Load Progress
 
 <script>
 
-var loading_index = 0;
-
-var userId = "<?php echo $idname; ?>";$idname
-
-var study_index = "<?php echo $init_study_index; ?>"; // init case number upon login
+var study_index = 1; // study progress index
 //check dynamic database to see where they left off, or are just beginning
-var total_cases = "<?php echo $total_cases; ?>";
 
-// number of stack slices
-var slices = "<?php echo $slices; ?>";
+// number of stack slices (must be constant across all image datasets)
+var slices = 25;
+var loading_index = 0;
 //read from pre-filled database
-
-var left_side = "<?php echo $left_side; ?>";
-var right_side = "<?php echo $right_side; ?>";
-var left_small = "<?php echo $left_small; ?>";
 
 // scale the zoom property to account for reconstructed field of view differences
 // var size_ratio = 1;
@@ -361,12 +316,11 @@ resizeMain();
 function loadAndDisplayImages() {
 
   // check current study index
-  var image_name = left_side;
+  var image_number = (2*study_index) - 1;
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name + ...
-    '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/new_images/images' + image_number + '/' + 'Instance_' + (i+1) + '.dcm';
   };
 
   // update stack info
@@ -391,8 +345,7 @@ function loadAndDisplayImages() {
     // set image overlay properites and values
     var viewport = cornerstone.getViewport(element);
     $('#bottomright').text("Zoom: " + viewport.scale.toFixed(2) + "x");
-    $('#bottomleft').text("WW/WC:" + Math.round(viewport.voi.windowWidth) + ...
-    "/" + Math.round(viewport.voi.windowCenter));
+    $('#bottomleft').text("WW/WC:" + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
 
     // enable and bind user input to mouse buttons and movement
     cornerstoneTools.mouseInput.enable(element);
@@ -433,12 +386,11 @@ function loadAndDisplayImages() {
   });
 
   // check current study index
-  var image_name2 = right_side;
+  var image_number2 = (2*study_index);
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + ...
-    image_name2 + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/new_images/images' + image_number2 + '/' + 'Instance_' + (i+1) + '.dcm';
   };
 
   // update stack info
@@ -463,8 +415,7 @@ function loadAndDisplayImages() {
     // set image overlay properites and values
     var viewport2 = cornerstone.getViewport(element2);
     $('#bottomright2').text("Zoom: " + viewport2.scale.toFixed(2) + "x");
-    $('#bottomleft2').text("WW/WC:" + Math.round(viewport2.voi.windowWidth) + ...
-    "/" + Math.round(viewport2.voi.windowCenter));
+    $('#bottomleft2').text("WW/WC:" + Math.round(viewport2.voi.windowWidth) + "/" + Math.round(viewport2.voi.windowCenter));
 
     // enable and bind user input to mouse buttons and movement
     cornerstoneTools.mouseInput.enable(element2);
@@ -513,6 +464,7 @@ function loadAll(imageID) {
 
     cornerstone.loadAndCacheImage(imageID[i]);
 
+
   }
 
   return cornerstone.loadImage(imageID[Math.floor(slices/2)]);
@@ -524,6 +476,7 @@ function loadAll2(imageID) {
 
     cornerstone.loadAndCacheImage(imageID[i]);
 
+
   }
 
   return cornerstone.loadImage(imageID[Math.floor(slices/2)]);
@@ -532,15 +485,13 @@ function loadAll2(imageID) {
 // define image update callback functions
 function onViewportUpdated(e, data) {
     var viewport = data.viewport;
-    $('#bottomleft').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + ...
-     "/" + Math.round(viewport.voi.windowCenter));
+    $('#bottomleft').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
     $('#bottomright').text("Zoom: " + viewport.scale.toFixed(2) + "x");
 };
 
 function onViewportUpdated2(e, data) {
     var viewport = data.viewport;
-    $('#bottomleft2').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + ...
-    "/" + Math.round(viewport.voi.windowCenter));
+    $('#bottomleft2').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
     $('#bottomright2').text("Zoom: " + viewport.scale.toFixed(2) + "x");
 };
 
@@ -560,92 +511,38 @@ function onNewImage2(e, data) {
 }
 
 // define user image mafc selection callback functions
-function write_to_db(choice){
+function write_to_db(){
+  // step to the next image datasets
+  study_index = study_index + 1;
+  // post selection to server side database
+  $.ajax({
+    type: 'POST',
+    url: './db/script.php',
+  });
 
-  var ajax=new XMLHttpRequest();
+  //TODO add code to clear cache
+  cornerstone.imageCache.purgeCache();
+  loading_index = 0;
 
-  ajax.onreadystatechange=function()
-  {
-    if (ajax.readyState==4 && ajax.status==200)
-    {
-
-
-      alert('It worked!');
-
-        // //clear cache
-        // cornerstone.imageCache.purgeCache();
-        // loading_index = 0;
-        //
-        // //start the next mafc user selection
-        // loadAndDisplayImages();
-
-    }
-  }
-
-  ajax.open("POST",'./db/selection.php',true)
-  ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  var all_data = "choice=" + choice + "left_side=" + left_side + ...
-   "right_side=" + right_side + "left_small=" + left_small + ...
-  "case_num=" + study_index + "userId" + userId + "cases_completed" + (cases_completed+1);
-  ajax.send(str);
-
-  // // post selection to server side database
-  // $.ajax({
-  //   type: 'POST',
-  //   url: './db/selection.php',
-  //   case_num: case
-  // });
-
-  //
-  // // step to the next image datasets
-  // study_index = study_index + 1;
-  // <?php
-  // // post selection to server side database
-  // $query = "INSERT INTO `".$idname."`(fnl,fnr,choice,slices) VALUES('$fnl','$fnr',0,'$slices')";
-  // $res = mysql_query($query);
-  //
-  // //update user database study index
-  // $query = "INSERT INTO users(study_index) VALUES($study_index)";
-  // $res = mysql_query($query);
-  // ?>
-  // //clear cache
-  // cornerstone.imageCache.purgeCache();
-  // loading_index = 0;
-  //
-  // //start the next mafc user selection
-  // loadAndDisplayImages();
+  //start the next mafc user selection
+  loadAndDisplayImages();
 }
 
 function write_to_db2(){
+  // step to the next image datasets
+  study_index = study_index + 1;
+  // post selection to server side database
+  $.ajax({
+    type: 'POST',
+    url: './db/script2.php',
+  });
 
+  //clear cache
+  cornerstone.imageCache.purgeCache();
+  loading_index = 0;
 
-  // // step to the next image datasets
-  // study_index = study_index + 1;
-  // // post selection to server side database
-  // $.ajax({
-  //   type: 'POST',
-  //   url: './db/script2.php',
-  // });
-  //
-  //
-  // // step to the next image datasets
-  // study_index = study_index + 1;
-  // // post selection to server side database
-  // <?php
-  // $query = "INSERT INTO `".$idname."`(fnl,fnr,choice,slices) VALUES('$fnl','$fnr',1,'$slices')";
-  // $res = mysql_query($query);
-  //
-  // //update user database study index
-  // $study_index = $study_index + 1;
-  // $query = "INSERT INTO users(study_index) VALUES('$study_index')";
-  // $res = mysql_query($query);
-  // ?>
-  // //clear cache
-  // cornerstone.imageCache.purgeCache();
-  // loading_index = 0;
-  //
-  // //start the next mafc user selection
-  // loadAndDisplayImages();
+  //start the next mafc user selection
+  loadAndDisplayImages();
 }
 
 // Resize elements according to current browser display window size
@@ -833,17 +730,22 @@ $('.btn_interp').on('click', function(){
   $(this).toggleClass('selected');
 });
 
+// // progress bar update function
+// function move(loading_index,total) {
+//     var elem = document.getElementById("myBar");
+//     var width = Math.floor((loading_index/total)*100);
+//     elem.style.width = width + '%';
+//     document.getElementById("label").innerHTML = width + '%';
+// }
+
 function onImageLoaded(){
+
   loading_index = loading_index + 1;
   var elem = document.getElementById("myBar");
   var width = Math.floor((loading_index/(slices*2))*100);
   elem.style.width = width + '%';
   document.getElementById("label").innerHTML = width + '%';
-}
 
-// study progress update function
-function study_progress() {
-    document.getElementById("study_label").innerHTML = study_index + '/' + total_cases;
 }
 
 </script>
