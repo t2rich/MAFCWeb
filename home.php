@@ -19,12 +19,14 @@ error_reporting(E_ALL | E_STRICT);
  $idname = settype($userRow['userId'], "string");
  $init_study_index = $userRow['studyIndex'] + 1; // get last known study index + 1
 
- $res2=mysql_query("SELECT * FROM `".$idname."` WHERE studyIndex=".$init_study_index);
+ $res2=mysql_query("SELECT * FROM `".$idname."` WHERE studyIndex='$init_study_index'");
  $userRow2=mysql_fetch_array($res2);
  $init_case_num = $userRow2['case_num'];
 
+//'$email'"
+
  // load study info database
- $res3=mysql_query("SELECT * FROM study_info WHERE case_num=".$init_case_num);
+ $res3=mysql_query("SELECT * FROM study_info WHERE case_num='$init_case_num'");
  $userRow3=mysql_fetch_array($res3);
  $total_cases = $userRow3['studySize'];
  // get folder names, number of slices
