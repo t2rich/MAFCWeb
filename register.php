@@ -155,23 +155,23 @@ if ( isset($_POST['btn-signup']) ) {
             $errMSG = "Successfully registered, you may login now";
           } else {
             $errTyp = "danger";
-            $errMSG = "Something went wrong, try again later...";
+            $errMSG = "(5) Something went wrong, try again later...";
           }
         } else {
           $errTyp = "danger";
-          $errMSG = "Something went wrong, try again later...";
+          $errMSG = "(4) Something went wrong, try again later...";
         }
       } else {
         $errTyp = "danger";
-        $errMSG = "Something went wrong, try again later...";
+        $errMSG = "(3) Something went wrong, try again later...";
       }
     } else {
       $errTyp = "danger";
-      $errMSG = "Something went wrong, try again later...";
+      $errMSG = "(2) Something went wrong, try again later...";
     }
   } else {
     $errTyp = "danger";
-    $errMSG = "Something went wrong with user input, try again...";
+    $errMSG = "(1) Something went wrong with user input, try again...";
   }
 }
 ?>
