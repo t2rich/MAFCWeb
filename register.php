@@ -129,7 +129,7 @@ if ( isset($_POST['btn-signup']) ) {
       if ($res2){
         $row=mysql_fetch_array($res2);
         $idname = settype($row['userId'], "string");
-        $name_check = $row['userName'];
+        $name_check = $row['userEmail'];
         echo $name_check;
         $query2 = "CREATE TABLE `".$idname."` (studyIndex INT(3) AUTO_INCREMENT PRIMARY KEY, case_num INT(3), left_small INT(1), choice INT(1), small_dir VARCHAR(30), large_dir VARCHAR(30), slices INT(2), time INT(4))";
         $res3 = mysql_query($query2);
