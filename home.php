@@ -127,8 +127,8 @@ if($res){
     margin-top: .3%;
   }
 
-  #label {
-    text-align: right;
+  #study_label {
+    margin-left: 100%;
     color:#737CA1;
   }
 
@@ -266,9 +266,9 @@ style="top:0px;left:0px; position:absolute">
 <br>
 <br>
 
-<div id="myProgress"> <div id="study_label">0/100</div>
+<div id="myProgress">
   <div id="myBar">
-    <div id="label">10%</div>
+    <div id="label">10%</div> <div id="study_label">0/100</div>
   </div>
 </div>
 
@@ -591,7 +591,7 @@ function write_to_db(choice){
 
   ajax.open("POST",'./db/selection.php',true)
   ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  var all_data = "choice=" + choice + "left_side=" + left_side + "right_side=" + right_side + "left_small=" + left_small + "case_num=" + study_index + "userId" + userId + "cases_completed" + (cases_completed+1);
+  var all_data = "choice=" + choice + "left_side=" + left_side + "right_side=" + right_side + "left_small=" + left_small + "studyIndex=" + study_index + "userId" + userId;
   ajax.send(str);
 
   // // post selection to server side database
