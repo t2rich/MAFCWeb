@@ -135,23 +135,19 @@ if ( isset($_POST['btn-signup']) ) {
         if ($res3){
           $res4=mysql_query("SELECT * FROM study_info WHERE case_num=1");
           $userRow=mysql_fetch_array($res4);
-          $study_size = $userRow['studySize'];
+          $studySize = $userRow['studySize'];
           $shuffled_array = range(1,$studySize);
-          foreach($shuffled_array as $values){
-            echo $values;
-          }
           shuffle($shuffled_array);
 
           $full_query = "";
           foreach ($shuffled_array as $value){
-            //echo $value;
             if(empty($full_query)){
               $full_query = "INSERT INTO `".$idname."`(case_num) VALUES($value)";
             } else {
               $full_query.=",($value)";
             }
           }
-          //echo $full_query;
+
           $res5 = mysql_query($full_query);
           if ($res5){
             $errTyp = "success";
