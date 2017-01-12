@@ -126,7 +126,7 @@ if($res){
   }
 
   #container a {
-    align:right;
+    margin-left: 30%;
     color:#737CA1;
   }
 
