@@ -463,8 +463,7 @@ function loadAndDisplayImages() {
     // set image overlay properites and values
     var viewport2 = cornerstone.getViewport(element2);
     $('#bottomright2').text("Zoom: " + viewport2.scale.toFixed(2) + "x");
-    $('#bottomleft2').text("WW/WC:" + Math.round(viewport2.voi.windowWidth) + ...
-    "/" + Math.round(viewport2.voi.windowCenter));
+    $('#bottomleft2').text("WW/WC:" + Math.round(viewport2.voi.windowWidth) + "/" + Math.round(viewport2.voi.windowCenter));
 
     // enable and bind user input to mouse buttons and movement
     cornerstoneTools.mouseInput.enable(element2);
@@ -532,15 +531,13 @@ function loadAll2(imageID) {
 // define image update callback functions
 function onViewportUpdated(e, data) {
     var viewport = data.viewport;
-    $('#bottomleft').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + ...
-     "/" + Math.round(viewport.voi.windowCenter));
+    $('#bottomleft').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
     $('#bottomright').text("Zoom: " + viewport.scale.toFixed(2) + "x");
 };
 
 function onViewportUpdated2(e, data) {
     var viewport = data.viewport;
-    $('#bottomleft2').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + ...
-    "/" + Math.round(viewport.voi.windowCenter));
+    $('#bottomleft2').text("WW/WC: " + Math.round(viewport.voi.windowWidth) +"/" + Math.round(viewport.voi.windowCenter));
     $('#bottomright2').text("Zoom: " + viewport.scale.toFixed(2) + "x");
 };
 
