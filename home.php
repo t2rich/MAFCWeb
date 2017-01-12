@@ -140,7 +140,7 @@ if($res){
   #top_line a {
     color:#737CA1;
     font-size: 100%;
-    margin-left: 25%;
+    margin-left: 26%;
   }
 
   #top_line b {
@@ -268,7 +268,7 @@ style="top:0px;left:0px; position:absolute">
 
 <div id="myProgress">
   <div id="myBar">
-    <div id="label">10% <div id="study_label">0/100</div> </div> <div id="study_label">Study Progress 0/100</div>
+    <div id="label">10% <div id="study_label">0/100</div> <div id="study_label">Study Progress 0/100</div>
   </div>
 </div>
 
