@@ -137,9 +137,8 @@ if ( isset($_POST['btn-signup']) ) {
           $userRow=mysql_fetch_array($res4);
           $study_size = $userRow['studySize'];
           $temp_array = range(1,$studySize);
-          echo $temp_array;
-          // $shuffled_array = shuffle($temp_array);
-          // echo $shuffled_array;
+          $shuffled_array = shuffle($temp_array);
+          echo $shuffled_array;
           // $full_query = "";
           // foreach ($shuffled_array as $value){
           //   if(empty($full_query)){
