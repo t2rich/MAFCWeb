@@ -580,9 +580,7 @@ function write_to_db(choice){
 
   ajax.open("POST",'./db/selection.php',true)
   ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  var all_data = "choice=" + choice + "left_side=" + left_side + ...
-   "right_side=" + right_side + "left_small=" + left_small + ...
-  "case_num=" + study_index + "userId" + userId + "cases_completed" + (cases_completed+1);
+  var all_data = "choice=" + choice + "left_side=" + left_side + "right_side=" + right_side + "left_small=" + left_small + "case_num=" + study_index + "userId" + userId + "cases_completed" + (cases_completed+1);
   ajax.send(str);
 
   // // post selection to server side database
