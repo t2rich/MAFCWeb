@@ -137,11 +137,14 @@ if ( isset($_POST['btn-signup']) ) {
           $userRow=mysql_fetch_array($res4);
           $study_size = $userRow['studySize'];
           $shuffled_array = range(1,$studySize);
+          foreach($shuffled_array as $values){
+            echo $values;
+          }
           shuffle($shuffled_array);
 
           $full_query = "";
           foreach ($shuffled_array as $value){
-            echo $value;
+            //echo $value;
             if(empty($full_query)){
               $full_query = "INSERT INTO `".$idname."`(case_num) VALUES($value)";
             } else {
