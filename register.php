@@ -118,7 +118,7 @@ if ( isset($_POST['btn-signup']) ) {
     $res = mysql_query($query);
 
     if ($res) {
-      $res2=mysql_query("SELECT * FROM users WHERE userEmail='$email'");
+      $res2=mysql_query("SELECT * FROM users WHERE userEmail=".$email);
       unset($name);
       unset($email);
       unset($pass);
