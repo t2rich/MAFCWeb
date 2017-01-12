@@ -296,7 +296,7 @@ Image Load Progress
 
 var loading_index = 0;
 
-var userId = "<?php echo $idname; ?>";$idname
+var userId = "<?php echo $idname; ?>";
 
 var study_index = "<?php echo $init_study_index; ?>"; // init case number upon login
 //check dynamic database to see where they left off, or are just beginning
