@@ -133,7 +133,8 @@ if ( isset($_POST['btn-signup']) ) {
         $res3 = mysql_query($query2);
 
         if ($res3){
-          $res4=mysql_query("SELECT * FROM study_info WHERE case_number="1);
+          $check=1;
+          $res4=mysql_query("SELECT * FROM study_info WHERE case_number=".$check);
           $userRow=mysql_fetch_array($res4);
           $study_size = $userRow['studySize'];
 
