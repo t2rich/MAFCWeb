@@ -268,7 +268,7 @@ style="top:0px;left:0px; position:absolute">
 
 <div id="myProgress">
   <div id="myBar">
-    <div id="label">10% <div id="study_label">0/100</div> <div id="study_label">Study Progress 0/100</div>
+    <div id="label">10% <div id="study_label">Study Progress 0/100</div></div> 
   </div>
 </div>
 
