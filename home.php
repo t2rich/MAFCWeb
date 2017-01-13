@@ -576,9 +576,9 @@ function write_to_db(choice){
   $.ajax({
     type: 'POST',
     url: './db/selection.php',
+    async: false,
     data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num, ss:slices},
     success: function(response){
-      alert(response);
 
       left_side = response.left_side;
       right_side = response.right_side;
