@@ -601,16 +601,17 @@ function write_to_db(choice){
     url: './db/selection.php',
     data: all_data,
     success: function(response){
-      left_side = response.left_side;
-      right_side = response.right_side;
-      left_small = response.left_small;
-      slices = response.slices;
-
-      study_index = study_index + 1;
-      //clear cache
-      cornerstone.imageCache.purgeCache();
-      loading_index = 0;
-      loadAndDisplayImages();
+      alert(response);
+      // left_side = response.left_side;
+      // right_side = response.right_side;
+      // left_small = response.left_small;
+      // slices = response.slices;
+      //
+      // study_index = study_index + 1;
+      // //clear cache
+      // cornerstone.imageCache.purgeCache();
+      // loading_index = 0;
+      // loadAndDisplayImages();
 
     }
 

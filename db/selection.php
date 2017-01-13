@@ -54,5 +54,6 @@ $pre_res = mysql_query($query);
 //   }
 // }
 //
+return($pre_res)
 mysql_close($con);
 ?>
