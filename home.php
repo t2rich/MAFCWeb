@@ -374,12 +374,15 @@ study_progress();
 // define all inline functions
 function loadAndDisplayImages() {
 
+  resizeMain();
+  study_progress();
+
   // check current study index
   var image_name = left_side;
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name + '/' + 'Instance_' + (i+1);
   };
 
   // update stack info
@@ -449,7 +452,7 @@ function loadAndDisplayImages() {
 
   //load dicom images (Instance_*) within image_number* folder
   for (i = 0; i < slices; i++) {
-    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name2 + '/' + 'Instance_' + (i+1) + '.dcm';
+    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name2 + '/' + 'Instance_' + (i+1);
   };
 
   // update stack info
@@ -587,6 +590,8 @@ function write_to_db(choice){
       //clear cache
       cornerstone.imageCache.purgeCache();
       loading_index = 0;
+      imageIds1 = [];
+      imageIds2 = [];
       loadAndDisplayImages();
 
     }
