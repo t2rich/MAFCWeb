@@ -591,10 +591,8 @@ function write_to_db(choice){
       loading_index = 0;
       imageIds1 = [];
       imageIds2 = [];
-      sync_check = 1;
 
-    },
-    complete: function(){loadAndDisplayImages()}
+    }
   });
 
 }
