@@ -27,8 +27,8 @@ if($pre_res){
   $studyIndex = $studyIndex + 1;
   $res=mysql_query("UPDATE users SET studyIndex=$studyIndex WHERE userId=$userId;");
   if($res){
-  //   $res2=mysql_query("SELECT * FROM `".$userId."` WHERE studyIndex=$studyIndex;");
-  // if($res2){
+    $res2=mysql_query("SELECT * FROM `".$userId."` WHERE studyIndex=$studyIndex;");
+  if($res2){echo "round3";
   //   $userRow2=mysql_fetch_array($res2);
   //   $init_case_num = $userRow2['case_num'];
   //
@@ -50,9 +50,8 @@ if($pre_res){
   //       $right_side = $large_dir;
   //     }
   //     echo json_encode(array("left_side"=>$left_side,"right_side"=>$right_side,"left_small"=>$left_small,"slices"=>$slices));
-  //   }
+    }
   }
 }
-echo "round2";
 mysql_close($con);
 ?>
