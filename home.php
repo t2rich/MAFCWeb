@@ -471,7 +471,7 @@ function loadAndDisplayImages() {
 
     // Set the stack as tool state
     cornerstoneTools.addStackStateManager(element2, ['stack']);
-    cornerstoneTools.addToolState(element2, 'stack2', stack2);
+    cornerstoneTools.addToolState(element2, 'stack', stack2);
 
     // set image overlay properites and values
     var viewport2 = cornerstone.getViewport(element2);
@@ -553,7 +553,7 @@ function onNewImage(e, data) {
 }
 
 function onNewImage2(e, data) {
-  var newImageIdIndex = stack2.currentImageIdIndex;
+  var newImageIdIndex = stack.currentImageIdIndex;
   // Populate the current slice span
   var currentValueSpan = document.getElementById("topright2");
   currentValueSpan.textContent = "Image " + (newImageIdIndex + 1) + "/" + imageIds2.length;
