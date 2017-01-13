@@ -305,17 +305,16 @@ Image Load Progress
 <script>
 
 var loading_index = 0;
-var sync_check = 0;
 
-var userId = "<?php echo $idname; ?>";
+var userId = parseInt("<?php echo $idname; ?>");
 
 var study_index = parseInt("<?php echo $init_study_index; ?>"); // init case number upon login
 //check dynamic database to see where they left off, or are just beginning
-var case_num = "<?php echo $init_case_num; ?>";
-var total_cases = "<?php echo $total_cases; ?>";
+var case_num = parseInt("<?php echo $init_case_num; ?>");
+var total_cases = parseInt("<?php echo $total_cases; ?>");
 
 // number of stack slices
-var slices = "<?php echo $slices; ?>";
+var slices = parseInt("<?php echo $slices; ?>");
 //read from pre-filled database
 
 var left_side = "<?php echo $left_side; ?>";
@@ -374,7 +373,7 @@ study_progress();
 
 // define all inline functions
 function loadAndDisplayImages() {
-  sync_check = 0;
+
   study_progress();
 
   // check current study index
@@ -462,7 +461,7 @@ function loadAndDisplayImages() {
   };
 
   // function used to display images
-  loadAll2(imageIds2).then(function(image2) {
+  loadAll(imageIds2).then(function(image2) {
 
     // log full image data to browser log
     console.log(image2);
@@ -531,16 +530,6 @@ function loadAll(imageID) {
   return cornerstone.loadImage(imageID[Math.floor(slices/2)]);
 }
 
-function loadAll2(imageID) {
-
-  for (i = 0; i < slices; i++) {
-
-    cornerstone.loadAndCacheImage(imageID[i]);
-
-  }
-
-  return cornerstone.loadImage(imageID[Math.floor(slices/2)]);
-}
 
 // define image update callback functions
 function onViewportUpdated(e, data) {
@@ -582,21 +571,21 @@ function write_to_db(choice){
       if(study_index == total_cases){
         alert("Study is complete. Thank you for your participation!")
       } else {
-      response = jQuery.parseJSON(json_response);
-      left_side = response.left_side;
-      right_side = response.right_side;
-      left_small = response.left_small;
-      slices = response.slices;
-      case_num = response.case_num;
+        response = jQuery.parseJSON(json_response);
+        left_side = response.left_side;
+        right_side = response.right_side;
+        left_small = response.left_small;
+        slices = response.slices;
+        case_num = response.case_num;
 
-      study_index = study_index + 1;
-      //clear cache
-      cornerstone.imageCache.purgeCache();
-      loading_index = 0;
-      imageIds1 = [];
-      imageIds2 = [];
-      loadAndDisplayImages();
-    }
+        study_index = study_index + 1;
+        //clear cache
+        cornerstone.imageCache.purgeCache();
+        loading_index = 0;
+        imageIds1 = [];
+        imageIds2 = [];
+        loadAndDisplayImages();
+      }
     }
   });
 
