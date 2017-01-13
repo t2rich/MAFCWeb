@@ -387,17 +387,17 @@ function loadAndDisplayImages() {
   // function used to display images
   loadAll(imageIds1).then(function(image) {
 
-    // update stack info
-    stack = {
-      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
-      imageIds: imageIds1
-    };
-
     // log full image data to browser log
     console.log(image);
 
     //display image
     cornerstone.displayImage(element, image);
+
+    // update stack info
+    stack = {
+      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
+      imageIds: imageIds1
+    };
 
     // Set the stack as tool state
     cornerstoneTools.addStackStateManager(element, ['stack']);
@@ -457,17 +457,17 @@ function loadAndDisplayImages() {
   // function used to display images
   loadAll(imageIds2).then(function(image2) {
 
-    // update stack info
-    stack2 = {
-      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
-      imageIds: imageIds2
-    };
-
     // log full image data to browser log
     console.log(image2);
 
     //display image
     cornerstone.displayImage(element2, image2);
+
+    // update stack info
+    stack2 = {
+      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
+      imageIds: imageIds2
+    };
 
     // Set the stack as tool state
     cornerstoneTools.addStackStateManager(element2, ['stack']);
