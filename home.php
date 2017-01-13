@@ -681,6 +681,7 @@ function loadAndDisplayImages() {
     loading_index = loading_index + 1;
     var elem = document.getElementById("myBar");
     var width = Math.floor((loading_index/(slices*2))*100);
+    if (width > 100){width = 100;}
     elem.style.width = width + '%';
     document.getElementById("label").innerHTML = width + '%';
   }
