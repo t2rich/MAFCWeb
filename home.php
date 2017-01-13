@@ -1,9 +1,5 @@
 <?php
 
-
-ini_set('display_errors', 'On');
-error_reporting(E_ALL | E_STRICT);
-
 ob_start();
 session_start();
 require_once 'dbconnect.php';
@@ -59,94 +55,7 @@ if($res){
     RAILabs MAFC
   </title>
 
-  <style>
-
-  .overlays {
-    color: gold;
-  }
-
-  .selected {
-    background-color:#737CA1;
-    outline: none;
-    border: none;
-  }
-
-  body {
-    margin:auto;
-    background-color:#0C090A;
-    color:#737CA1;
-  }
-
-  button:active {
-    outline: none;
-    border: none;
-    background-color:#737CA1;
-    color: black;
-  }
-
-
-  .btn {
-    width:9%;
-    outline: none;
-  }
-
-  .btn1 {
-    width: 9%;
-    outline: none;
-  }
-
-  .btn2 {
-    width:49%;
-    line-height: 200%;
-    outline: none;
-  }
-
-  .btn3 {
-    margin-right: .5%;
-  }
-
-  #myProgress {
-    position: relative;
-    height: 2%;
-    background-color: #0C090A;
-  }
-
-  #myBar {
-    position: absolute;
-    width: 1%;
-    height: 100%;
-    background-color: #737CA1;
-  }
-
-  #label {
-    text-align: center;
-    line-height: 100%;
-    color: white;
-    margin-top: .3%;
-  }
-
-  #container a {
-    margin-left: 60%;
-    color:#737CA1;
-  }
-
-  #top_line {
-    color:#737CA1;
-    font-size: 200%;
-  }
-
-  #top_line a {
-    color:#737CA1;
-    font-size: 100%;
-    margin-left: 26%;
-  }
-
-  #top_line b {
-    color:#737CA1;
-    font-size: 100%;
-    margin-left: 20%;
-  }
-  </style>
+  <link rel="stylesheet" href="mystyle.css" type="text/css"  />
 
 </head>
 
@@ -315,7 +224,6 @@ var total_cases = parseInt("<?php echo $total_cases; ?>");
 
 // number of stack slices
 var slices = parseInt("<?php echo $slices; ?>");
-//read from pre-filled database
 
 var left_side = "<?php echo $left_side; ?>";
 var right_side = "<?php echo $right_side; ?>";
@@ -326,23 +234,13 @@ var left_small = "<?php echo $left_small; ?>";
 //Not implemented in this iteration
 
 // set-up some dummy variables to be used to load images later on
-var imageIds1 = [
-  'example://1',
-];
+var imageIds1 = ['example://1'];
 
-var imageIds2 = [
-  'example://1',
-];
+var imageIds2 = ['example://1'];
 
-var stack = {
-  currentImageIdIndex : 0,
-  imageIds: imageIds1
-};
+var stack = {currentImageIdIndex : 0, imageIds: imageIds1};
 
-var stack2 = {
-  currentImageIdIndex : 0,
-  imageIds: imageIds2
-};
+var stack2 = {currentImageIdIndex : 0,imageIds: imageIds2};
 
 // enablee the html divs to hold cornerstone dicom images
 var element = cornerstone.enable(document.getElementById('image1'));
@@ -387,19 +285,17 @@ function loadAndDisplayImages() {
   // function used to display images
   loadAll(imageIds1).then(function(image) {
 
-    // log full image data to browser log
-    console.log(image);
-
-    //display image
-    cornerstone.displayImage(element, image);
-
     // update stack info
     stack = {
       currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
       imageIds: imageIds1
     };
 
-    onNewImage();
+    // log full image data to browser log
+    console.log(image);
+
+    //display image
+    cornerstone.displayImage(element, image);
 
     // Set the stack as tool state
     cornerstoneTools.addStackStateManager(element, ['stack']);
@@ -459,19 +355,17 @@ function loadAndDisplayImages() {
   // function used to display images
   loadAll(imageIds2).then(function(image2) {
 
-    // log full image data to browser log
-    console.log(image2);
-
-    //display image
-    cornerstone.displayImage(element2, image2);
-
     // update stack info
     stack2 = {
       currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
       imageIds: imageIds2
     };
 
-    onNewImage2();
+    // log full image data to browser log
+    console.log(image2);
+
+    //display image
+    cornerstone.displayImage(element2, image2);
 
     // Set the stack as tool state
     cornerstoneTools.addStackStateManager(element2, ['stack']);
@@ -550,6 +444,7 @@ function onViewportUpdated2(e, data) {
 
 // define new image callback functions (i.e. slice scrolling)
 function onNewImage(e, data) {
+
 
     var newImageIdIndex = stack.currentImageIdIndex;
     var currentValueSpan = document.getElementById("topright");
@@ -799,4 +694,5 @@ function study_progress() {
 
 </script>
 </html>
+
 <?php ob_end_flush(); ?>

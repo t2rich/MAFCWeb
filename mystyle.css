@@ -1,0 +1,85 @@
+.overlays {
+  color: gold;
+}
+
+.selected {
+  background-color:#737CA1;
+  outline: none;
+  border: none;
+}
+
+body {
+  margin:auto;
+  background-color:#0C090A;
+  color:#737CA1;
+}
+
+button:active {
+  outline: none;
+  border: none;
+  background-color:#737CA1;
+  color: black;
+}
+
+
+.btn {
+  width:9%;
+  outline: none;
+}
+
+.btn1 {
+  width: 9%;
+  outline: none;
+}
+
+.btn2 {
+  width:49%;
+  line-height: 200%;
+  outline: none;
+}
+
+.btn3 {
+  margin-right: .5%;
+}
+
+#myProgress {
+  position: relative;
+  height: 2%;
+  background-color: #0C090A;
+}
+
+#myBar {
+  position: absolute;
+  width: 1%;
+  height: 100%;
+  background-color: #737CA1;
+}
+
+#label {
+  text-align: center;
+  line-height: 100%;
+  color: white;
+  margin-top: .3%;
+}
+
+#container a {
+  margin-left: 60%;
+  color:#737CA1;
+}
+
+#top_line {
+  color:#737CA1;
+  font-size: 200%;
+}
+
+#top_line a {
+  color:#737CA1;
+  font-size: 100%;
+  margin-left: 26%;
+}
+
+#top_line b {
+  color:#737CA1;
+  font-size: 100%;
+  margin-left: 20%;
+}
