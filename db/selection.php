@@ -55,5 +55,5 @@ $case_num = $_POST['cn'];
 // }
 //
 return($userId)
-mysql_close($con);
+// mysql_close($con);
 ?>
