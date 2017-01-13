@@ -43,7 +43,7 @@ if($res){
         $right_side = $large_dir;
       } else {
         $left_side = $large_dir;
-        $right_side = $large_dir;
+        $right_side = $small_dir;
       }
     } else {echo "error3";}
   } else {echo "error2";}
