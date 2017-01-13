@@ -34,21 +34,22 @@ if($pre_res){
 
       // load study info database
       $res3=mysql_query("SELECT * FROM study_info WHERE case_num=$init_case_num;");
-      if($res3){echo "round4";
-        //     $userRow3=mysql_fetch_array($res3);
-        //     // get folder names, number of slices
-        //     $small_dir = $userRow3['small_dir'];
-        //     $large_dir = $userRow3['large_dir'];
-        //     $slices = $userRow3['slices'];
-        //     $left_small = rand(0,1);
-        //
-        //     if ($left_small) {
-        //       $left_side = $small_dir;
-        //       $right_side = $large_dir;
-        //     } else {
-        //       $left_side = $large_dir;
-        //       $right_side = $large_dir;
-        //     }
+      if($res3){
+            $userRow3=mysql_fetch_array($res3);
+            // get folder names, number of slices
+            $small_dir = $userRow3['small_dir'];
+            $large_dir = $userRow3['large_dir'];
+            $slices = $userRow3['slices'];
+            $left_small = rand(0,1);
+
+            if ($left_small) {
+              $left_side = $small_dir;
+              $right_side = $large_dir;
+            } else {
+              $left_side = $large_dir;
+              $right_side = $large_dir;
+            }
+            echo "round5";
         //     echo json_encode(array("left_side"=>$left_side,"right_side"=>$right_side,"left_small"=>$left_small,"slices"=>$slices));
       }
     }
