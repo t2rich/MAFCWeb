@@ -570,7 +570,7 @@ function onNewImage2(e, data) {
 // define user image mafc selection callback functions
 function write_to_db(choice){
 
-  var ajax=new XMLHttpRequest();
+  // var ajax=new XMLHttpRequest();
   //
   // ajax.onreadystatechange=function()
   // {
@@ -581,8 +581,8 @@ function write_to_db(choice){
   //     alert('It worked!');
   //
       //clear cache
-      cornerstone.imageCache.purgeCache();
-      loading_index = 0;
+      // cornerstone.imageCache.purgeCache();
+      // loading_index = 0;
   //     //
   //     // //start the next mafc user selection
   //     // loadAndDisplayImages();
@@ -592,14 +592,14 @@ function write_to_db(choice){
   //
   // ajax.open("POST",'./db/selection.php',true)
   // ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  var all_data = "choice=" + choice + "left_side=" + left_side + "right_side=" + right_side + "left_small=" + left_small + "studyIndex=" + study_index + "userId" + userId + "case_num" + case_num;
+  // var all_data = "choice=" + choice + "left_side=" + left_side + "right_side=" + right_side + "left_small=" + left_small + "studyIndex=" + study_index + "userId" + userId + "case_num" + case_num;
   // ajax.send(all_data);
 
   // post selection to server side database
   $.ajax({
     type: 'POST',
     url: './db/selection.php',
-    data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num},
+    data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num, ss:slices},
     success: function(response){
       alert(response);
       // left_side = response.left_side;

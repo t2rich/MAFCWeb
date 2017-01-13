@@ -9,6 +9,7 @@ $left_small = $_POST['small'];
 $studyIndex = $_POST['si'];
 $userId = $_POST['id;']
 $case_num = $_POST['cn'];
+$slices= $_POST['ss'];
 
 $con = mysql_connect("localhost","web_user","railabs");
 
