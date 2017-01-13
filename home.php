@@ -546,13 +546,15 @@ function onViewportUpdated2(e, data) {
 
 // define new image callback functions (i.e. slice scrolling)
 function onNewImage(e, data) {
-  var newImageIdIndex = stack.currentImageIdIndex;
-  var newImageIdIndex2 = stack2.currentImageIdIndex;
-  // Populate the current slice span
-  var currentValueSpan = document.getElementById("topright");
-  currentValueSpan.textContent = "Image " + (newImageIdIndex + 1) + "/" + imageIds1.length;
-  var currentValueSpan2 = document.getElementById("topright2");
-  currentValueSpan2.textContent = "Image " + (newImageIdIndex2 + 1) + "/" + imageIds2.length;
+  if (data.element.id == "image1"){
+    var newImageIdIndex = stack.currentImageIdIndex;
+    var currentValueSpan = document.getElementById("topright");
+    currentValueSpan.textContent = "Image " + (newImageIdIndex + 1) + "/" + imageIds1.length;
+  }else{
+    var newImageIdIndex2 = stack2.currentImageIdIndex;
+    var currentValueSpan2 = document.getElementById("topright2");
+    currentValueSpan2.textContent = "Image " + (newImageIdIndex2 + 1) + "/" + imageIds2.length;
+  }
 }
 
 // define user image mafc selection callback functions
