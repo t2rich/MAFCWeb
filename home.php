@@ -595,7 +595,7 @@ function write_to_db(choice){
 
     }
 
-  }).then(loadAndDisplayImages());
+  }).done(loadAndDisplayImages());
 
 }
 
