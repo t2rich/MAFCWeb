@@ -126,7 +126,7 @@ if($res){
   }
 
   #container a {
-    margin-left: 55%;
+    margin-left: 60%;
     color:#737CA1;
   }
 
@@ -310,6 +310,7 @@ var userId = "<?php echo $idname; ?>";
 
 var study_index = "<?php echo $init_study_index; ?>"; // init case number upon login
 //check dynamic database to see where they left off, or are just beginning
+var case_num = "<?php echo $init_case_num; ?>";
 var total_cases = "<?php echo $total_cases; ?>";
 
 // number of stack slices
@@ -570,36 +571,50 @@ function onNewImage2(e, data) {
 function write_to_db(choice){
 
   var ajax=new XMLHttpRequest();
+  //
+  // ajax.onreadystatechange=function()
+  // {
+  //   if (ajax.readyState==4 && ajax.status==200)
+  //   {
+  //
+  //
+  //     alert('It worked!');
+  //
+      //clear cache
+      cornerstone.imageCache.purgeCache();
+      loading_index = 0;
+  //     //
+  //     // //start the next mafc user selection
+  //     // loadAndDisplayImages();
+  //
+  //   }
+  // }
+  //
+  // ajax.open("POST",'./db/selection.php',true)
+  // ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  var all_data = "choice=" + choice + "left_side=" + left_side + "right_side=" + right_side + "left_small=" + left_small + "studyIndex=" + study_index + "userId" + userId + "case_num" + case_num;
+  // ajax.send(all_data);
 
-  ajax.onreadystatechange=function()
-  {
-    if (ajax.readyState==4 && ajax.status==200)
-    {
+  // post selection to server side database
+  $.ajax({
+    type: 'POST',
+    url: './db/selection.php',
+    data: all_data,
+    success: function(response){
+      left_side = response.left_side;
+      right_side = response.right_side;
+      left_small = response.left_small;
+      slices = response.slices;
 
-
-      alert('It worked!');
-
-      // //clear cache
-      // cornerstone.imageCache.purgeCache();
-      // loading_index = 0;
-      //
-      // //start the next mafc user selection
-      // loadAndDisplayImages();
+      study_index = study_index + 1;
+      //clear cache
+      cornerstone.imageCache.purgeCache();
+      loading_index = 0;
+      loadAndDisplayImages();
 
     }
-  }
 
-  ajax.open("POST",'./db/selection.php',true)
-  ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  var all_data = "choice=" + choice + "left_side=" + left_side + "right_side=" + right_side + "left_small=" + left_small + "studyIndex=" + study_index + "userId" + userId;
-  ajax.send(all_data);
-
-  // // post selection to server side database
-  // $.ajax({
-  //   type: 'POST',
-  //   url: './db/selection.php',
-  //   case_num: case
-  // });
+  });
 
   //
   // // step to the next image datasets
