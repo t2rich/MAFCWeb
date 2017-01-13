@@ -7,7 +7,7 @@ $left_side = $_POST['ls'];
 $right_side = $_POST['rs'];
 $left_small = $_POST['small'];
 $studyIndex = $_POST['si'];
-$userId = $_POST['id'];
+$userId = $_POST.id;
 $case_num = $_POST['cn'];
 
 // $con = mysql_connect("localhost","web_user","railabs");
