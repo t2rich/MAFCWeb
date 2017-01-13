@@ -30,10 +30,10 @@ if($pre_res){
     $res2=mysql_query("SELECT * FROM `".$userId."` WHERE studyIndex=$studyIndex;");
     if($res2){
       $userRow2=mysql_fetch_array($res2);
-      $init_case_num = $userRow2['case_num'];
+      $new_case_num = $userRow2['case_num'];
 
       // load study info database
-      $res3=mysql_query("SELECT * FROM study_info WHERE case_num=$init_case_num;");
+      $res3=mysql_query("SELECT * FROM study_info WHERE case_num=$new_case_num;");
       if($res3){
             $userRow3=mysql_fetch_array($res3);
             // get folder names, number of slices
@@ -49,7 +49,7 @@ if($pre_res){
               $left_side = $large_dir;
               $right_side = $small_dir;
             }
-            echo json_encode(array("left_side"=>$left_side,"right_side"=>$right_side,"left_small"=>$left_small,"slices"=>$slices));
+            echo json_encode(array("left_side"=>$left_side,"right_side"=>$right_side,"left_small"=>$left_small,"slices"=>$slices, "case_num"=>$new_case_num));
       }
     }
   }

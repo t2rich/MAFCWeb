@@ -584,6 +584,7 @@ function write_to_db(choice){
       right_side = response.right_side;
       left_small = response.left_small;
       slices = response.slices;
+      case_num = response.case_num;
 
       study_index = study_index + 1;
       //clear cache
