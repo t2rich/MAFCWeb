@@ -470,7 +470,7 @@ function loadAndDisplayImages() {
     cornerstone.displayImage(element2, image2);
 
     // Set the stack as tool state
-    cornerstoneTools.addStackStateManager(element2, ['stack2']);
+    cornerstoneTools.addStackStateManager(element2, ['stack']);
     cornerstoneTools.addToolState(element2, 'stack2', stack2);
 
     // set image overlay properites and values
