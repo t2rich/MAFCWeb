@@ -585,7 +585,7 @@ function write_to_db(choice){
       left_small = response.left_small;
       slices = response.slices;
 
-      study_index = study_index;
+      study_index = study_index + 1;
       //clear cache
       cornerstone.imageCache.purgeCache();
       loading_index = 0;
