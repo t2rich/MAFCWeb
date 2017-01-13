@@ -11,16 +11,16 @@ $userId = $_POST['id'];
 $case_num = $_POST['cn'];
 $slices= $_POST['ss'];
 
-$con = mysql_connect("localhost","web_user","railabs");
+// $con = mysql_connect("localhost","web_user","railabs");
+//
+// if (!$con)
+// {
+//   die('Could not connect: ' . mysql_error());
+// }
+//
+// mysql_select_db("mafc", $con);
 
-if (!$con)
-{
-  die('Could not connect: ' . mysql_error());
-}
-
-mysql_select_db("mafc", $con);
-
-$query = "UPDATE `".$userId."` SET case_num=$case_num, left_small=$left_small, choice=$choice, small_dir=$small_dir, large_dir=$large_dir, slices=$slices WHERE case_num='$case_num'";
+$query = "UPDATE `".$userId."` SET case_num=$case_num, left_small=$left_small, choice=$choice, small_dir=$small_dir, large_dir=$large_dir, slices=$slices WHERE case_num=$case_num";
 
 // $pre_res = mysql_query($query);
 
@@ -55,5 +55,5 @@ $query = "UPDATE `".$userId."` SET case_num=$case_num, left_small=$left_small, c
 //   }
 // }
 echo $query
-mysql_close($con);
+// mysql_close($con);
 ?>
