@@ -308,7 +308,7 @@ var loading_index = 0;
 
 var userId = "<?php echo $idname; ?>";
 
-var study_index = "<?php echo $init_study_index; ?>"; // init case number upon login
+var study_index = parseInt("<?php echo $init_study_index; ?>"); // init case number upon login
 //check dynamic database to see where they left off, or are just beginning
 var case_num = "<?php echo $init_case_num; ?>";
 var total_cases = "<?php echo $total_cases; ?>";
@@ -374,7 +374,6 @@ study_progress();
 // define all inline functions
 function loadAndDisplayImages() {
 
-  resizeMain();
   study_progress();
 
   // check current study index
@@ -586,7 +585,7 @@ function write_to_db(choice){
       left_small = response.left_small;
       slices = response.slices;
 
-      study_index = study_index + 1;
+      study_index = study_index;
       //clear cache
       cornerstone.imageCache.purgeCache();
       loading_index = 0;
@@ -600,39 +599,7 @@ function write_to_db(choice){
 
 }
 
-function write_to_db2(){
 
-
-  // // step to the next image datasets
-  // study_index = study_index + 1;
-  // // post selection to server side database
-  // $.ajax({
-  //   type: 'POST',
-  //   url: './db/script2.php',
-  // });
-  //
-  //
-  // // step to the next image datasets
-  // study_index = study_index + 1;
-  // // post selection to server side database
-  // <?php
-  // $query = "INSERT INTO `".$idname."`(fnl,fnr,choice,slices) VALUES('$fnl','$fnr',1,'$slices')";
-  // $res = mysql_query($query);
-  //
-  // //update user database study index
-  // $study_index = $study_index + 1;
-  // $query = "INSERT INTO users(study_index) VALUES('$study_index')";
-  // $res = mysql_query($query);
-  // ?>
-  // //clear cache
-  // cornerstone.imageCache.purgeCache();
-  // loading_index = 0;
-  //
-  // //start the next mafc user selection
-  // loadAndDisplayImages();
-}
-
-// Resize elements according to current browser display window size
 function resizeMain() {
   var height = $(window).height();
   var width = $(window).width();
