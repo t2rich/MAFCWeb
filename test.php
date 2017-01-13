@@ -235,9 +235,11 @@ var left_small = "<?php echo $left_small; ?>";
 
 // set-up some dummy variables to be used to load images later on
 var imageIds1 = ['example://1'];
+
 var imageIds2 = ['example://1'];
 
 var stack = {currentImageIdIndex : 0, imageIds: imageIds1};
+
 var stack2 = {currentImageIdIndex : 0, imageIds: imageIds2};
 
 // enablee the html divs to hold cornerstone dicom images
@@ -283,23 +285,35 @@ function loadAndDisplayImages() {
     imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name + '/' + 'Instance_' + (i+1);
   };
 
-  // function used to display images
-  loadAll(imageIds1).then(function(image) {
+  // check current study index
+  var image_name2 = right_side;
 
-    // update stack info
-    stack = {
-      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
-      imageIds: imageIds1
-    };
+  //load dicom images (Instance_*) within image_number* folder
+  for (i = 0; i < slices; i++) {
+    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name2 + '/' + 'Instance_' + (i+1);
+  };
 
-    // update tool state
-    cornerstoneTools.addToolState(element, 'stack', stack);
+  // update stack info
+  stack.imageIds = imageIds1;
+  stack2.imageIds = imageIds2;
+  stack.currentImageIdIndex = Math.floor(slices/2);
+  stack2.currentImageIdIndex = Math.floor(slices/2);
 
-    // log full image data to browser
+  // load all left and right imagaes
+  loadAll(imageIds1);
+  loadAll(imageIds2);
+
+    // log full image data to browser log
     console.log(image);
+    console.log(image2);
+
+    // Set the stack as tool state
+    cornerstoneTools.addToolState(element, 'stack', stack);
+    cornerstoneTools.addToolState(element2, 'stack', stack2);
 
     //display image
     cornerstone.displayImage(element, image);
+    cornerstone.displayImage(element2, image2);
 
     // set image overlay properites and values
     var viewport = cornerstone.getViewport(element);
@@ -342,356 +356,328 @@ function loadAndDisplayImages() {
       cornerstone.setViewport(element, viewport);
     });
 
-    // check current study index
-    var image_name2 = right_side;
 
-    //load dicom images (Instance_*) within image_number* folder
-    for (i = 0; i < slices; i++) {
-      imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name2 + '/' + 'Instance_' + (i+1);
-    };
+    // set image overlay properites and values
+    var viewport2 = cornerstone.getViewport(element2);
+    $('#bottomright2').text("Zoom: " + viewport2.scale.toFixed(2) + "x");
+    $('#bottomleft2').text("WW/WC:" + Math.round(viewport2.voi.windowWidth) + "/" + Math.round(viewport2.voi.windowCenter));
 
-    // function used to display images
-    loadAll(imageIds2).then(function(image2) {
+    // enable and bind user input to mouse buttons and movement
+    cornerstoneTools.mouseInput.enable(element2);
+    cornerstoneTools.mouseWheelInput.enable(element2);
+    cornerstoneTools.wwwc.activate(element2, 1);
+    cornerstoneTools.pan.activate(element2, 2);
+    cornerstoneTools.zoom.activate(element2, 4);
+    cornerstoneTools.stackScrollWheel.activate(element2);
+    //cornerstoneTools.stackPrefetch.enable(element2);
 
-      // update stack info
-      stack2 = {
-        currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
-        imageIds: imageIds2
-      };
+    // add displayed image to synchronizers (wwwc and pan/zoom)
+    synchronizer.add(element2);
+    synchronizer2.add(element2);
+    synchronizer3.add(element2);
 
-      // update tool state
-      cornerstoneTools.addToolState(element2, 'stack', stack2);
+    // Add event handlers for the ww/wc presets
+    $('#softTissue2').click(function(e) {
+      var viewport = cornerstone.getViewport(element2);
+      viewport.voi.windowWidth = 400;
+      viewport.voi.windowCenter = 20;
+      cornerstone.setViewport(element2, viewport);
+    });
 
-      // log full image data to browser log
-      console.log(image2);
+    $('#lung2').click(function(e) {
+      var viewport = cornerstone.getViewport(element2);
+      viewport.voi.windowWidth = 1600;
+      viewport.voi.windowCenter = -600;
+      cornerstone.setViewport(element2, viewport);
+    });
 
-      //display image
-      cornerstone.displayImage(element2, image2);
+    $('#bone2').click(function(e) {
+      var viewport = cornerstone.getViewport(element2);
+      viewport.voi.windowWidth = 2000;
+      viewport.voi.windowCenter = 300;
+      cornerstone.setViewport(element2, viewport);
+    });
 
-      // set image overlay properites and values
-      var viewport2 = cornerstone.getViewport(element2);
-      $('#bottomright2').text("Zoom: " + viewport2.scale.toFixed(2) + "x");
-      $('#bottomleft2').text("WW/WC:" + Math.round(viewport2.voi.windowWidth) + "/" + Math.round(viewport2.voi.windowCenter));
+};
 
-      // enable and bind user input to mouse buttons and movement
-      cornerstoneTools.mouseInput.enable(element2);
-      cornerstoneTools.mouseWheelInput.enable(element2);
-      cornerstoneTools.wwwc.activate(element2, 1);
-      cornerstoneTools.pan.activate(element2, 2);
-      cornerstoneTools.zoom.activate(element2, 4);
-      cornerstoneTools.stackScrollWheel.activate(element2);
-      //cornerstoneTools.stackPrefetch.enable(element2);
+// load all stack images before displaying any single one
+function loadAll(imageID) {
 
-      // add displayed image to synchronizers (wwwc and pan/zoom)
-      synchronizer.add(element2);
-      synchronizer2.add(element2);
-      synchronizer3.add(element2);
+  for (i = 0; i < slices; i++) {
 
-      // Add event handlers for the ww/wc presets
-      $('#softTissue2').click(function(e) {
-        var viewport = cornerstone.getViewport(element2);
-        viewport.voi.windowWidth = 400;
-        viewport.voi.windowCenter = 20;
-        cornerstone.setViewport(element2, viewport);
-      });
+    cornerstone.loadAndCacheImage(imageID[i]);
 
-      $('#lung2').click(function(e) {
-        var viewport = cornerstone.getViewport(element2);
-        viewport.voi.windowWidth = 1600;
-        viewport.voi.windowCenter = -600;
-        cornerstone.setViewport(element2, viewport);
-      });
-
-      $('#bone2').click(function(e) {
-        var viewport = cornerstone.getViewport(element2);
-        viewport.voi.windowWidth = 2000;
-        viewport.voi.windowCenter = 300;
-        cornerstone.setViewport(element2, viewport);
-      });
-
-    });});
-
-  };
-
-  // load all stack images before displaying any single one
-  function loadAll(imageID) {
-
-    for (i = 0; i < slices; i++) {
-
-      cornerstone.loadAndCacheImage(imageID[i]);
-
-    }
-
-    return cornerstone.loadImage(imageID[Math.floor(slices/2)]);
   }
 
+}
 
-  // define image update callback functions
-  function onViewportUpdated(e, data) {
-    var viewport = data.viewport;
-    $('#bottomleft').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
-    $('#bottomright').text("Zoom: " + viewport.scale.toFixed(2) + "x");
-  };
 
-  function onViewportUpdated2(e, data) {
-    var viewport = data.viewport;
-    $('#bottomleft2').text("WW/WC: " + Math.round(viewport.voi.windowWidth) +"/" + Math.round(viewport.voi.windowCenter));
-    $('#bottomright2').text("Zoom: " + viewport.scale.toFixed(2) + "x");
-  };
+// define image update callback functions
+function onViewportUpdated(e, data) {
+  var viewport = data.viewport;
+  $('#bottomleft').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
+  $('#bottomright').text("Zoom: " + viewport.scale.toFixed(2) + "x");
+};
 
-  // define new image callback functions (i.e. slice scrolling)
-  function onNewImage(e, data) {
+function onViewportUpdated2(e, data) {
+  var viewport = data.viewport;
+  $('#bottomleft2').text("WW/WC: " + Math.round(viewport.voi.windowWidth) +"/" + Math.round(viewport.voi.windowCenter));
+  $('#bottomright2').text("Zoom: " + viewport.scale.toFixed(2) + "x");
+};
+
+// define new image callback functions (i.e. slice scrolling)
+function onNewImage(e, data) {
 
 
     var newImageIdIndex = stack.currentImageIdIndex;
     var currentValueSpan = document.getElementById("topright");
     currentValueSpan.textContent = "Image " + (newImageIdIndex + 1) + "/" + imageIds1.length;
 
-  }
+}
 
-  // define new image callback functions (i.e. slice scrolling)
-  function onNewImage2(e, data) {
+// define new image callback functions (i.e. slice scrolling)
+function onNewImage2(e, data) {
 
     var newImageIdIndex2 = stack2.currentImageIdIndex;
     var currentValueSpan2 = document.getElementById("topright2");
     currentValueSpan2.textContent = "Image " + (newImageIdIndex2 + 1) + "/" + imageIds2.length;
 
+}
+
+// define user image mafc selection callback functions
+function write_to_db(choice){
+
+  // post selection to server side database
+  $.ajax({
+    type: 'POST',
+    url: './db/selection.php',
+    data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num, ss:slices},
+    success: function(json_response){
+      if(study_index == total_cases){
+        alert("Study is complete. Thank you for your participation!")
+        window.location.href = "logout.php?logout";
+      } else {
+        response = jQuery.parseJSON(json_response);
+        left_side = response.left_side;
+        right_side = response.right_side;
+        left_small = response.left_small;
+        slices = response.slices;
+        case_num = response.case_num;
+
+        study_index = study_index + 1;
+        //clear cache
+        cornerstone.imageCache.purgeCache();
+        loading_index = 0;
+        imageIds1 = [];
+        imageIds2 = [];
+        cornerstoneTools.clearToolState(element,'stack')
+        cornerstoneTools.clearToolState(element2,'stack')
+        loadAndDisplayImages();
+      }
+    }
+  });
+
+}
+
+
+function resizeMain() {
+  var height = $(window).height();
+  var width = $(window).width();
+  var new_size = 0;
+
+  //find limiting dimension
+  if (height <= (width*.5)) {
+    new_size = height*2;
+  } else {
+    new_size = width;
   }
 
-  // define user image mafc selection callback functions
-  function write_to_db(choice){
+  $('body').height(new_size * .5);
+  $('body').width(new_size * .75);
 
-    // post selection to server side database
-    $.ajax({
-      type: 'POST',
-      url: './db/selection.php',
-      data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num, ss:slices},
-      success: function(json_response){
-        if(study_index == total_cases){
-          alert("Study is complete. Thank you for your participation!")
-          window.location.href = "logout.php?logout";
-        } else {
-          response = jQuery.parseJSON(json_response);
-          left_side = response.left_side;
-          right_side = response.right_side;
-          left_small = response.left_small;
-          slices = response.slices;
-          case_num = response.case_num;
+  $('#container').height($('body').height());
+  $('#container').width($('body').width());
 
-          study_index = study_index + 1;
-          //clear cache
-          cornerstone.imageCache.purgeCache();
-          loading_index = 0;
-          imageIds1 = [];
-          imageIds2 = [];
-          // cornerstoneTools.clearToolState(element,'stack')
-          // cornerstoneTools.clearToolState(element2,'stack')
-          loadAndDisplayImages();
-        }
-      }
-    });
+  $('.cornerstone-enabled-image').height(Math.floor($('#container').width() * .49));
+  $('.cornerstone-enabled-image').width(Math.floor($('#container').width() * .49));
 
+  $('#image1').height($('.cornerstone-enabled-image').width());
+  $('#image1').width($('.cornerstone-enabled-image').width());
+
+  $('#image2').height($('.cornerstone-enabled-image').width());
+  $('#image2').width($('.cornerstone-enabled-image').width());
+
+  $('#myProgress').width($('.cornerstone-enabled-image').width());
+  $('#top_line').width($('body').width());
+
+  cornerstone.resize(element, true);
+  cornerstone.resize(element2, true);
+
+  // update size of buttons to match current browser display size
+  var fontSize = $('#container').width() * 0.009; // 9% of container width
+  $('.btn').css('font-size', fontSize);
+  $('.btn1').css('font-size', fontSize);
+  $('.btn_invert').css('font-size', fontSize);
+  $('.btn_interp').css('font-size', fontSize);
+  $('.btn2').css('font-size', fontSize);
+  $('body').css('font-size', fontSize);
+  $('#label').css('font-size', fontSize);
+
+}
+
+// Call resize main on window resize
+$(window).resize(function() {
+  resizeMain();
+});
+
+// define other useful image display parameter functions (button activated)
+$('#invert').click(function (e) {
+  var viewport = cornerstone.getViewport(element);
+  if (viewport.invert === true) {
+    viewport.invert = false;
+  } else {
+    viewport.invert = true;
   }
+  cornerstone.setViewport(element, viewport);
+});
 
-
-  function resizeMain() {
-    var height = $(window).height();
-    var width = $(window).width();
-    var new_size = 0;
-
-    //find limiting dimension
-    if (height <= (width*.5)) {
-      new_size = height*2;
-    } else {
-      new_size = width;
-    }
-
-    $('body').height(new_size * .5);
-    $('body').width(new_size * .75);
-
-    $('#container').height($('body').height());
-    $('#container').width($('body').width());
-
-    $('.cornerstone-enabled-image').height(Math.floor($('#container').width() * .49));
-    $('.cornerstone-enabled-image').width(Math.floor($('#container').width() * .49));
-
-    $('#image1').height($('.cornerstone-enabled-image').width());
-    $('#image1').width($('.cornerstone-enabled-image').width());
-
-    $('#image2').height($('.cornerstone-enabled-image').width());
-    $('#image2').width($('.cornerstone-enabled-image').width());
-
-    $('#myProgress').width($('.cornerstone-enabled-image').width());
-    $('#top_line').width($('body').width());
-
-    cornerstone.resize(element, true);
-    cornerstone.resize(element2, true);
-
-    // update size of buttons to match current browser display size
-    var fontSize = $('#container').width() * 0.009; // 9% of container width
-    $('.btn').css('font-size', fontSize);
-    $('.btn1').css('font-size', fontSize);
-    $('.btn_invert').css('font-size', fontSize);
-    $('.btn_interp').css('font-size', fontSize);
-    $('.btn2').css('font-size', fontSize);
-    $('body').css('font-size', fontSize);
-    $('#label').css('font-size', fontSize);
-
+$('#interpolation').click(function (e) {
+  var viewport = cornerstone.getViewport(element);
+  if (viewport.pixelReplication === true) {
+    viewport.pixelReplication = false;
+  } else {
+    viewport.pixelReplication = true;
   }
+  cornerstone.setViewport(element, viewport);
+});
 
-  // Call resize main on window resize
-  $(window).resize(function() {
-    resizeMain();
-  });
+$('#invert2').click(function (e) {
+  var viewport = cornerstone.getViewport(element2);
+  if (viewport.invert === true) {
+    viewport.invert = false;
+  } else {
+    viewport.invert = true;
+  }
+  cornerstone.setViewport(element2, viewport);
+});
 
-  // define other useful image display parameter functions (button activated)
-  $('#invert').click(function (e) {
-    var viewport = cornerstone.getViewport(element);
-    if (viewport.invert === true) {
-      viewport.invert = false;
-    } else {
-      viewport.invert = true;
+$('#interpolation2').click(function (e) {
+  var viewport = cornerstone.getViewport(element2);
+  if (viewport.pixelReplication === true) {
+    viewport.pixelReplication = false;
+  } else {
+    viewport.pixelReplication = true;
+  }
+  cornerstone.setViewport(element2, viewport);
+});
+
+$('#ww').click(function() {
+  if (ww.checked){
+    synchronizer2.add(element2);
+    ww.checked = true;
+    cornerstone.updateImage(element2);
+    $('.btn').removeClass('selected');
+    id_name = $('.btn1.selected').attr('id');
+    split = id_name.match(/[a-zA-Z]+|[0-9]+/g);
+    only_letters = "#" + split[0];
+    $(only_letters).addClass('selected');
+    if ($('#invert2').hasClass('selected')){
+      $('#invert').addClass('selected');
     }
-    cornerstone.setViewport(element, viewport);
-  });
+  } else {
+    synchronizer2.remove(element2);
+    ww.checked = false;
+  }
+});
 
-  $('#interpolation').click(function (e) {
-    var viewport = cornerstone.getViewport(element);
-    if (viewport.pixelReplication === true) {
-      viewport.pixelReplication = false;
-    } else {
-      viewport.pixelReplication = true;
+$('#zp').click(function() {
+  if (zp.checked){
+    synchronizer.add(element2);
+    zp.checked = true;
+    cornerstone.updateImage(element2);
+  } else {
+    synchronizer.remove(element2);
+    zp.checked = false;
+  }
+});
+
+$('#pos').click(function() {
+  if (pos.checked){
+    synchronizer3.add(element2);
+    pos.checked = true;
+    diff = stack2.currentImageIdIndex - stack.currentImageIdIndex;
+    cornerstoneTools.scroll(element, diff);
+  } else {
+    synchronizer3.remove(element2);
+    pos.checked = false;
+  }
+});
+
+$('.btn').on('click', function(){
+  if (ww.checked) {
+    $('.btn').removeClass('selected');
+    $('.btn1').removeClass('selected');
+    this_id = this.id;
+    split = this.id.match(/[a-zA-Z]+|[0-9]+/g);
+    only_letters = "#" + split[0];
+    sync_id = only_letters + 2;
+    $(only_letters).addClass('selected');
+    $(sync_id).addClass('selected');
+    if ($('#invert').hasClass('selected')){
+      $('#invert2').addClass('selected');
     }
-    cornerstone.setViewport(element, viewport);
-  });
+  } else {
+    $('.btn').removeClass('selected');
+    $(this).addClass('selected');
+  }
+});
 
-  $('#invert2').click(function (e) {
-    var viewport = cornerstone.getViewport(element2);
-    if (viewport.invert === true) {
-      viewport.invert = false;
-    } else {
-      viewport.invert = true;
+$('.btn1').on('click', function(){
+  if (ww.checked) {
+    $('.btn').removeClass('selected');
+    $('.btn1').removeClass('selected');
+    this_id = this.id;
+    split = this.id.match(/[a-zA-Z]+|[0-9]+/g);
+    only_letters = "#" + split[0];
+    sync_id = only_letters + 2;
+    $(only_letters).addClass('selected');
+    $(sync_id).addClass('selected');
+    if ($('#invert2').hasClass('selected')){
+      $('#invert').addClass('selected');
     }
-    cornerstone.setViewport(element2, viewport);
-  });
+  } else {
+    $('.btn1').removeClass('selected');
+    $(this).addClass('selected');
+  }
+});
 
-  $('#interpolation2').click(function (e) {
-    var viewport = cornerstone.getViewport(element2);
-    if (viewport.pixelReplication === true) {
-      viewport.pixelReplication = false;
-    } else {
-      viewport.pixelReplication = true;
-    }
-    cornerstone.setViewport(element2, viewport);
-  });
-
-  $('#ww').click(function() {
-    if (ww.checked){
-      synchronizer2.add(element2);
-      ww.checked = true;
-      cornerstone.updateImage(element2);
-      $('.btn').removeClass('selected');
-      id_name = $('.btn1.selected').attr('id');
-      split = id_name.match(/[a-zA-Z]+|[0-9]+/g);
-      only_letters = "#" + split[0];
-      $(only_letters).addClass('selected');
-      if ($('#invert2').hasClass('selected')){
-        $('#invert').addClass('selected');
-      }
-    } else {
-      synchronizer2.remove(element2);
-      ww.checked = false;
-    }
-  });
-
-  $('#zp').click(function() {
-    if (zp.checked){
-      synchronizer.add(element2);
-      zp.checked = true;
-      cornerstone.updateImage(element2);
-    } else {
-      synchronizer.remove(element2);
-      zp.checked = false;
-    }
-  });
-
-  $('#pos').click(function() {
-    if (pos.checked){
-      synchronizer3.add(element2);
-      pos.checked = true;
-      diff = stack2.currentImageIdIndex - stack.currentImageIdIndex;
-      cornerstoneTools.scroll(element, diff);
-    } else {
-      synchronizer3.remove(element2);
-      pos.checked = false;
-    }
-  });
-
-  $('.btn').on('click', function(){
-    if (ww.checked) {
-      $('.btn').removeClass('selected');
-      $('.btn1').removeClass('selected');
-      this_id = this.id;
-      split = this.id.match(/[a-zA-Z]+|[0-9]+/g);
-      only_letters = "#" + split[0];
-      sync_id = only_letters + 2;
-      $(only_letters).addClass('selected');
-      $(sync_id).addClass('selected');
-      if ($('#invert').hasClass('selected')){
-        $('#invert2').addClass('selected');
-      }
-    } else {
-      $('.btn').removeClass('selected');
-      $(this).addClass('selected');
-    }
-  });
-
-  $('.btn1').on('click', function(){
-    if (ww.checked) {
-      $('.btn').removeClass('selected');
-      $('.btn1').removeClass('selected');
-      this_id = this.id;
-      split = this.id.match(/[a-zA-Z]+|[0-9]+/g);
-      only_letters = "#" + split[0];
-      sync_id = only_letters + 2;
-      $(only_letters).addClass('selected');
-      $(sync_id).addClass('selected');
-      if ($('#invert2').hasClass('selected')){
-        $('#invert').addClass('selected');
-      }
-    } else {
-      $('.btn1').removeClass('selected');
-      $(this).addClass('selected');
-    }
-  });
-
-  $('.btn_invert').on('click', function(){
-    if (ww.checked) {
-      $('#invert').toggleClass('selected');
-      $('#invert2').toggleClass('selected');
-    } else {
-      $(this).toggleClass('selected');
-    }
-  });
-
-  $('.btn_interp').on('click', function(){
+$('.btn_invert').on('click', function(){
+  if (ww.checked) {
+    $('#invert').toggleClass('selected');
+    $('#invert2').toggleClass('selected');
+  } else {
     $(this).toggleClass('selected');
-  });
-
-  function onImageLoaded(){
-    loading_index = loading_index + 1;
-    var elem = document.getElementById("myBar");
-    var width = Math.floor((loading_index/(slices*2))*100);
-    elem.style.width = width + '%';
-    document.getElementById("label").innerHTML = width + '%';
   }
+});
 
-  // study progress update function
-  function study_progress() {
-    document.getElementById("study_label").innerHTML = "Study Progress: " + study_index + '/' + total_cases;
-  }
+$('.btn_interp').on('click', function(){
+  $(this).toggleClass('selected');
+});
 
-  </script>
-  </html>
+function onImageLoaded(){
+  loading_index = loading_index + 1;
+  var elem = document.getElementById("myBar");
+  var width = Math.floor((loading_index/(slices*2))*100);
+  elem.style.width = width + '%';
+  document.getElementById("label").innerHTML = width + '%';
+}
 
-  <?php ob_end_flush(); ?>
+// study progress update function
+function study_progress() {
+  document.getElementById("study_label").innerHTML = "Study Progress: " + study_index + '/' + total_cases;
+}
+
+</script>
+</html>
+
+<?php ob_end_flush(); ?>
