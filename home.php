@@ -574,7 +574,7 @@ function onNewImage2(e, data) {
 function write_to_db(choice){
 
   // post selection to server side database
-  $.ajax({
+  var b = $.ajax({
     type: 'POST',
     url: './db/selection.php',
     data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num, ss:slices},
@@ -595,7 +595,8 @@ function write_to_db(choice){
 
     }
 
-  }).done(loadAndDisplayImages());
+  });
+  b.done(loadAndDisplayImages());
 
 }
 
