@@ -54,6 +54,6 @@ $slices= $_POST['ss'];
 //     }
 //   }
 // }
-echo $choice
+echo $left_side
 // mysql_close($con);
 ?>
