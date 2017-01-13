@@ -570,31 +570,6 @@ function onNewImage2(e, data) {
 // define user image mafc selection callback functions
 function write_to_db(choice){
 
-  // var ajax=new XMLHttpRequest();
-  //
-  // ajax.onreadystatechange=function()
-  // {
-  //   if (ajax.readyState==4 && ajax.status==200)
-  //   {
-  //
-  //
-  //     alert('It worked!');
-  //
-      //clear cache
-      // cornerstone.imageCache.purgeCache();
-      // loading_index = 0;
-  //     //
-  //     // //start the next mafc user selection
-  //     // loadAndDisplayImages();
-  //
-  //   }
-  // }
-  //
-  // ajax.open("POST",'./db/selection.php',true)
-  // ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  // var all_data = "choice=" + choice + "left_side=" + left_side + "right_side=" + right_side + "left_small=" + left_small + "studyIndex=" + study_index + "userId" + userId + "case_num" + case_num;
-  // ajax.send(all_data);
-
   // post selection to server side database
   $.ajax({
     type: 'POST',
@@ -602,39 +577,22 @@ function write_to_db(choice){
     data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num, ss:slices},
     success: function(response){
       alert(response);
-      // left_side = response.left_side;
-      // right_side = response.right_side;
-      // left_small = response.left_small;
-      // slices = response.slices;
-      //
-      // study_index = study_index + 1;
-      // //clear cache
-      // cornerstone.imageCache.purgeCache();
-      // loading_index = 0;
-      // loadAndDisplayImages();
+
+      left_side = response.left_side;
+      right_side = response.right_side;
+      left_small = response.left_small;
+      slices = response.slices;
+
+      study_index = study_index + 1;
+      //clear cache
+      cornerstone.imageCache.purgeCache();
+      loading_index = 0;
+      loadAndDisplayImages();
 
     }
 
   });
 
-  //
-  // // step to the next image datasets
-  // study_index = study_index + 1;
-  // <?php
-  // // post selection to server side database
-  // $query = "INSERT INTO `".$idname."`(fnl,fnr,choice,slices) VALUES('$fnl','$fnr',0,'$slices')";
-  // $res = mysql_query($query);
-  //
-  // //update user database study index
-  // $query = "INSERT INTO users(study_index) VALUES($study_index)";
-  // $res = mysql_query($query);
-  // ?>
-  // //clear cache
-  // cornerstone.imageCache.purgeCache();
-  // loading_index = 0;
-  //
-  // //start the next mafc user selection
-  // loadAndDisplayImages();
 }
 
 function write_to_db2(){
