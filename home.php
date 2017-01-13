@@ -357,7 +357,6 @@ $(element2).on("CornerstoneImageRendered", onViewportUpdated2);
 
 // create listeners for new images (i.e. images within stack)
 $(element).on("CornerstoneNewImage", onNewImage);
-$(element2).on("CornerstoneNewImage", onNewImage2);
 
 // create synchronizers for wwwc and pan/zoom across the two displayed images
 var synchronizer = new cornerstoneTools.Synchronizer("CornerstoneImageRendered", cornerstoneTools.panZoomSynchronizer);
@@ -547,16 +546,12 @@ function onViewportUpdated2(e, data) {
 // define new image callback functions (i.e. slice scrolling)
 function onNewImage(e, data) {
   var newImageIdIndex = stack.currentImageIdIndex;
+  var newImageIdIndex2 = stack2.currentImageIdIndex;
   // Populate the current slice span
   var currentValueSpan = document.getElementById("topright");
   currentValueSpan.textContent = "Image " + (newImageIdIndex + 1) + "/" + imageIds1.length;
-}
-
-function onNewImage2(e, data) {
-  var newImageIdIndex = stack2.currentImageIdIndex;
-  // Populate the current slice span
-  var currentValueSpan = document.getElementById("topright2");
-  currentValueSpan.textContent = "Image " + (newImageIdIndex + 1) + "/" + imageIds2.length;
+  var currentValueSpan2 = document.getElementById("topright2");
+  currentValueSpan2.textContent = "Image " + (newImageIdIndex2 + 1) + "/" + imageIds2.length;
 }
 
 // define user image mafc selection callback functions
