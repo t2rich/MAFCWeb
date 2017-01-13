@@ -54,6 +54,6 @@ $case_num = $_POST['cn'];
 //   }
 // }
 //
-return($_POST)
+echo $choice
 // mysql_close($con);
 ?>
