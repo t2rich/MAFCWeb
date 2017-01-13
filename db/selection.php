@@ -49,8 +49,7 @@ if($pre_res){
               $left_side = $large_dir;
               $right_side = $small_dir;
             }
-            echo $left_side;
-        //     echo json_encode(array("left_side"=>$left_side,"right_side"=>$right_side,"left_small"=>$left_small,"slices"=>$slices));
+            echo json_encode(array("left_side"=>$left_side,"right_side"=>$right_side,"left_small"=>$left_small,"slices"=>$slices));
       }
     }
   }
