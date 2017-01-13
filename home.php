@@ -357,7 +357,7 @@ $(element2).on("CornerstoneImageRendered", onViewportUpdated2);
 
 // create listeners for new images (i.e. images within stack)
 $(element).on("CornerstoneNewImage", onNewImage);
-$(element2).on("CornerstoneNewImage", onNewImage);
+$(element2).on("CornerstoneNewImage", onNewImage2);
 
 // create synchronizers for wwwc and pan/zoom across the two displayed images
 var synchronizer = new cornerstoneTools.Synchronizer("CornerstoneImageRendered", cornerstoneTools.panZoomSynchronizer);
@@ -400,7 +400,7 @@ function loadAndDisplayImages() {
     };
 
     onNewImage();
-    
+
     // Set the stack as tool state
     cornerstoneTools.addStackStateManager(element, ['stack']);
     cornerstoneTools.addToolState(element, 'stack', stack);
@@ -471,7 +471,7 @@ function loadAndDisplayImages() {
       imageIds: imageIds2
     };
 
-    onNewImage();
+    onNewImage2();
 
     // Set the stack as tool state
     cornerstoneTools.addStackStateManager(element2, ['stack']);
@@ -550,15 +550,20 @@ function onViewportUpdated2(e, data) {
 
 // define new image callback functions (i.e. slice scrolling)
 function onNewImage(e, data) {
-  if (data.element.id == "image1"){
+
     var newImageIdIndex = stack.currentImageIdIndex;
     var currentValueSpan = document.getElementById("topright");
     currentValueSpan.textContent = "Image " + (newImageIdIndex + 1) + "/" + imageIds1.length;
-  }else{
+
+}
+
+// define new image callback functions (i.e. slice scrolling)
+function onNewImage2(e, data) {
+
     var newImageIdIndex2 = stack2.currentImageIdIndex;
     var currentValueSpan2 = document.getElementById("topright2");
     currentValueSpan2.textContent = "Image " + (newImageIdIndex2 + 1) + "/" + imageIds2.length;
-  }
+
 }
 
 // define user image mafc selection callback functions
