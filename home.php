@@ -579,6 +579,9 @@ function write_to_db(choice){
     url: './db/selection.php',
     data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num, ss:slices},
     success: function(json_response){
+      if(study_index == total_cases){
+        alert("Study is complete. Thank you for your participation!")
+      } else {
       response = jQuery.parseJSON(json_response);
       left_side = response.left_side;
       right_side = response.right_side;
@@ -593,7 +596,7 @@ function write_to_db(choice){
       imageIds1 = [];
       imageIds2 = [];
       loadAndDisplayImages();
-
+    }
     }
   });
 
