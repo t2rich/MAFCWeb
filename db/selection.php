@@ -1,15 +1,15 @@
 <?php
 
-// //unpack data from post request
-//
-// $choice = $_POST['choice'];
-// $left_side = $_POST['left_side'];
-// $right_side = $_POST['right_side'];
-// $left_small = $_POST['left_small'];
-// $studyIndex = $_POST['studyIndex'];
-// $userId = $_POST['userId'];
-// $case_num = $_POST['case_num'];
-//
+//unpack data from post request
+
+$choice = $_POST['choice'];
+$left_side = $_POST['left_side'];
+$right_side = $_POST['right_side'];
+$left_small = $_POST['left_small'];
+$studyIndex = $_POST['studyIndex'];
+$userId = $_POST['userId'];
+$case_num = $_POST['case_num'];
+
 $con = mysql_connect("localhost","web_user","railabs");
 
 if (!$con)
