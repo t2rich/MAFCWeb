@@ -305,6 +305,7 @@ Image Load Progress
 <script>
 
 var loading_index = 0;
+var sync_check = 0;
 
 var userId = "<?php echo $idname; ?>";
 
@@ -373,7 +374,7 @@ study_progress();
 
 // define all inline functions
 function loadAndDisplayImages() {
-
+  sync_check = 0;
   study_progress();
 
   // check current study index
@@ -573,10 +574,9 @@ function onNewImage2(e, data) {
 function write_to_db(choice){
 
   // post selection to server side database
-  $.ajax({
+  var b = $.ajax({
     type: 'POST',
     url: './db/selection.php',
-    async: false,
     data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num, ss:slices},
     success: function(response){
 
@@ -591,11 +591,12 @@ function write_to_db(choice){
       loading_index = 0;
       imageIds1 = [];
       imageIds2 = [];
-
+      sync_check = 1;
 
     }
 
   });
+
         loadAndDisplayImages();
 }
 
