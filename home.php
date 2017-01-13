@@ -488,6 +488,8 @@ function write_to_db(choice){
         loading_index = 0;
         imageIds1 = [];
         imageIds2 = [];
+        cornerstoneTools.getElementToolStateManager(element).toolState.stack = [];
+        cornerstoneTools.getElementToolStateManager(element2).toolState.stack = [];
         loadAndDisplayImages();
       }
     }
