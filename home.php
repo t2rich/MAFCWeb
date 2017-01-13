@@ -357,6 +357,7 @@ $(element2).on("CornerstoneImageRendered", onViewportUpdated2);
 
 // create listeners for new images (i.e. images within stack)
 $(element).on("CornerstoneNewImage", onNewImage);
+$(element2).on("CornerstoneNewImage", onNewImage);
 
 // create synchronizers for wwwc and pan/zoom across the two displayed images
 var synchronizer = new cornerstoneTools.Synchronizer("CornerstoneImageRendered", cornerstoneTools.panZoomSynchronizer);
