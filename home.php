@@ -593,7 +593,7 @@ function write_to_db(choice){
       imageIds2 = [];
       sync_check = 1;
 
-    }
+    },
     complete: function(){loadAndDisplayImages()}
   });
 
