@@ -384,14 +384,14 @@ function loadAndDisplayImages() {
     imageIds1[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name + '/' + 'Instance_' + (i+1);
   };
 
-  // update stack info
-  stack = {
-    currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
-    imageIds: imageIds1
-  };
-
   // function used to display images
   loadAll(imageIds1).then(function(image) {
+
+    // update stack info
+    stack = {
+      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
+      imageIds: imageIds1
+    };
 
     // log full image data to browser log
     console.log(image);
@@ -454,14 +454,14 @@ function loadAndDisplayImages() {
     imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name2 + '/' + 'Instance_' + (i+1);
   };
 
-  // update stack info
-  stack2 = {
-    currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
-    imageIds: imageIds2
-  };
-
   // function used to display images
   loadAll(imageIds2).then(function(image2) {
+
+    // update stack info
+    stack2 = {
+      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
+      imageIds: imageIds2
+    };
 
     // log full image data to browser log
     console.log(image2);
