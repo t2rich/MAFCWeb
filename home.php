@@ -244,9 +244,6 @@ var stack2 = {currentImageIdIndex : 0, imageIds: imageIds2};
 var element = cornerstone.enable(document.getElementById('image1'));
 var element2 = cornerstone.enable(document.getElementById('image2'));
 
-cornerstoneTools.addStackStateManager(element, ['stack']);
-cornerstoneTools.addStackStateManager(element2, ['stack']);
-
 // Image loading events are bound to the cornerstone object, not the element
 $(cornerstone).on("CornerstoneImageLoaded", onImageLoaded);
 
@@ -293,6 +290,7 @@ function loadAndDisplayImages() {
     };
 
     // update tool state
+    cornerstoneTools.addStackStateManager(element, ['stack']);
     cornerstoneTools.addToolState(element, 'stack', stack);
 
     // log full image data to browser
@@ -360,6 +358,7 @@ function loadAndDisplayImages() {
       };
 
       // update tool state
+      cornerstoneTools.addStackStateManager(element2, ['stack']);
       cornerstoneTools.addToolState(element2, 'stack', stack2);
 
       // log full image data to browser log
