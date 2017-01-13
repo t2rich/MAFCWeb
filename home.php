@@ -399,6 +399,8 @@ function loadAndDisplayImages() {
       imageIds: imageIds1
     };
 
+    onNewImage();
+    
     // Set the stack as tool state
     cornerstoneTools.addStackStateManager(element, ['stack']);
     cornerstoneTools.addToolState(element, 'stack', stack);
@@ -468,6 +470,8 @@ function loadAndDisplayImages() {
       currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
       imageIds: imageIds2
     };
+
+    onNewImage();
 
     // Set the stack as tool state
     cornerstoneTools.addStackStateManager(element2, ['stack']);
