@@ -382,8 +382,8 @@ function loadAndDisplayImages() {
       //cornerstoneTools.stackPrefetch.enable(element2);
 
       // add displayed image to synchronizers (wwwc and pan/zoom)
-      if(ww.checked){synchronizer.add(element2);}
-      if(zp.checked){synchronizer2.add(element2);}
+      if(ww.checked){synchronizer2.add(element2);}
+      if(zp.checked){synchronizer.add(element2);}
       if(pos.checked){synchronizer3.add(element2);}
 
 
