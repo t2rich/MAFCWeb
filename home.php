@@ -382,9 +382,10 @@ function loadAndDisplayImages() {
       //cornerstoneTools.stackPrefetch.enable(element2);
 
       // add displayed image to synchronizers (wwwc and pan/zoom)
-      synchronizer.add(element2);
-      synchronizer2.add(element2);
-      synchronizer3.add(element2);
+      if(ww.checked){synchronizer.add(element2);}
+      if(zp.checked){synchronizer2.add(element2);}
+      if(pos.checked){synchronizer3.add(element2);}
+
 
       // Add event handlers for the ww/wc presets
       $('#softTissue2').click(function(e) {
@@ -771,6 +772,18 @@ function loadAndDisplayImages() {
 
   // study progress update function
   function study_progress() {
+    document.getElementById("study_label").innerHTML = "Study Progress: " + study_index + '/' + total_cases;
+  }
+
+  function ww_func() {
+    document.getElementById("study_label").innerHTML = "Study Progress: " + study_index + '/' + total_cases;
+  }
+
+  function zp_func() {
+    document.getElementById("study_label").innerHTML = "Study Progress: " + study_index + '/' + total_cases;
+  }
+
+  function pos_func() {
     document.getElementById("study_label").innerHTML = "Study Progress: " + study_index + '/' + total_cases;
   }
 
