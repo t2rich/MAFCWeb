@@ -487,6 +487,10 @@ function write_to_db(choice){
         loading_index = 0;
         imageIds1 = [];
         imageIds2 = [];
+        cornerstoneTools.removeStackStateManager(element2, ['stack']);
+        cornerstoneTools.removeToolState(element2, 'stack', stack2);
+        cornerstoneTools.removeStackStateManager(element, ['stack']);
+        cornerstoneTools.removeToolState(element, 'stack', stack);
         loadAndDisplayImages();
       }
     }
