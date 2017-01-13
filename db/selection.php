@@ -20,9 +20,9 @@ if (!$con)
 
 mysql_select_db("mafc", $con);
 
-$query = "UPDATE `".$userId."` SET case_num='$case_num', left_small='$left_small', choice='$choice', small_dir='$small_dir', large_dir='$large_dir', slices='$slices' WHERE case_num='$case_num'";
+$query = "UPDATE `".$userId."` SET case_num=$case_num, left_small=$left_small, choice=$choice, small_dir=$small_dir, large_dir=$large_dir, slices=$slices WHERE case_num='$case_num'";
 
-$pre_res = mysql_query($query);
+// $pre_res = mysql_query($query);
 
 // if($pre_res){
 //   $studyIndex = $studyIndex + 1;
@@ -54,6 +54,6 @@ $pre_res = mysql_query($query);
 //     }
 //   }
 // }
-echo $pre_res
+echo $query
 mysql_close($con);
 ?>
