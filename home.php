@@ -344,6 +344,10 @@ var stack2 = {
   imageIds: imageIds2
 };
 
+// enablee the html divs to hold cornerstone dicom images
+var element = cornerstone.enable(document.getElementById('image1'));
+var element2 = cornerstone.enable(document.getElementById('image2'));
+
 // Set the stack as tool state
 cornerstoneTools.addStackStateManager(element, ['stack']);
 cornerstoneTools.addToolState(element, 'stack', stack);
@@ -351,10 +355,6 @@ cornerstoneTools.addToolState(element, 'stack', stack);
 // Set the stack as tool state
 cornerstoneTools.addStackStateManager(element2, ['stack']);
 cornerstoneTools.addToolState(element2, 'stack', stack2);
-
-// enablee the html divs to hold cornerstone dicom images
-var element = cornerstone.enable(document.getElementById('image1'));
-var element2 = cornerstone.enable(document.getElementById('image2'));
 
 // Image loading events are bound to the cornerstone object, not the element
 $(cornerstone).on("CornerstoneImageLoaded", onImageLoaded);
