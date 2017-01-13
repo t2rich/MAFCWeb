@@ -553,7 +553,7 @@ function onNewImage(e, data) {
 }
 
 function onNewImage2(e, data) {
-  var newImageIdIndex = stack.currentImageIdIndex;
+  var newImageIdIndex = stack2.currentImageIdIndex;
   // Populate the current slice span
   var currentValueSpan = document.getElementById("topright2");
   currentValueSpan.textContent = "Image " + (newImageIdIndex + 1) + "/" + imageIds2.length;
