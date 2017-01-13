@@ -10,18 +10,18 @@ $studyIndex = $_POST['studyIndex'];
 $userId = $_POST['userId'];
 $case_num = $_POST['case_num'];
 
-$con = mysql_connect("localhost","web_user","railabs");
-
-if (!$con)
-{
-  die('Could not connect: ' . mysql_error());
-}
-
-mysql_select_db("mafc", $con);
-
-$query = "INSERT INTO `".$userId."` (case_num, left_small, choice, small_dir, large_dir, slices) VALUES ($case_num,$left_small,$choice,$left_side,$right_side,$slices);";
-
-$pre_res = mysql_query($query);
+// $con = mysql_connect("localhost","web_user","railabs");
+//
+// if (!$con)
+// {
+//   die('Could not connect: ' . mysql_error());
+// }
+//
+// mysql_select_db("mafc", $con);
+//
+// $query = "INSERT INTO `".$userId."` (case_num, left_small, choice, small_dir, large_dir, slices) VALUES ($case_num,$left_small,$choice,$left_side,$right_side,$slices);";
+//
+// $pre_res = mysql_query($query);
 //
 // if($pre_res){
 //   $studyIndex = $studyIndex + 1;
@@ -54,6 +54,6 @@ $pre_res = mysql_query($query);
 //   }
 // }
 //
-return($pre_res)
+return($userId)
 mysql_close($con);
 ?>
