@@ -391,7 +391,7 @@ function loadAndDisplayImages() {
   };
 
   // function used to display images
-  loadAll(imageIds1).done(function(image) {
+  loadAll(imageIds1).then(function(image) {
 
     // log full image data to browser log
     console.log(image);
@@ -444,76 +444,74 @@ function loadAndDisplayImages() {
       cornerstone.setViewport(element, viewport);
     });
 
+  });
 
+  // check current study index
+  var image_name2 = right_side;
 
-    // check current study index
-    var image_name2 = right_side;
+  //load dicom images (Instance_*) within image_number* folder
+  for (i = 0; i < slices; i++) {
+    imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name2 + '/' + 'Instance_' + (i+1);
+  };
 
-    //load dicom images (Instance_*) within image_number* folder
-    for (i = 0; i < slices; i++) {
-      imageIds2[i] = 'wadouri:http://colab-sbx-245.oit.duke.edu/all_images/' + image_name2 + '/' + 'Instance_' + (i+1);
-    };
+  // update stack info
+  stack2 = {
+    currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
+    imageIds: imageIds2
+  };
 
-    // update stack info
-    stack2 = {
-      currentImageIdIndex : Math.floor(slices/2), //Default to middle slice
-      imageIds: imageIds2
-    };
+  // function used to display images
+  loadAll(imageIds2).then(function(image2) {
 
-    // function used to display images
-    loadAll(imageIds2).then(function(image2) {
+    // log full image data to browser log
+    console.log(image2);
 
-      // log full image data to browser log
-      console.log(image2);
+    //display image
+    cornerstone.displayImage(element2, image2);
 
-      //display image
-      cornerstone.displayImage(element2, image2);
+    // Set the stack as tool state
+    cornerstoneTools.addStackStateManager(element2, ['stack']);
+    cornerstoneTools.addToolState(element2, 'stack', stack2);
 
-      // Set the stack as tool state
-      cornerstoneTools.addStackStateManager(element2, ['stack']);
-      cornerstoneTools.addToolState(element2, 'stack', stack2);
+    // set image overlay properites and values
+    var viewport2 = cornerstone.getViewport(element2);
+    $('#bottomright2').text("Zoom: " + viewport2.scale.toFixed(2) + "x");
+    $('#bottomleft2').text("WW/WC:" + Math.round(viewport2.voi.windowWidth) + "/" + Math.round(viewport2.voi.windowCenter));
 
-      // set image overlay properites and values
-      var viewport2 = cornerstone.getViewport(element2);
-      $('#bottomright2').text("Zoom: " + viewport2.scale.toFixed(2) + "x");
-      $('#bottomleft2').text("WW/WC:" + Math.round(viewport2.voi.windowWidth) + "/" + Math.round(viewport2.voi.windowCenter));
+    // enable and bind user input to mouse buttons and movement
+    cornerstoneTools.mouseInput.enable(element2);
+    cornerstoneTools.mouseWheelInput.enable(element2);
+    cornerstoneTools.wwwc.activate(element2, 1);
+    cornerstoneTools.pan.activate(element2, 2);
+    cornerstoneTools.zoom.activate(element2, 4);
+    cornerstoneTools.stackScrollWheel.activate(element2);
+    //cornerstoneTools.stackPrefetch.enable(element2);
 
-      // enable and bind user input to mouse buttons and movement
-      cornerstoneTools.mouseInput.enable(element2);
-      cornerstoneTools.mouseWheelInput.enable(element2);
-      cornerstoneTools.wwwc.activate(element2, 1);
-      cornerstoneTools.pan.activate(element2, 2);
-      cornerstoneTools.zoom.activate(element2, 4);
-      cornerstoneTools.stackScrollWheel.activate(element2);
-      //cornerstoneTools.stackPrefetch.enable(element2);
+    // add displayed image to synchronizers (wwwc and pan/zoom)
+    synchronizer.add(element2);
+    synchronizer2.add(element2);
+    synchronizer3.add(element2);
 
-      // add displayed image to synchronizers (wwwc and pan/zoom)
-      synchronizer.add(element2);
-      synchronizer2.add(element2);
-      synchronizer3.add(element2);
+    // Add event handlers for the ww/wc presets
+    $('#softTissue2').click(function(e) {
+      var viewport = cornerstone.getViewport(element2);
+      viewport.voi.windowWidth = 400;
+      viewport.voi.windowCenter = 20;
+      cornerstone.setViewport(element2, viewport);
+    });
 
-      // Add event handlers for the ww/wc presets
-      $('#softTissue2').click(function(e) {
-        var viewport = cornerstone.getViewport(element2);
-        viewport.voi.windowWidth = 400;
-        viewport.voi.windowCenter = 20;
-        cornerstone.setViewport(element2, viewport);
-      });
+    $('#lung2').click(function(e) {
+      var viewport = cornerstone.getViewport(element2);
+      viewport.voi.windowWidth = 1600;
+      viewport.voi.windowCenter = -600;
+      cornerstone.setViewport(element2, viewport);
+    });
 
-      $('#lung2').click(function(e) {
-        var viewport = cornerstone.getViewport(element2);
-        viewport.voi.windowWidth = 1600;
-        viewport.voi.windowCenter = -600;
-        cornerstone.setViewport(element2, viewport);
-      });
-
-      $('#bone2').click(function(e) {
-        var viewport = cornerstone.getViewport(element2);
-        viewport.voi.windowWidth = 2000;
-        viewport.voi.windowCenter = 300;
-        cornerstone.setViewport(element2, viewport);
-      });
-
+    $('#bone2').click(function(e) {
+      var viewport = cornerstone.getViewport(element2);
+      viewport.voi.windowWidth = 2000;
+      viewport.voi.windowCenter = 300;
+      cornerstone.setViewport(element2, viewport);
     });
 
   });
