@@ -430,12 +430,95 @@ function loadAndDisplayImages() {
     var viewport = data.viewport;
     $('#bottomleft').text("WW/WC: " + Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter));
     $('#bottomright').text("Zoom: " + viewport.scale.toFixed(2) + "x");
+
+    var setting = $('.btn.selected').attr('id');
+    if (ww.checked) {
+      // look at current wl button selection
+      if (setting == "bone"){
+        if (Math.round(viewport.voi.windowWidth) != 2000 || Math.round(viewport.voi.windowCenter != 300)){
+          $('.btn').removeClass('selected');
+          $('.btn1').removeClass('selected');
+        }
+      }
+      else if (setting == "lung"){
+        if (Math.round(viewport.voi.windowWidth) != 1600 || Math.round(viewport.voi.windowCenter != -600)){
+          $('.btn').removeClass('selected');
+          $('.btn1').removeClass('selected');
+        }
+      }
+      else if (setting == "softTissue"){
+        if (Math.round(viewport.voi.windowWidth) != 400 || Math.round(viewport.voi.windowCenter != 20)){
+          $('.btn').removeClass('selected');
+          $('.btn1').removeClass('selected');
+        }
+      }
+
+    } else {
+      if (setting == "bone"){
+        if (Math.round(viewport.voi.windowWidth) != 2000 || Math.round(viewport.voi.windowCenter != 300)){
+          $('.btn').removeClass('selected');
+        }
+      }
+      else if (setting == "lung"){
+        if (Math.round(viewport.voi.windowWidth) != 1600 || Math.round(viewport.voi.windowCenter != -600)){
+          $('.btn').removeClass('selected');
+        }
+      }
+      else if (setting == "softTissue"){
+        if (Math.round(viewport.voi.windowWidth) != 400 || Math.round(viewport.voi.windowCenter != 20)){
+          $('.btn').removeClass('selected');
+        }
+      }
+    }
+
   };
 
   function onViewportUpdated2(e, data) {
     var viewport = data.viewport;
     $('#bottomleft2').text("WW/WC: " + Math.round(viewport.voi.windowWidth) +"/" + Math.round(viewport.voi.windowCenter));
     $('#bottomright2').text("Zoom: " + viewport.scale.toFixed(2) + "x");
+
+    var setting = $('.btn1.selected').attr('id');
+    if (ww.checked) {
+      // look at current wl button selection
+      if (setting == "bone2"){
+        if (Math.round(viewport.voi.windowWidth) != 2000 || Math.round(viewport.voi.windowCenter != 300)){
+          $('.btn').removeClass('selected');
+          $('.btn1').removeClass('selected');
+        }
+      }
+      else if (setting == "lung2"){
+        if (Math.round(viewport.voi.windowWidth) != 1600 || Math.round(viewport.voi.windowCenter != -600)){
+          $('.btn').removeClass('selected');
+          $('.btn1').removeClass('selected');
+        }
+      }
+      else if (setting == "softTissue2"){
+        if (Math.round(viewport.voi.windowWidth) != 400 || Math.round(viewport.voi.windowCenter != 20)){
+          $('.btn').removeClass('selected');
+          $('.btn1').removeClass('selected');
+        }
+      }
+
+    } else {
+      if (setting == "bone2"){
+        if (Math.round(viewport.voi.windowWidth) != 2000 || Math.round(viewport.voi.windowCenter != 300)){
+          $('.btn1').removeClass('selected');
+        }
+      }
+      else if (setting == "lung2"){
+        if (Math.round(viewport.voi.windowWidth) != 1600 || Math.round(viewport.voi.windowCenter != -600)){
+          $('.btn1').removeClass('selected');
+        }
+      }
+      else if (setting == "softTissue2"){
+        if (Math.round(viewport.voi.windowWidth) != 400 || Math.round(viewport.voi.windowCenter != 20)){
+          $('.btn1').removeClass('selected');
+        }
+      }
+    }
+
+
   };
 
   // define new image callback functions (i.e. slice scrolling)
