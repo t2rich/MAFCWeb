@@ -54,6 +54,6 @@ $slices= $_POST['ss'];
 //     }
 //   }
 // }
-echo $choice
+echo $userId
 // mysql_close($con);
 ?>
