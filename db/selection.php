@@ -41,7 +41,7 @@ if($pre_res){
             $large_dir = $userRow3['large_dir'];
             $slices = $userRow3['slices'];
             $left_small = rand(0,1);
-
+            echo $left_small;
             if ($left_small) {
               $left_side = $small_dir;
               $right_side = $large_dir;
@@ -49,7 +49,7 @@ if($pre_res){
               $left_side = $large_dir;
               $right_side = $large_dir;
             }
-            echo "round5";
+
         //     echo json_encode(array("left_side"=>$left_side,"right_side"=>$right_side,"left_small"=>$left_small,"slices"=>$slices));
       }
     }
