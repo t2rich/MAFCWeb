@@ -391,7 +391,7 @@ function loadAndDisplayImages() {
   };
 
   // function used to display images
-  loadAll(imageIds1).then(function(image) {
+  image = loadAll(imageIds1);
 
     // log full image data to browser log
     console.log(image);
@@ -444,7 +444,6 @@ function loadAndDisplayImages() {
       cornerstone.setViewport(element, viewport);
     });
 
-  });
 
   // check current study index
   var image_name2 = right_side;
@@ -461,7 +460,7 @@ function loadAndDisplayImages() {
   };
 
   // function used to display images
-  loadAll(imageIds2).then(function(image2) {
+  image2 = loadAll(imageIds2);
 
     // log full image data to browser log
     console.log(image2);
@@ -513,8 +512,6 @@ function loadAndDisplayImages() {
       viewport.voi.windowCenter = 300;
       cornerstone.setViewport(element2, viewport);
     });
-
-  });
 
 };
 
