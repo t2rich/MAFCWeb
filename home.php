@@ -348,14 +348,6 @@ var stack2 = {
 var element = cornerstone.enable(document.getElementById('image1'));
 var element2 = cornerstone.enable(document.getElementById('image2'));
 
-// Set the stack as tool state
-cornerstoneTools.addStackStateManager(element, ['stack']);
-cornerstoneTools.addToolState(element, 'stack', stack);
-
-// Set the stack as tool state
-cornerstoneTools.addStackStateManager(element2, ['stack']);
-cornerstoneTools.addToolState(element2, 'stack', stack2);
-
 // Image loading events are bound to the cornerstone object, not the element
 $(cornerstone).on("CornerstoneImageLoaded", onImageLoaded);
 
@@ -406,6 +398,10 @@ function loadAndDisplayImages() {
 
     //display image
     cornerstone.displayImage(element, image);
+
+    // Set the stack as tool state
+    cornerstoneTools.addStackStateManager(element, ['stack']);
+    cornerstoneTools.addToolState(element, 'stack', stack);
 
     // set image overlay properites and values
     var viewport = cornerstone.getViewport(element);
@@ -472,6 +468,10 @@ function loadAndDisplayImages() {
 
     //display image
     cornerstone.displayImage(element2, image2);
+
+    // Set the stack as tool state
+    cornerstoneTools.addStackStateManager(element2, ['stack2']);
+    cornerstoneTools.addToolState(element2, 'stack2', stack2);
 
     // set image overlay properites and values
     var viewport2 = cornerstone.getViewport(element2);
