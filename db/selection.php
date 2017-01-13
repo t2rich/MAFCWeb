@@ -15,6 +15,7 @@ $con = mysql_connect("localhost","web_user","railabs");
 
 if (!$con)
 {
+  echo "Could not connect"
   die('Could not connect: ' . mysql_error());
 }
 
