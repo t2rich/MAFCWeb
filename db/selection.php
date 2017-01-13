@@ -2,13 +2,13 @@
 
 //unpack data from post request
 
-$choice = $_POST['choice'];
-$left_side = $_POST['left_side'];
-$right_side = $_POST['right_side'];
-$left_small = $_POST['left_small'];
-$studyIndex = $_POST['studyIndex'];
-$userId = $_POST['userId'];
-$case_num = $_POST['case_num'];
+$choice = $_POST['c'];
+$left_side = $_POST['ls'];
+$right_side = $_POST['rs'];
+$left_small = $_POST['small'];
+$studyIndex = $_POST['si'];
+$userId = $_POST['id'];
+$case_num = $_POST['cn'];
 
 // $con = mysql_connect("localhost","web_user","railabs");
 //
