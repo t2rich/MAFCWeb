@@ -488,14 +488,8 @@ function write_to_db(choice){
         loading_index = 0;
         imageIds1 = [];
         imageIds2 = [];
-        var toolStateManager = cornerstoneTools.getElementToolStateManager(element);
-        // Note that this only works on ImageId-specific tool state managers (for now)
-        toolStateManager.clear(element)
-        cornerstone.updateImage(element);
-        var toolStateManager2 = cornerstoneTools.getElementToolStateManager(element2);
-        // Note that this only works on ImageId-specific tool state managers (for now)
-        toolStateManager2.clear(element2)
-        cornerstone.updateImage(element2);
+        cornerstoneTools.clearToolState(element,'stack')
+        cornerstoneTools.clearToolState(element2,'stack')
         loadAndDisplayImages();
       }
     }
