@@ -391,7 +391,7 @@ function loadAndDisplayImages() {
   };
 
   // function used to display images
-  loadAll(imageIds1).then(function(image) {
+  loadAll(imageIds1).done(function(image) {
 
     // log full image data to browser log
     console.log(image);
@@ -515,7 +515,9 @@ function loadAndDisplayImages() {
       });
 
     });
+
   });
+
 };
 
 // load all stack images before displaying any single one
