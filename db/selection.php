@@ -15,7 +15,6 @@ $con = mysql_connect("localhost","web_user","railabs");
 
 if (!$con)
 {
-  echo "Could not connect"
   die('Could not connect: ' . mysql_error());
 }
 
@@ -56,5 +55,5 @@ $query = "UPDATE `".$userId."` SET case_num=$case_num, left_small=$left_small, c
 //   }
 // }
 echo $query
-mysql_close($con);
+// mysql_close($con);
 ?>
