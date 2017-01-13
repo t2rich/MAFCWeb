@@ -25,8 +25,8 @@ $pre_res = mysql_query($query);
 
 if($pre_res){
   $studyIndex = $studyIndex + 1;
-  // $res=mysql_query("UPDATE users SET studyIndex=$studyIndex WHERE userId=$userId;");
-  // if($res){
+  $res=mysql_query("UPDATE users SET studyIndex=$studyIndex WHERE userId=$userId;");
+  if($res){
   //   $res2=mysql_query("SELECT * FROM `".$userId."` WHERE studyIndex=$studyIndex;");
   // if($res2){
   //   $userRow2=mysql_fetch_array($res2);
@@ -51,8 +51,8 @@ if($pre_res){
   //     }
   //     echo json_encode(array("left_side"=>$left_side,"right_side"=>$right_side,"left_small"=>$left_small,"slices"=>$slices));
   //   }
-  // }
+  }
 }
-echo $studyIndex;
+echo "round2";
 mysql_close($con);
 ?>
