@@ -19,7 +19,7 @@ if (!$con)
 
 mysql_select_db("mafc", $con);
 
-$query = "INSERT INTO `".$idname."` (case_num, left_small, choice, small_dir, large_dir, slices) VALUES ($case_num,$left_small,$choice,$small_dir,$large_dir,$slices);";
+$query = "INSERT INTO `".$userId."` (case_num, left_small, choice, small_dir, large_dir, slices) VALUES ($case_num,$left_small,$choice,$small_dir,$large_dir,$slices);";
 
 $pre_res = mysql_query($query);
 //
