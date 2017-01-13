@@ -578,8 +578,8 @@ function write_to_db(choice){
     type: 'POST',
     url: './db/selection.php',
     data: {c:choice, ls:left_side, rs:right_side, small:left_small, si:study_index, id:userId, cn:case_num, ss:slices},
-    success: function(response){
-
+    success: function(json_response){
+      response = jQuery.parseJSON(json_response);
       left_side = response.left_side;
       right_side = response.right_side;
       left_small = response.left_small;
@@ -591,6 +591,7 @@ function write_to_db(choice){
       loading_index = 0;
       imageIds1 = [];
       imageIds2 = [];
+      loadAndDisplayImages();
 
     }
   });
