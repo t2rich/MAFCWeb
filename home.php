@@ -260,12 +260,14 @@ var synchronizer = new cornerstoneTools.Synchronizer("CornerstoneImageRendered",
 var synchronizer2 = new cornerstoneTools.Synchronizer("CornerstoneImageRendered", cornerstoneTools.wwwcSynchronizer);
 var synchronizer3 = new cornerstoneTools.Synchronizer("CornerstoneNewImage", cornerstoneTools.stackImageIndexSynchronizer);
 
-//initial run once webpage is ready
-$(document).ready(loadAndDisplayImages())
-
 // ajust all displayed elements to fit current screen size
 resizeMain();
 study_progress();
+
+alert("Instructions:")
+
+//initial run once webpage is ready
+$(document).ready(loadAndDisplayImages())
 
 // define all inline functions
 function loadAndDisplayImages() {
